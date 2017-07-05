@@ -1,0 +1,78 @@
+package cn.hrms.recruit.entity;
+
+import java.io.Serializable;
+import java.util.Date;
+
+/*
+ * 录用
+ */
+public class Hire implements Serializable {
+
+	private static final long serialVersionUID = 4816049722388014242L;
+	
+	/*
+	 * 简历编号
+	 */
+	private Resume resume;
+	
+	/*
+	 * 录用人
+	 */
+	private String preson;
+	
+	/*
+	 * 录用时间
+	 */
+	private Date time;
+	
+	/*
+	 * 录用决议
+	 */
+	private String decision;
+
+	public Hire(Resume resume, String preson, Date time, String decision) {
+		super();
+		this.resume = resume;
+		this.preson = preson;
+		this.time = time;
+		this.decision = decision;
+	}
+
+	public Hire() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Resume getResume() {
+		return resume;
+	}
+
+	public void setResume(Resume resume) {
+		this.resume = resume;
+	}
+
+	public String getPreson() {
+		return preson;
+	}
+
+	public void setPreson(String preson) {
+		this.preson = preson;
+	}
+
+	public Date getTime() {
+		return time;
+	}
+
+	public void setTime(Date time) {
+		this.time = time;
+	}
+
+	public String getDecision() {
+		return decision;
+	}
+
+	public void setDecision(String decision) {
+		this.decision = decision;
+	}
+	
+}

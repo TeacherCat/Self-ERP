@@ -1,0 +1,63 @@
+package cn.hrms.sysset.action;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import cn.hrms.sysset.biz.DeptBiz;
+import cn.hrms.sysset.entity.Dept;
+import cn.hrms.util.Page;
+
+@Controller("deptAction")
+public class DeptAction {
+	private DeptBiz deptBiz;
+	
+	@RequestMapping("deptList")
+	public String deptList(Dept dept, Integer currPageNo, Model model){
+		Page<Dept> page = new Page<Dept>();
+		page.setPageSize(5);
+		page.setTotalCount(deptBiz.deptCount(dept));
+		page.setPageTotalCount();
+		if(currPageNo != null){
+			page.setCurrPageNo(currPageNo);
+		}
+		page.setPageList(deptBiz.findDept(dept, page));
+		model.addAttribute("page", page);
+		return "jsp/sysset/dept/deptList";
+	}
+
+	@RequestMapping("deptDetail")
+	public String deptDetail(Integer id, Model model){
+		model.addAttribute("dept", deptBiz.findDeptById(id));
+		return "jsp/sysset/dept/deptDetail";
+	}
+
+	@RequestMapping("deptAdd")
+	public String deptAdd(Dept dept, Integer res){
+		if(res == null){  //res如果为空则新增，不为空则直接跳转到新增页面
+			deptBiz.addDept(dept);
+		}
+		return "jsp/sysset/dept/deptAdd";
+	}
+
+	@RequestMapping("deptDel")
+	public String deptDel(Integer id, Model model){
+		model.addAttribute("deptList", deptBiz.findDept(new Dept()));
+		deptBiz.delDept(id);
+		return "jsp/sysset/dept/deptList";
+	}
+
+	@RequestMapping("deptUpd")
+	public String deptUpd(Dept dept, Integer res, Model model){
+		if(res == null){  //res如果为空则修改，不为空则直接跳转到修改页面
+			deptBiz.updDept(dept);
+		}
+		model.addAttribute("dept", deptBiz.findDeptById(dept.getId()));
+		return "jsp/sysset/dept/deptUpd";
+	}
+
+	public void setDeptBiz(DeptBiz deptBiz) {
+		this.deptBiz = deptBiz;
+	}
+
+}

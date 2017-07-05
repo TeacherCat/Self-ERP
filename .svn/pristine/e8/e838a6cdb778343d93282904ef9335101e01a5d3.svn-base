@@ -1,0 +1,97 @@
+package cn.hrms.personnel.action;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.alibaba.fastjson.JSON;
+
+import cn.hrms.personnel.biz.ArchivesBiz;
+import cn.hrms.personnel.entity.Archives;
+import cn.hrms.sysset.biz.DeptBiz;
+import cn.hrms.sysset.biz.PostBiz;
+import cn.hrms.sysset.entity.Dept;
+import cn.hrms.sysset.entity.Post;
+import cn.hrms.util.Page;
+
+@Controller
+public class ArchivesAction {
+
+	private ArchivesBiz archivesBiz;
+	private DeptBiz deptBiz;
+	private PostBiz postBiz;
+	
+	/**
+	 * 档案列表显示
+	 * @param archives 查询条件
+	 * @param currPageNo 当前页
+	 * @param model 传值
+	 * @return
+	 */
+	@RequestMapping("archivesList")
+	public String archivesList(Archives archives,Integer currPageNo,Model model){
+		if("请选择".equals(archives.getState())){
+			archives.setState(null);
+		}
+		Page<Archives> page = new Page<Archives>();
+		page.setTotalCount(archivesBiz.findTotalCount(archives));
+		page.setPageTotalCount();
+		if(currPageNo != null){
+			page.setCurrPageNo(currPageNo);
+		}
+		page.setPageList(archivesBiz.findArchives(archives, page));
+		model.addAttribute("page", page);
+		model.addAttribute("archives", archives);
+		return "jsp/personnel/archivesList";
+	}
+	
+	/**
+	 * 档案登记
+	 * @param archives 档案对象
+	 * @param num 是否为新增操作
+	 * @param model 传值
+	 * @return
+	 */
+	@RequestMapping("archivesAdd")
+	public String archivesAdd(Archives archives,Integer num,Model model){
+		if(num != null){
+			List<Dept> deptList = deptBiz.findDept(null);
+			List<Post> postList = postBiz.findPost(new Post(), new Page<Post>());
+			model.addAttribute("deptList", deptList);
+			model.addAttribute("postList", postList);
+			return "jsp/personnel/archivesAdd";
+		}
+		return archivesList(new Archives(),1,model);
+	}
+
+	/**
+	 * 级联菜单
+	 * @param deptID 部门编号
+	 * @return
+	 */
+	@RequestMapping("leaveMenu")
+	public String leaveMenu(Integer deptID,HttpServletResponse response) throws IOException{
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		List<Post> postList = postBiz.findPostByDeptId(deptID);
+		String str = JSON.toJSONString(postList);
+		out.print(str);
+		return null;
+	}
+	
+	public void setArchivesBiz(ArchivesBiz archivesBiz) {
+		this.archivesBiz = archivesBiz;
+	}
+	public void setDeptBiz(DeptBiz deptBiz) {
+		this.deptBiz = deptBiz;
+	}
+	public void setPostBiz(PostBiz postBiz) {
+		this.postBiz = postBiz;
+	}
+	
+}

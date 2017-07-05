@@ -1,0 +1,65 @@
+package cn.hrms.sysset.action;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import cn.hrms.sysset.biz.ProjectBiz;
+import cn.hrms.sysset.entity.Project;
+import cn.hrms.util.Final;
+import cn.hrms.util.Page;
+
+@Controller("projectAction")
+public class ProjectAction {
+	private ProjectBiz projectBiz;
+	
+	@RequestMapping("projectList")
+	public String projectList(Integer currPageNo, Model model){
+		Page<Project> page = new Page<Project>();
+		page.setTotalCount(projectBiz.proCount());
+		page.setPageTotalCount();
+		if(currPageNo != null){
+			page.setCurrPageNo(currPageNo);
+		}
+		page.setPageList(projectBiz.findPro(page));
+		model.addAttribute("page", page);
+		return "jsp/sysset/project/projectList";
+	}
+	
+	@RequestMapping("projectAdd")
+	public String projectAdd(Project pro, Integer res, Model model){
+		if(res == null){
+			projectBiz.addPro(pro);
+			model.addAttribute("msg", Final.addSuccess);
+		}
+		return "jsp/sysset/project/projectAdd";
+	}
+	
+	@RequestMapping("projectDel")
+	public String projectDel(Integer id, Integer currPageNo, Model model){
+		projectBiz.delPro(id);
+		model.addAttribute("msg", Final.delSuccess);
+		return projectList(currPageNo, model);
+	}
+	
+	@RequestMapping("projectUpd")
+	public String projectUpd(Project pro, Integer res, Model model){
+		if(res == null){
+			projectBiz.updPro(pro);
+			model.addAttribute("msg", Final.updSuccess);
+		}
+		model.addAttribute("project", projectBiz.findProById(pro.getId()));
+		return "jsp/sysset/project/projectUpd";
+	}
+	
+	@RequestMapping("projectDetail")
+	public String projectDetail(Integer id, Model model){
+		model.addAttribute("project", projectBiz.findProById(id));
+		return "jsp/sysset/project/projectDetail";
+	}
+
+	public void setProjectBiz(ProjectBiz projectBiz) {
+		this.projectBiz = projectBiz;
+	}
+
+}

@@ -1,0 +1,35 @@
+package cn.hrms.action;
+
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import cn.hrms.biz.UserBiz;
+import cn.hrms.entity.User;
+
+@Controller("userAction")
+public class UserAction {
+
+	private UserBiz userBiz;
+	
+	@RequestMapping("show")
+	public String show(Model model){
+		List<User> userList = userBiz.findUser();
+		model.addAttribute("userList", userList);
+		return "index";
+	}
+	
+	@RequestMapping("add")
+	public String add(Model model,User user){
+		userBiz.addUser(user);
+		show(model);
+		return "index";
+	}
+
+	public void setUserBiz(UserBiz userBiz) {
+		this.userBiz = userBiz;
+	}
+	
+}

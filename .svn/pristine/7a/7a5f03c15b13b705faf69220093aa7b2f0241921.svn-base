@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.train.entity.Train">
+
+	<resultMap type="cn.hrms.train.entity.Train" id="trainMap">
+		<id property="id" column="tra_id" />
+		<result property="name" column="tra_name" />
+		<result property="lecturer" column="tra_lecturer" />
+		<result property="goal" column="tra_goal" />
+		<result property="desc" column="tra_desc" />
+		<result property="startTime" column="tra_start_time" />
+		<result property="endTime" column="tra_end_time" />
+		<result property="personnel" column="tra_personnel" />
+		<result property="data" column="tra_data" />
+		<result property="registrar" column="tra_registrar" />
+		<result property="time" column="tra_time" />
+		<result property="state" column="tra_state" />
+	</resultMap>
+
+	<!-- 查询培训 -->
+	<select id="findTrain" resultMap="trainMap" parameterType="map">
+		select * from train
+		<where>
+			<if test="train.id != null">
+				and tra_id = #{train.id}
+			</if>
+			<if test="train.name != null">
+				and tra_name like concat(concat("%",#{train.name}),"%")
+			</if>
+			<if test="train.startTime != null and train.endTime == null">
+				and tra_time >= #{train.startTime}
+			</if>
+			<if test="train.endTime != null and train.startTime == null">
+				and #{train.endTime} >= tra_time 
+			</if>
+			<if test="train.startTime != null and train.endTime != null">
+				and tra_time BETWEEN #{train.startTime} AND #{train.endTime} 
+			</if>
+		</where>
+		limit #{start},#{size}
+	</select>
+	
+	<select id="findTotalCount" resultType="int">
+		SELECT COUNT(tra_id) FROM train
+		<where>
+			<if test="id != null">
+				and tra_id = #{id}
+			</if>
+			<if test="name != null">
+				and tra_name like concat(concat("%",#{name}),"%")
+			</if>
+			<if test="startTime != null and endTime == null">
+				and tra_time >= #{startTime}
+			</if>
+			<if test="endTime !=null and startTime == null">
+				and #{endTime} >= tra_time 
+			</if>
+			<if test="startTime != null and endTime != null">
+				and tra_time BETWEEN #{startTime} AND #{endTime} 
+			</if>
+		</where>
+	</select>
+	
+</mapper>

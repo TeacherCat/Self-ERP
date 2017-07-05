@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.sysset.entity.User">
+	<resultMap type="cn.hrms.sysset.entity.User" id="userMap">
+		<result column="user_name" property="name" />
+		<result column="user_real_name" property="realName" />
+		<result column="user_password" property="password" />
+		<result column="user_telephone" property="telephone" />
+
+		<association property="role" column="user_role_id" select="cn.hrms.sysset.entity.Role.findRoleById"/>
+		<association property="dept" column="user_dept_id" select="cn.hrms.sysset.entity.Dept.findDeptById"/>
+		<association property="post" column="user_post_id" select="cn.hrms.sysset.entity.Post.findPostById"/>
+	</resultMap>
+	
+	<insert id="addUser" parameterType="cn.hrms.sysset.entity.User">
+		insert into user(user_name,user_real_name,user_password,user_role_id,user_dept_id,user_post_id,user_telephone) 
+		values(#{name},#{realName},#{password},#{role.id},#{dept.id},#{post.id},#{telephone})
+	</insert>
+	
+	<delete id="delUser" parameterType="cn.hrms.sysset.entity.User">
+		delete from user where user_name = #{name}
+	</delete>
+	
+	<update id="updUser" parameterType="cn.hrms.sysset.entity.User">
+		update user set user_real_name = #{realName}, user_password = #{password}, user_telephone = #{telephone}, 
+						user_role_id = #{role.id}, user_dept_id = #{dept.id}, user_post_id = #{post.id}
+		where user_name = #{name}
+	</update>
+	
+	<select id="findUser" resultMap="userMap">
+		select * from user 
+		<where>
+			<if test="name != null">
+				and user_name like concat(concat('%',#{name}),'%')
+			</if>
+			<if test="role != null">
+				and user_role_id = #{role.id}
+			</if>
+			<if test="dept != null">
+				and user_dept_id = #{dept.id}
+			</if>
+		</where>
+	</select>
+</mapper>

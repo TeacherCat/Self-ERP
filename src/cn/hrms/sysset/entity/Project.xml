@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.sysset.entity.Project">
+	<resultMap type="cn.hrms.sysset.entity.Project" id="proMap">
+		<result property="id" column="proj_id"/>
+		<result property="name" column="proj_name"/>
+		<result property="desc" column="proj_desc"/>
+	</resultMap>
+
+	<!-- 根据薪酬项目查询 -->
+	<select id="findProById" resultMap="proMap">
+		select * from project where proj_id = #{id}
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="findPro" resultMap="proMap" parameterType="map">
+		select * from project limit #{start},#{pageSize}
+	</select>
+	
+	<!-- 查询所有 -->
+	<select id="findProj" resultMap="proMap">
+		select * from project
+	</select>
+	
+	<!-- 查询总条数 -->
+	<select id="proCount" resultType="int">
+		select count(*) from project
+	</select>
+	
+	<!-- 新增薪酬项目 -->
+	<insert id="addPro" parameterType="cn.hrms.sysset.entity.Project">
+		insert into project(proj_name,proj_desc) values(#{name},#{desc})
+	</insert>
+	
+	<!-- 删除薪酬项目 -->
+	<delete id="delPro" parameterType="cn.hrms.sysset.entity.Project">
+		delete from project where proj_id = #{id}
+	</delete>
+	
+	<!-- 修改薪酬项目 -->
+	<update id="updPro" parameterType="cn.hrms.sysset.entity.Project">
+		update project set proj_name = #{name},proj_desc = #{desc} where proj_id = #{id}
+	</update>
+</mapper>

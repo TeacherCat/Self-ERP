@@ -1,0 +1,39 @@
+package cn.hrms.sysset.biz.impl;
+
+import java.util.List;
+
+import cn.hrms.sysset.biz.PostBiz;
+import cn.hrms.sysset.dao.PostDao;
+import cn.hrms.sysset.entity.Post;
+
+public class PostBizImpl implements PostBiz{
+	private PostDao postDao;
+
+	@Override
+	public List<Post> findPost(Post post) {
+		return postDao.findPost(post);
+	}
+	
+	
+	@Override
+	public int addPost(Post post) {
+		return postDao.addPost(post);
+	}
+	
+	
+	@Override
+	public int delPost(Integer id) {
+		return postDao.delPost(id);
+	}
+	
+	
+	@Override
+	public int updPost(Post post) {
+		return postDao.updPost(post);
+	}
+
+	public void setPostDao(PostDao postDao) {
+		this.postDao = postDao;
+	}
+
+}

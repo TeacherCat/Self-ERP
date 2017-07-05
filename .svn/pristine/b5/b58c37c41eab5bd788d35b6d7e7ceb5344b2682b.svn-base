@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.sysset.entity.Post">
+	<resultMap type="cn.hrms.sysset.entity.Post" id="postMap">
+		<result column="post_id" property="id" />
+		<result column="post_name" property="name" />
+		<result column="post_desc" property="desc" />
+		<result column="post_remarks" property="remarks" />
+
+		<association property="dept" column="post_dept_id" 	select="cn.hrms.sysset.entity.Dept.findDeptById"/>
+	</resultMap>
+	
+	<select id="findPostById" resultType="cn.hrms.sysset.entity.Post">
+		select * from post where post_id = #{id}
+	</select>
+</mapper>

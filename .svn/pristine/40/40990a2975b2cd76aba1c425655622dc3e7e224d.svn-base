@@ -1,0 +1,435 @@
+/*
+SQLyog Community v12.3.3 (64 bit)
+MySQL - 5.1.47-community : Database - hrms
+*********************************************************************
+*/
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`hrms` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+USE `hrms`;
+
+/*Table structure for table `archives` */
+
+DROP TABLE IF EXISTS `archives`;
+
+CREATE TABLE `archives` (
+  `arc_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `arc_dept_id` INT(11) NOT NULL,
+  `arc_post_id` INT(11) NOT NULL,
+  `arc_state` VARCHAR(50) NOT NULL,
+  `arc_name` VARCHAR(50) NOT NULL,
+  `arc_sex` VARCHAR(50) NOT NULL,
+  `arc_card` VARCHAR(50) NOT NULL,
+  `arc_telephone` VARCHAR(50) NOT NULL,
+  `arc_email` VARCHAR(50) NOT NULL,
+  `arc_place` VARCHAR(50) DEFAULT NULL,
+  `arc_address` VARCHAR(50) DEFAULT NULL,
+  `arc_politics` VARCHAR(50) DEFAULT NULL,
+  `arc_education` VARCHAR(50) NOT NULL,
+  `arc_school` VARCHAR(50) DEFAULT NULL,
+  `arc_specialty` VARCHAR(50) DEFAULT NULL,
+  `arc_bank` VARCHAR(50) DEFAULT NULL,
+  `arc_socila` VARCHAR(50) DEFAULT NULL,
+  `arc_record` VARCHAR(200) DEFAULT NULL,
+  `arc_remarks` VARCHAR(200) DEFAULT NULL,
+  `arc_photo` VARCHAR(50) DEFAULT NULL,
+  `arc_registrar` VARCHAR(50) NOT NULL,
+  `arc_time` DATETIME NOT NULL,
+  PRIMARY KEY (`arc_id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+/*Data for the table `archives` */
+
+/*Table structure for table `archives_audit` */
+
+DROP TABLE IF EXISTS `archives_audit`;
+
+CREATE TABLE `archives_audit` (
+  `aud_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `aud_result` VARCHAR(50) NOT NULL,
+  `aud_opinion` VARCHAR(200) DEFAULT NULL,
+  `aud_person` VARCHAR(50) NOT NULL,
+  `aud_time` DATETIME NOT NULL,
+  PRIMARY KEY (`aud_id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+/*Data for the table `archives_audit` */
+
+/*Table structure for table `dept` */
+
+DROP TABLE IF EXISTS `dept`;
+
+CREATE TABLE `dept` (
+  `dept_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `dept_name` VARCHAR(50) NOT NULL,
+  `dept_desc` VARCHAR(200) DEFAULT NULL,
+  `dept_remarks` VARCHAR(200) DEFAULT NULL,
+  `dept_phone` VARCHAR(50) DEFAULT NULL,
+  PRIMARY KEY (`dept_id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+/*Data for the table `dept` */
+
+/*Table structure for table `hire` */
+
+DROP TABLE IF EXISTS `hire`;
+
+CREATE TABLE `hire` (
+  `hire_id` INT(11) NOT NULL,
+  `hire_preson` VARCHAR(50) NOT NULL,
+  `hire_time` DATE NOT NULL,
+  `hire_decision` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`hire_id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+/*Data for the table `hire` */
+
+/*Table structure for table `post` */
+
+DROP TABLE IF EXISTS `post`;
+
+CREATE TABLE `post` (
+  `post_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `post_name` VARCHAR(50) NOT NULL,
+  `post_dept_id` INT(11) NOT NULL,
+  `post_desc` VARCHAR(200) DEFAULT NULL,
+  `post_remarks` VARCHAR(200) DEFAULT NULL,
+  PRIMARY KEY (`post_id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+/*Data for the table `post` */
+
+/*Table structure for table `project` */
+
+DROP TABLE IF EXISTS `project`;
+
+CREATE TABLE `project` (
+  `proj_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `proj_name` VARCHAR(50) NOT NULL,
+  `proj_desc` VARCHAR(200) DEFAULT NULL,
+  PRIMARY KEY (`proj_id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+/*Data for the table `project` */
+
+/*Table structure for table `property` */
+
+DROP TABLE IF EXISTS `property`;
+
+CREATE TABLE `property` (
+  `pro_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `pro_name` VARCHAR(50) NOT NULL,
+  `pro_desc` VARCHAR(200) DEFAULT NULL,
+  PRIMARY KEY (`pro_id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+/*Data for the table `property` */
+
+/*Table structure for table `property_details` */
+
+DROP TABLE IF EXISTS `property_details`;
+
+CREATE TABLE `property_details` (
+  `det_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `det_pro_id` INT(11) NOT NULL,
+  `det_name` VARCHAR(50) NOT NULL,
+  `det_desc` VARCHAR(200) DEFAULT NULL,
+  PRIMARY KEY (`det_id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+/*Data for the table `property_details` */
+
+/*Table structure for table `provide` */
+
+DROP TABLE IF EXISTS `provide`;
+
+CREATE TABLE `provide` (
+  `prov_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `prov_stan_id` INT(11) NOT NULL,
+  `prov_dept_id` VARCHAR(50) NOT NULL,
+  `prov_count` INT(11) NOT NULL,
+  `prov_amount` DOUBLE NOT NULL,
+  `prov_registrar` VARCHAR(50) NOT NULL,
+  `prov_time` DATE NOT NULL,
+  `prov_state` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`prov_id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+/*Data for the table `provide` */
+
+/*Table structure for table `provide_audit` */
+
+DROP TABLE IF EXISTS `provide_audit`;
+
+CREATE TABLE `provide_audit` (
+  `aud_id` INT(11) NOT NULL,
+  `aud_result` VARCHAR(50) NOT NULL,
+  `aud_opinion` VARCHAR(50) NOT NULL,
+  `aud_person` VARCHAR(50) NOT NULL,
+  `aud_time` DATE NOT NULL,
+  PRIMARY KEY (`aud_id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+/*Data for the table `provide_audit` */
+
+/*Table structure for table `provide_details` */
+
+DROP TABLE IF EXISTS `provide_details`;
+
+CREATE TABLE `provide_details` (
+  `det_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `det_prov_id` INT(11) NOT NULL,
+  `det_arc_id` INT(11) NOT NULL,
+  `det_standard` DOUBLE NOT NULL,
+  `det_performance` DOUBLE DEFAULT NULL,
+  `det_evection` DOUBLE DEFAULT NULL,
+  `det_overtime` DOUBLE DEFAULT NULL,
+  `det_deduct` DOUBLE DEFAULT NULL,
+  `det_amount` DOUBLE NOT NULL,
+  PRIMARY KEY (`det_id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+/*Data for the table `provide_details` */
+
+/*Table structure for table `releases` */
+
+DROP TABLE IF EXISTS `releases`;
+
+CREATE TABLE `releases` (
+  `rele_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `rele_dept_id` INT(11) NOT NULL,
+  `rele_post_id` INT(11) NOT NULL,
+  `rele_type` VARCHAR(50) NOT NULL,
+  `rele_count` INT(11) NOT NULL,
+  `rele_education` VARCHAR(50) NOT NULL,
+  `rele_limit` DOUBLE NOT NULL,
+  `rele_desc` VARCHAR(200) DEFAULT NULL,
+  `rele_requier` VARCHAR(200) DEFAULT NULL,
+  `rele_registrar` VARCHAR(50) NOT NULL,
+  `rele_start_time` DATE NOT NULL,
+  `rele_end_time` DATE NOT NULL,
+  PRIMARY KEY (`rele_id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+/*Data for the table `releases` */
+
+/*Table structure for table `result` */
+
+DROP TABLE IF EXISTS `result`;
+
+CREATE TABLE `result` (
+  `resu_id` INT(11) NOT NULL,
+  `resu_preson` VARCHAR(50) NOT NULL,
+  `resu_time` DATE NOT NULL,
+  `resu_evaluate` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`resu_id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+/*Data for the table `result` */
+
+/*Table structure for table `resumes` */
+
+DROP TABLE IF EXISTS `resumes`;
+
+CREATE TABLE `resumes` (
+  `res_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `res_rele_id` VARCHAR(50) NOT NULL,
+  `res_name` VARCHAR(50) NOT NULL,
+  `res_sex` VARCHAR(50) NOT NULL,
+  `res_card` VARCHAR(50) NOT NULL,
+  `res_telephone` VARCHAR(50) NOT NULL,
+  `res_email` VARCHAR(50) NOT NULL,
+  `res_place` VARCHAR(50) DEFAULT NULL,
+  `res_address` VARCHAR(50) DEFAULT NULL,
+  `res_politics` VARCHAR(50) DEFAULT NULL,
+  `res_education` VARCHAR(50) NOT NULL,
+  `res_school` VARCHAR(50) DEFAULT NULL,
+  `res_specialty` VARCHAR(50) DEFAULT NULL,
+  `res_limit` VARCHAR(50) NOT NULL,
+  `res_job` VARCHAR(50) NOT NULL,
+  `res_graduate` VARCHAR(50) NOT NULL,
+  `res_salary` VARCHAR(50) NOT NULL,
+  `res_type` VARCHAR(50) NOT NULL,
+  `res_record` VARCHAR(200) DEFAULT NULL,
+  `res_accessory` VARCHAR(50) DEFAULT NULL,
+  `res_recommend_interview` VARCHAR(50) DEFAULT NULL,
+  `res_referral` VARCHAR(50) DEFAULT NULL,
+  `res_recommend_time` DATE DEFAULT NULL,
+  `res_recommend_idea` VARCHAR(50) DEFAULT NULL,
+  `res_time` DATE NOT NULL,
+  `res_state` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`res_id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+/*Data for the table `resumes` */
+
+/*Table structure for table `role` */
+
+DROP TABLE IF EXISTS `role`;
+
+CREATE TABLE `role` (
+  `role_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `role_name` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`role_id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+/*Data for the table `role` */
+
+/*Table structure for table `standard` */
+
+DROP TABLE IF EXISTS `standard`;
+
+CREATE TABLE `standard` (
+  `stan_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `stan_name` VARCHAR(50) NOT NULL,
+  `stan_amount` DOUBLE NOT NULL,
+  `stan_registrar` VARCHAR(50) NOT NULL,
+  `stan_time` DATE NOT NULL,
+  `stan_state` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`stan_id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+/*Data for the table `standard` */
+
+/*Table structure for table `standard_audit` */
+
+DROP TABLE IF EXISTS `standard_audit`;
+
+CREATE TABLE `standard_audit` (
+  `sa_stan_id` INT(11) NOT NULL,
+  `sa_result` VARCHAR(50) NOT NULL,
+  `sa_opinion` VARCHAR(50) NOT NULL,
+  `sa_person` VARCHAR(50) NOT NULL,
+  `sa_time` DATE NOT NULL
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+/*Data for the table `standard_audit` */
+
+/*Table structure for table `standard_details` */
+
+DROP TABLE IF EXISTS `standard_details`;
+
+CREATE TABLE `standard_details` (
+  `sd_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `sd_stan_id` INT(11) NOT NULL,
+  `sd_proj_id` INT(11) NOT NULL,
+  `sd_money` DOUBLE NOT NULL,
+  PRIMARY KEY (`det_id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+/*Data for the table `standard_details` */
+
+/*Table structure for table `titles` */
+
+DROP TABLE IF EXISTS `titles`;
+
+CREATE TABLE `titles` (
+  `tit_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `tit_name` VARCHAR(50) NOT NULL,
+  `tit_dept_id` INT(11) NOT NULL,
+  `tit_desc` VARCHAR(200) DEFAULT NULL,
+  `tit_remarks` VARCHAR(200) DEFAULT NULL,
+  PRIMARY KEY (`tit_id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+/*Data for the table `titles` */
+
+/*Table structure for table `topic` */
+
+DROP TABLE IF EXISTS `topic`;
+
+CREATE TABLE `topic` (
+  `top_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `top_name` VARCHAR(50) NOT NULL,
+  `top_type` VARCHAR(50) NOT NULL,
+  `top_level` VARCHAR(50) NOT NULL,
+  `top_dept_id` INT(11) NOT NULL,
+  `top_person` VARCHAR(50) NOT NULL,
+  `top_time` DATE NOT NULL,
+  `top_content` VARCHAR(200) DEFAULT NULL,
+  `top_remarks` VARCHAR(200) DEFAULT NULL,
+  `top_accessory` VARCHAR(200) DEFAULT NULL,
+  PRIMARY KEY (`top_id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+/*Data for the table `topic` */
+
+/*Table structure for table `train` */
+
+DROP TABLE IF EXISTS `train`;
+
+CREATE TABLE `train` (
+  `tra_id` INT(11) NOT NULL AUTO_INCREMENT,
+  `tra_name` VARCHAR(50) NOT NULL,
+  `tra_lecturer` VARCHAR(50) NOT NULL,
+  `tra_goal` VARCHAR(200) DEFAULT NULL,
+  `tra_desc` VARCHAR(200) DEFAULT NULL,
+  `tra_start_time` DATETIME NOT NULL,
+  `tra_end_time` DATETIME NOT NULL,
+  `tra_personnel` VARCHAR(200) DEFAULT NULL,
+  `tra_data` VARCHAR(200) DEFAULT NULL,
+  `tra_registrar` VARCHAR(50) NOT NULL,
+  `tra_time` DATETIME NOT NULL,
+  `tra_state` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`tra_id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+/*Data for the table `train` */
+
+/*Table structure for table `train_audit` */
+
+DROP TABLE IF EXISTS `train_audit`;
+
+CREATE TABLE `train_audit` (
+  `aud_id` INT(11) NOT NULL,
+  `aud_result` VARCHAR(50) NOT NULL,
+  `aud_opinion` VARCHAR(200) NOT NULL,
+  `aud_person` VARCHAR(50) NOT NULL,
+  `aud_time` DATETIME NOT NULL,
+  PRIMARY KEY (`aud_id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+/*Data for the table `train_audit` */
+
+/*Table structure for table `train_back` */
+
+DROP TABLE IF EXISTS `train_back`;
+
+CREATE TABLE `train_back` (
+  `back_id` INT(11) NOT NULL,
+  `back_result` VARCHAR(50) NOT NULL,
+  `back_opinion` VARCHAR(200) DEFAULT NULL,
+  `back_person` VARCHAR(50) NOT NULL,
+  `back_time` DATETIME NOT NULL,
+  PRIMARY KEY (`back_id`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+/*Data for the table `train_back` */
+
+/*Table structure for table `users` */
+
+DROP TABLE IF EXISTS `users`;
+
+CREATE TABLE `users` (
+  `users_name` VARCHAR(50) NOT NULL,
+  `users_real_name` VARCHAR(50) NOT NULL,
+  `users_password` VARCHAR(50) NOT NULL,
+  `users_role_id` INT(11) NOT NULL,
+  `users_telephone` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`users_name`)
+) ENGINE=INNODB DEFAULT CHARSET=utf8;
+
+/*Data for the table `users` */
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

@@ -1,0 +1,152 @@
+package cn.hrms.pay.entity;
+
+import java.io.Serializable;
+import java.util.Date;
+
+import cn.hrms.train.entity.Feedback;
+
+/**
+ * 薪酬发放
+ */
+public class Provide implements Serializable {
+
+	private static final long serialVersionUID = 3208398508108887767L;
+	
+	/**
+	 * 发放编号
+	 */
+	private Integer id;
+	
+	/**
+	 * 标准编号
+	 */
+	private Feedback feed;
+	
+	/**
+	 * 一级发放单位
+	 */
+	private String first_unit;
+	
+	/**
+	 * 二级发放单位
+	 */
+	private String second_unit;
+	
+	/**
+	 * 发放人数
+	 */
+	private Integer count;
+	
+	/**
+	 * 薪酬发放总额
+	 */
+	private Double amount;
+	
+	/**
+	 * 登记人
+	 */
+	private String registrar;
+	
+	/**
+	 * 登记时间
+	 */
+	private Date time;
+	
+	/**
+	 * 状态
+	 */
+	private String state;
+
+	public Provide(Integer id, Feedback feed, String first_unit,
+			String second_unit, Integer count, Double amount, String registrar,
+			Date time, String state) {
+		super();
+		this.id = id;
+		this.feed = feed;
+		this.first_unit = first_unit;
+		this.second_unit = second_unit;
+		this.count = count;
+		this.amount = amount;
+		this.registrar = registrar;
+		this.time = time;
+		this.state = state;
+	}
+
+	public Provide() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Feedback getFeed() {
+		return feed;
+	}
+
+	public void setFeed(Feedback feed) {
+		this.feed = feed;
+	}
+
+	public String getFirst_unit() {
+		return first_unit;
+	}
+
+	public void setFirst_unit(String first_unit) {
+		this.first_unit = first_unit;
+	}
+
+	public String getSecond_unit() {
+		return second_unit;
+	}
+
+	public void setSecond_unit(String second_unit) {
+		this.second_unit = second_unit;
+	}
+
+	public Integer getCount() {
+		return count;
+	}
+
+	public void setCount(Integer count) {
+		this.count = count;
+	}
+
+	public Double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Double amount) {
+		this.amount = amount;
+	}
+
+	public String getRegistrar() {
+		return registrar;
+	}
+
+	public void setRegistrar(String registrar) {
+		this.registrar = registrar;
+	}
+
+	public Date getTime() {
+		return time;
+	}
+
+	public void setTime(Date time) {
+		this.time = time;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+}

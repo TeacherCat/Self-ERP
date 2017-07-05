@@ -1,0 +1,92 @@
+package cn.hrms.personnel.entity;
+import java.io.Serializable;
+
+
+/**
+ * 档案审核
+ */
+public class ArchivesAudit implements Serializable{
+	
+	private static final long serialVersionUID = 993826157904298046L;
+	
+	/**
+	 * 档案编号
+	 */
+	private Integer archive;
+	/**
+	 * 审核结果
+	 */
+	private String resuit;
+	/**
+	 * 审核意见
+	 */
+	private String opinion;
+	/**
+	 * 审核人
+	 */
+	private String person;
+	/**
+	 * 审核时间
+	 */
+	private String time;
+
+	
+	/**
+	 * 构造函数
+	 */
+	public ArchivesAudit() {}
+	
+	public ArchivesAudit(Integer archive, String resuit, String opinion,
+			String person, String time) {
+		this.archive = archive;
+		this.resuit = resuit;
+		this.opinion = opinion;
+		this.person = person;
+		this.time = time;
+	}
+
+	
+	/**
+	 * 属性封装
+	 */
+	public Integer getArchive() {
+		return archive;
+	}
+
+	public void setArchive(Integer archive) {
+		this.archive = archive;
+	}
+
+	public String getResuit() {
+		return resuit;
+	}
+
+	public void setResuit(String resuit) {
+		this.resuit = resuit;
+	}
+
+	public String getOpinion() {
+		return opinion;
+	}
+
+	public void setOpinion(String opinion) {
+		this.opinion = opinion;
+	}
+
+	public String getPerson() {
+		return person;
+	}
+
+	public void setPerson(String person) {
+		this.person = person;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+	
+}

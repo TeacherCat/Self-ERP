@@ -1,0 +1,41 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>薪酬项目列表</title>
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/plugins/layui/css/layui.css" />
+	<script type="text/javascript" src="<%=request.getContextPath()%>/plugins/layui/layui.js"></script>
+</head>
+
+<body>
+
+	<div class="layui-form-item" style="margin-top:20px;">
+		<a class="layui-btn layui-btn-radius" style="margin-top:-5px;margin-left:20px;" href="<%=request.getContextPath()%>/jsp/sysset/project/projectAdd.jsp">新&nbsp;增&nbsp;项&nbsp;目</a>
+	</div>
+	
+	<div class="layui-field-box layui-form">
+		<table class="layui-table admin-table">
+			<thead>
+				<tr>
+					<th>项目编号</th>
+					<th>项目名称</th>
+					<th>项目描述</th>
+					<th style="width:200px;">操作</th>
+				</tr>
+			</thead>
+			<tr>
+				<td>aaa</td>
+				<td>aaa</td>
+				<td>aaa</td>
+				<td><a href="<%=request.getContextPath()%>/jsp/sysset/project/projectUpd.jsp" class="layui-btn layui-btn-normal layui-btn-mini">修改</a>
+					<a href="<%=request.getContextPath()%>/jsp/sysset/project/projectDetail.jsp" class="layui-btn layui-btn-mini">详情</a>
+					<a href="#" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+</body>
+</html>

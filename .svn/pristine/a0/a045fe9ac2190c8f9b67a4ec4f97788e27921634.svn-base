@@ -1,0 +1,66 @@
+package cn.hrms.sysset.action;
+
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import cn.hrms.sysset.biz.DeptBiz;
+import cn.hrms.sysset.biz.PostBiz;
+import cn.hrms.sysset.entity.Dept;
+import cn.hrms.sysset.entity.Post;
+
+@Controller("PostAction")
+public class PostAction {
+	private PostBiz postBiz;
+	private DeptBiz deptBiz;
+	
+	@RequestMapping("postList")
+	public String postList(Post post, Model model){
+		List<Post> postList = postBiz.findPost(post);
+		model.addAttribute("postList", postList);
+		model.addAttribute("deptList", deptBiz.findDept(new Dept()));
+		return "jsp/sysset/post/postList";
+	}
+	
+	@RequestMapping("postAdd")
+	public String postAdd(Post post, Model model){
+		model.addAttribute("deptList", deptBiz.findDept(new Dept()));
+		if(post != null){
+			postBiz.addPost(post);
+		}
+		return "jsp/sysset/post/postAdd";
+	}
+	
+	@RequestMapping("postDetail")
+	public String postDetail(Integer id, Model model){
+		model.addAttribute("postList", postBiz.findPost(new Post(id)));
+		return "jsp/sysset/post/postDetail";
+	}
+	
+	@RequestMapping("postUpd")
+	public String postUpd(Post post, Model model){
+		model.addAttribute("deptList", deptBiz.findDept(new Dept()));
+		if(post != null){
+			postBiz.updPost(post);
+		}
+		return "jsp/sysset/post/postUpd";
+	}
+	
+	public String postDel(Post post, Integer id, Model model){
+		postBiz.delPost(id);
+		model.addAttribute("postList", postBiz.findPost(post));
+		model.addAttribute("deptList", deptBiz.findDept(new Dept()));
+		return "jsp/sysset/post/postList";
+	}
+
+	public void setPostBiz(PostBiz postBiz) {
+		this.postBiz = postBiz;
+	}
+
+	public void setDeptBiz(DeptBiz deptBiz) {
+		this.deptBiz = deptBiz;
+	}
+	
+}

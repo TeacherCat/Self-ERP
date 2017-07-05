@@ -1,0 +1,19 @@
+package cn.hrms.test;
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import cn.hrms.sysset.biz.DeptBiz;
+import cn.hrms.sysset.entity.Dept;
+import cn.hrms.sysset.entity.Post;
+
+public class test {
+	public static void main(String[] args) {
+		ClassPathXmlApplicationContext cpa = new ClassPathXmlApplicationContext("applicationContext.xml");
+		DeptBiz deptBiz = cpa.getBean("deptBiz",DeptBiz.class);
+		for (Dept d : deptBiz.findDept(new Dept())) {
+			System.out.println(d);
+		}
+		
+	}
+
+}

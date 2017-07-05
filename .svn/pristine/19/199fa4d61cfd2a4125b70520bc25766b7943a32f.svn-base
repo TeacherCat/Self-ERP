@@ -1,0 +1,96 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>薪酬标准列表</title>
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/plugins/layui/css/layui.css" />
+	<script type="text/javascript" src="<%=request.getContextPath()%>/plugins/layui/layui.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.8.3.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			//日期
+		    $("#begin,#end").click(function(){
+		        WdatePicker({
+		            highLineWeekDay:true //周末高亮
+		            ,readOnly:true      //只读，只可用控件input中 修改内容
+		            ,dateFmt:'yyyy-MM-dd HH:mm:ss'
+		        });
+		    });
+		});
+    </script>
+</head>
+
+<body>
+
+	<div class="layui-form-item" style="margin-top:20px;">
+		<div class="layui-inline">
+			<label class="layui-form-label">标准编号：</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">标准状态：</label>
+			<select class="select">
+				<option>请选择省</option>
+				<option>浙江省</option>
+				<option>江西省</option>
+				<option>福建省</option>
+			</select>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">登记时间：</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input" id="begin">
+			</div>
+		</div>
+		<input type="submit" class="layui-btn layui-btn-radius" style="margin-top:-5px;" value="查&nbsp;询" />
+		<a class="layui-btn layui-btn-radius" style="margin-top:-5px;" href="<%=request.getContextPath()%>/jsp/pay/standard/standardAdd.jsp">薪&nbsp;酬&nbsp;标&nbsp;准&nbsp;登&nbsp;记</a>
+	</div>
+	
+	<div class="layui-field-box layui-form">
+		<table class="layui-table admin-table">
+			<thead>
+				<tr>
+					<th>标准编号</th>
+					<th>标准名称</th>
+					<th>薪酬总额</th>
+					<th>登记人</th>
+					<th>登记时间</th>
+					<th style="width:200px;">操作</th>
+				</tr>
+			</thead>
+			<tr>
+				<td>aaa</td>
+				<td>aaa</td>
+				<td>aaa</td>
+				<td>aaa</td>
+				<td>aaa</td>
+				<td><a href="<%=request.getContextPath()%>/jsp/pay/standard/standardUpd.jsp" class="layui-btn layui-btn-normal layui-btn-mini">修改</a>
+					<a href="<%=request.getContextPath()%>/jsp/pay/standard/standardDetail.jsp" class="layui-btn layui-btn-mini">详情</a>
+					<a href="<%=request.getContextPath()%>/jsp/pay/standard/standardAudit.jsp" class="layui-btn layui-btn-mini">审核</a>
+					<a href="#" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="btable-paged" data-type="paged" style="margin:20px auto;width:550px;">
+		<div class="layui-box layui-laypage layui-laypage-default">
+			<a>首页</a>
+			<a>上一页</a>
+			<span>1 / 1</span>
+			<a>下一页</a>
+			<a>尾页</a>
+			<span class="layui-laypage-total">到第 
+			<input class="layui-laypage-skip" onkeyup=""> 页
+			<button class="layui-laypage-btn" type="button">确定</button>
+			</span>
+		</div>
+	</div>
+
+</body>
+</html>

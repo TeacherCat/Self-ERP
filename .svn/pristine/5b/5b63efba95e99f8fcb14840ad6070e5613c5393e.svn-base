@@ -1,0 +1,74 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>薪酬标准列表</title>
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/plugins/layui/css/layui.css" />
+	<script type="text/javascript" src="<%=request.getContextPath()%>/plugins/layui/layui.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.8.3.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/sysset.js"></script>
+<body>
+	<form action="standardList.do" method="post" id="myForm">
+
+		<div class="layui-form-item" style="margin-top:20px;">
+			<div class="layui-inline">
+				<label class="layui-form-label">标准状态：</label>
+				<select class="select" name="state">
+					<option value="0">请选择状态</option>
+					<option <c:if test="${stan.state=='起草'}">selected="selected"</c:if>>起草</option>
+					<option <c:if test="${stan.state=='审核中'}">selected="selected"</c:if>>审核中</option>
+					<option <c:if test="${stan.state=='审核通过'}">selected="selected"</c:if>>审核通过</option>
+					<option <c:if test="${stan.state=='驳回'}">selected="selected"</c:if>>驳回</option>
+				</select>
+			</div>
+			<div class="layui-inline">
+				<label class="layui-form-label">登记时间：</label>
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input" id="begin" name="time" value="${stan.time }">
+				</div>
+				<span class="layui-form-label" style="width:5px;">至</span>
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input" id="end" name="endTime" value="${endTime }">
+				</div>
+			</div>
+			<input type="submit" class="layui-btn layui-btn-radius" style="margin-top:-5px;" value="查&nbsp;询" />
+			<a class="layui-btn layui-btn-radius" style="margin-top:-5px;" href="standardAdd.do?res=1">薪&nbsp;酬&nbsp;标&nbsp;准&nbsp;登&nbsp;记</a>
+		</div>
+		
+		<div class="layui-field-box layui-form">
+			<table class="layui-table admin-table">
+				<thead>
+					<tr>
+						<th>标准名称</th>
+						<th>薪酬总额</th>
+						<th>登记人</th>
+						<th>登记时间</th>
+						<th>状态</th>
+						<th style="width:200px;">操作</th>
+					</tr>
+				</thead>
+				<c:forEach var="stan" items="${page.pageList }">
+					<tr>
+						<td>${stan.name }</td>
+						<td>${stan.amount }</td>
+						<td>${stan.registrar }</td>
+						<td>${stan.time }</td>
+						<td>${stan.state }</td>
+						<td><a href="standardUpd.do?id=${stan.id }&res=1" class="layui-btn layui-btn-normal layui-btn-mini">修改</a>
+							<a href="standardDetail.do?id=${stan.id }" class="layui-btn layui-btn-mini">详情</a>
+							<a href="standardAudit.do?id=${stan.id }&res=1" class="layui-btn layui-btn-mini">审核</a>
+							<button class="layui-btn layui-btn-danger layui-btn-mini" onclick="jqueryDel('standardDel.do',${stan.id})">删除</button>
+						</td>
+					</tr>
+				</c:forEach>
+			</table>
+			<p style="width:100px;margin:0px auto;margin-top:30px;color:red;">${msg}</p>
+		</div>
+		
+		<%@ include file="../../../jsp/public/page.jsp" %>
+	</form>
+</body>
+</html>

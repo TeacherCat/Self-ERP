@@ -1,0 +1,112 @@
+package cn.hrms.sysset.action;
+import java.io.IOException;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import cn.hrms.sysset.biz.DeptBiz;
+import cn.hrms.sysset.biz.PostBiz;
+import cn.hrms.sysset.entity.Dept;
+import cn.hrms.util.Final;
+import cn.hrms.util.Page;
+
+@Controller("deptAction")
+public class DeptAction {
+	private DeptBiz deptBiz;
+	private PostBiz postBiz;
+	
+	/**
+	 * 部门列表显示
+	 * @param dept 部门信息条件
+	 * @param currPageNo 当前页
+	 * @param model 传值
+	 * @return
+	 */
+	@RequestMapping("deptList")
+	public String deptList(Dept dept, Integer currPageNo, Model model){
+		Page<Dept> page = new Page<Dept>();
+		page.setTotalCount(deptBiz.deptCount(dept));
+		page.setPageTotalCount();
+		if(currPageNo != null){
+			page.setCurrPageNo(currPageNo);
+		}
+		page.setPageList(deptBiz.findDept(dept, page));
+		model.addAttribute("dept", dept);
+		model.addAttribute("page", page);
+		return "jsp/sysset/dept/deptList";
+	}
+
+	/**
+	 * 部门详情信息
+	 * @param id 部门编号
+	 * @param model 传值
+	 * @return
+	 */
+	@RequestMapping("deptDetail")
+	public String deptDetail(Integer id, Model model){
+		model.addAttribute("dept", deptBiz.findDeptById(id));
+		return "jsp/sysset/dept/deptDetail";
+	}
+
+	/**
+	 * 新增部门
+	 * @param dept 部门对象
+	 * @param res 标识
+	 * @param model 传值
+	 * @return
+	 */
+	@RequestMapping("deptAdd")
+	public String deptAdd(Dept dept, Integer res, Model model){
+		if(res != null){  //res如果为空则新增，不为空则直接跳转到新增页面
+			return "jsp/sysset/dept/deptAdd";
+		}else{
+			deptBiz.addDept(dept);
+			model.addAttribute("msg", Final.addSuccess);
+			return deptList(new Dept(), 1, model);
+		}
+	}
+
+	/**
+	 * 删除部门
+	 * @param id 部门编号
+	 * @return
+	 * @throws IOException 
+	 */
+	@RequestMapping("deptDel")
+	public String deptDel(Integer id, Integer currPageNo ,Model model){
+		if(postBiz.findPostByDeptId(id).size() > 0){
+			model.addAttribute("msg", "该部门下包含职位，不能删除！");
+		}else{
+			deptBiz.delDept(id);
+			model.addAttribute("msg", Final.delSuccess);
+		}
+		return deptList(new Dept(), currPageNo, model);
+	}
+
+	/**
+	 * 修改部门
+	 * @param dept 部门对象
+	 * @param res 标识
+	 * @param model 传值
+	 * @return
+	 */
+	@RequestMapping("deptUpd")
+	public String deptUpd(Dept dept, Integer res, Model model){
+		if(res != null){  //res如果为空则修改，不为空则直接跳转到修改页面
+			model.addAttribute("dept", deptBiz.findDeptById(dept.getId()));
+			return "jsp/sysset/dept/deptUpd";
+		}else{
+			deptBiz.updDept(dept);
+			model.addAttribute("msg", Final.updSuccess);
+			return deptList(new Dept(), 1, model);
+		}
+	}
+
+	public void setDeptBiz(DeptBiz deptBiz) {
+		this.deptBiz = deptBiz;
+	}
+
+	public void setPostBiz(PostBiz postBiz) {
+		this.postBiz = postBiz;
+	}
+
+}

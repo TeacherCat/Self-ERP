@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.personnel.entity.Archives">
+	<resultMap type="cn.hrms.personnel.entity.Archives" id="ArcMap">
+		<result column="arc_id" property="id" />
+		<result column="arc_state" property="state" />
+		<result column="arc_name" property="name" />
+		<result column="arc_sex" property="sex" />
+		<result column="arc_card" property="card" />
+		<result column="arc_telephone" property="telephone" />
+		<result column="arc_email" property="email" />
+		<result column="arc_place" property="place" />
+		<result column="arc_address" property="address" />
+		<result column="arc_politics" property="politics" />
+		<result column="arc_education" property="education" />
+		<result column="arc_school" property="school" />
+		<result column="arc_specialty" property="specialty" />
+		<result column="arc_bank" property="bank" />
+		<result column="arc_socila" property="socila" />
+		<result column="arc_record" property="record" />
+		<result column="arc_remarks" property="remarks" />
+		<result column="arc_photo" property="photo" />
+		<result column="arc_relation" property="relation" />
+		<result column="arc_accessory" property="accessory" />
+		<result column="arc_registrar" property="registrar" />
+		<result column="arc_time" property="time" />
+		
+		<association property="dept" column="arc_dept_id" select="cn.hrms.sysset.entity.Dept.findDeptById"/>
+		<association property="role" column="arc_post_id" select="cn.hrms.sysset.entity.Role.findRoleById"/>
+	</resultMap>
+	
+	<select id="findArcById" resultType="cn.hrms.personnel.entity.Archives">
+		select * from archive where arc_id = #{id}
+	</select>
+</mapper>

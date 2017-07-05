@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.recruit.entity.Resume">
+	<resultMap type="cn.hrms.recruit.entity.Resume" id="resMap">
+		<result column="res_id" property="id" />
+		<result column="res_name" property="name" />
+		<result column="res_sex" property="sex" />
+		<result column="res_identity_card" property="identityCard" />
+		<result column="res_telephone" property="telephone" />
+		<result column="res_email" property="email" />
+		<result column="res_place" property="place" />
+		<result column="res_address" property="address" />
+		<result column="res_politics_status" property="politicsStatus" />
+		<result column="res_education" property="education" />
+		<result column="res_school" property="school" />
+		<result column="res_specialty" property="specialty" />
+		<result column="res_age_limit" property="ageLimit" />
+		<result column="res_job" property="job" />
+		<result column="res_fresh_graduate" property="freshGraduate" />
+		<result column="res_salary_requier" property="salaryRequier" />
+		<result column="res_join_type" property="joinType" />
+		<result column="res_record" property="record" />
+		<result column="res_accessory" property="accessory" />
+		<result column="res_recommend_interview" property="recommendInterview" />
+		<result column="res_referral" property="referral" />
+		<result column="res_recommend_time" property="recommendTime" />
+		<result column="res_recommend_idea" property="recommendIdea" />
+		<result column="res_time" property="time" />
+		<result column="res_state" property="state" />
+		
+		<association property="rele" column="res_rele_id" select="cn.hrms.recruit.entity.Release.findReleById"/>
+	</resultMap>
+	
+	<select id="findResById" resultType="cn.hrms.recruit.entity.Resume">
+		select * from resume where res_id = #{id}
+	</select>
+</mapper>

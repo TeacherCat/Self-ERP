@@ -1,0 +1,138 @@
+
+
+/* 用户角色表 */
+INSERT INTO role(role_name) VALUES('人事专员');
+INSERT INTO role(role_name) VALUES('人事经理');
+INSERT INTO role(role_name) VALUES('薪酬专员');
+INSERT INTO role(role_name) VALUES('薪酬经理');
+INSERT INTO role(role_name) VALUES('人力资源负责人');
+
+
+/* 部门表 */
+INSERT INTO dept(dept_name,dept_desc,dept_phone) VALUES('项目开发部','项目开发部...','0755-26666666');
+INSERT INTO dept(dept_name,dept_desc,dept_phone) VALUES('项目测试部','项目测试部...','0755-22566201');
+INSERT INTO dept(dept_name,dept_desc,dept_phone) VALUES('产品营销部','产品营销部...','0755-27720210');
+INSERT INTO dept(dept_name,dept_desc,dept_phone) VALUES('产品推广部','产品推广部...','0755-28200130');
+INSERT INTO dept(dept_name,dept_desc,dept_phone) VALUES('售后服务部','售后服务部...','0755-23001023');
+INSERT INTO dept(dept_name,dept_desc,dept_phone) VALUES('人力资源部','人力资源部...','0755-23361020');
+INSERT INTO dept(dept_name,dept_desc,dept_phone) VALUES('财务部','财务部...','0755-23361020');
+INSERT INTO dept(dept_name,dept_desc,dept_phone) VALUES('总裁办','总裁办...','0755-28888888');
+
+
+/* 职位表 */
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('java工程师',1,'java工程师......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('C#工程师',1,'C#工程师......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('PHP工程师',1,'PHP工程师......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('前端设计员',1,'前端设计员');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('UI设计员',1,'UI设计员......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('项目经理',1,'项目经理......');
+
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('单元测试员',2,'单元测试员......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('模块测试员',2,'模块测试员......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('项目测试员',2,'项目测试员......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('测试主管',2,'测试主管......');
+
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('产品专员',3,'产品专员......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('营销专员',3,'营销专员......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('产品主管',3,'产品主管......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('营销主管',3,'营销主管......');
+
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('国内推广员',4,'国内推广员......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('国际推广员',4,'国际推广员......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('国内推广经理',4,'国内推广经理......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('国际推广经理',4,'国际推广经理......');
+
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('华中售后员',5,'华中售后员......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('华南售后员',5,'华南售后员......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('华北售后员',5,'华北售后员......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('售后经理',5,'售后经理......');
+
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('人事专员',6,'人事专员......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('人事经理',6,'人事经理......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('薪酬专员',6,'薪酬专员......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('薪酬经理',6,'薪酬经理......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('人力资源负责人',6,'人力资源负责人......');
+
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('财务专员',7,'财务专员......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('财务经理',7,'财务经理......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('财务部负责人',7,'财务部负责人......');
+
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('总经理',8,'总经理......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('副总裁',8,'副总裁......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('总裁',8,'总裁......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('首席执行官',8,'首席执行官......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('首席财务官',8,'首席财务官......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('董事成员',8,'董事成员......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('董事长',8,'董事长......');
+
+
+/* 用户表 */
+INSERT INTO users VALUES('liuting','刘婷','123456',1,'15812023230');
+INSERT INTO users VALUES('chenzhuo','陈卓','123456',1,'15845201254');
+INSERT INTO users VALUES('liuhuan','刘欢','123456',1,'15920123022');
+INSERT INTO users VALUES('limengting','李梦婷','123456',1,'15810002361');
+INSERT INTO users VALUES('yangyang','杨阳','123456',1,'15862001023');
+INSERT INTO users VALUES('xudan','徐丹','123456',3,'13612012013');
+INSERT INTO users VALUES('wanmengli','万梦力','123456',3,'13420225563');
+INSERT INTO users VALUES('zhouwenyu','周文宇','123456',3,'15620123022');
+INSERT INTO users VALUES('zhaoyazhi','赵雅芝','123456',3,'15920887402');
+INSERT INTO users VALUES('quxiaoxiao','曲潇潇','123456',3,'15822023675');
+INSERT INTO users VALUES('zhaoya','赵雅','123456',2,'13602132025');
+INSERT INTO users VALUES('zhoumeng','周萌','123456',4,'13888992021');
+INSERT INTO users VALUES('admin','张三','123456',5,'13581310901');
+
+
+/* 题库表 */
+INSERT INTO topic(top_name,top_type,top_level,top_dept_id,top_person,top_time,top_accessory) VALUES('软件工程师初级测试题','java','A',1,'刘婷','2017-5-21','aaa.txt');
+INSERT INTO topic(top_name,top_type,top_level,top_dept_id,top_person,top_time,top_accessory) VALUES('软件工程师C#初级测试题','C#','B',1,'刘婷','2017-5-21','ccc.txt');
+INSERT INTO topic(top_name,top_type,top_level,top_dept_id,top_person,top_time,top_accessory) VALUES('软件工程师PHP初级测试题','PHP','A',1,'刘婷','2017-5-21','bbb.txt');
+INSERT INTO topic(top_name,top_type,top_level,top_dept_id,top_person,top_time,top_accessory) VALUES('前端测试题','前端','C',1,'刘欢','2017-5-24','ddd.txt');
+INSERT INTO topic(top_name,top_type,top_level,top_dept_id,top_person,top_time,top_accessory) VALUES('前端进阶测试题','前端','B',1,'刘欢','2017-5-24','eee.txt');
+INSERT INTO topic(top_name,top_type,top_level,top_dept_id,top_person,top_time,top_accessory) VALUES('前端高阶测试题','前端','A',1,'刘欢','2017-5-24','adg.txt');
+INSERT INTO topic(top_name,top_type,top_level,top_dept_id,top_person,top_time,top_accessory) VALUES('UI测试题','UI','C',1,'李梦婷','2017-5-24','adga.txt');
+INSERT INTO topic(top_name,top_type,top_level,top_dept_id,top_person,top_time,top_accessory) VALUES('UI进阶测试题','UI','B',1,'李梦婷','2017-5-24','aag.txt');
+INSERT INTO topic(top_name,top_type,top_level,top_dept_id,top_person,top_time,top_accessory) VALUES('UI高阶测试题','UI','A',1,'李梦婷','2017-5-24','adgead.txt');
+INSERT INTO topic(top_name,top_type,top_level,top_dept_id,top_person,top_time,top_accessory) VALUES('白盒测试用例试题','测试','C',2,'杨阳','2017-5-24','adgeas.txt');
+INSERT INTO topic(top_name,top_type,top_level,top_dept_id,top_person,top_time,top_accessory) VALUES('白盒测试用例进阶试题','测试','B',2,'杨阳','2017-5-24','adgeas.txt');
+INSERT INTO topic(top_name,top_type,top_level,top_dept_id,top_person,top_time,top_accessory) VALUES('白盒测试用例高阶试题','测试','A',2,'杨阳','2017-5-24','adgeas.txt');
+
+
+/* 培训表 */
+INSERT INTO train(tra_name,tra_lecturer,tra_goal,tra_start_time,tra_end_time,tra_personnel,tra_data,tra_registrar,tra_time,tra_state) VALUES('java程序员上岗培训','王涛','上岗前的培训','2017-5-8','2017-5-9','张三，李四，王五','upload/train/asdgasg.txt','刘婷','2017-5-6','起草');
+INSERT INTO train(tra_name,tra_lecturer,tra_goal,tra_start_time,tra_end_time,tra_personnel,tra_data,tra_registrar,tra_time,tra_state) VALUES('C#程序员上岗培训','王涛','上岗前的培训','2017-5-9','2017-5-10','张三，李四，王五','upload/train/asde.txt','刘婷','2017-5-7','起草');
+INSERT INTO train(tra_name,tra_lecturer,tra_goal,tra_start_time,tra_end_time,tra_personnel,tra_data,tra_registrar,tra_time,tra_state) VALUES('PHP程序员上岗培训','王涛','上岗前的培训','2017-5-10','2017-5-11','张三，李四，王五','upload/train/sdrh.txt','陈卓','2017-5-8','起草');
+INSERT INTO train(tra_name,tra_lecturer,tra_goal,tra_start_time,tra_end_time,tra_personnel,tra_data,tra_registrar,tra_time,tra_state) VALUES('单元测试上岗培训','周大宝','上岗前的培训','2017-5-11','2017-5-12','张三，李四，王五','upload/train/rsf.txt','李梦婷','2017-5-9','起草');
+INSERT INTO train(tra_name,tra_lecturer,tra_goal,tra_start_time,tra_end_time,tra_personnel,tra_data,tra_registrar,tra_time,tra_state) VALUES('模块测试上岗培训','周大宝','上岗前的培训','2017-5-12','2017-5-13','张三，李四，王五','upload/train/sdfr.txt','刘婷','2017-5-10','起草');
+INSERT INTO train(tra_name,tra_lecturer,tra_goal,tra_start_time,tra_end_time,tra_personnel,tra_data,tra_registrar,tra_time,tra_state) VALUES('项目测试上岗培训','周大宝','上岗前的培训','2017-5-13','2017-5-14','张三，李四，王五','upload/train/zshe.txt','李梦婷','2017-5-11','起草');
+INSERT INTO train(tra_name,tra_lecturer,tra_goal,tra_start_time,tra_end_time,tra_personnel,tra_data,tra_registrar,tra_time,tra_state) VALUES('前端上岗培训','江易纲','上岗前的培训','2017-5-14','2017-5-15','张三，李四，王五','upload/train/eyadsg.txt','陈卓','2017-5-12','起草');
+INSERT INTO train(tra_name,tra_lecturer,tra_goal,tra_start_time,tra_end_time,tra_personnel,tra_data,tra_registrar,tra_time,tra_state) VALUES('UI上岗培训','江易纲','上岗前的培训','2017-5-15','2017-5-16','张三，李四，王五','upload/train/ea.txt','李梦婷','2017-5-13','起草');
+INSERT INTO train(tra_name,tra_lecturer,tra_goal,tra_start_time,tra_end_time,tra_personnel,tra_data,tra_registrar,tra_time,tra_state) VALUES('产品推广员上岗培训','战天宁','上岗前的培训','2017-5-16','2017-5-17','张三，李四，王五','upload/train/sdga.txt','陈卓','2017-5-14','起草');
+INSERT INTO train(tra_name,tra_lecturer,tra_goal,tra_start_time,tra_end_time,tra_personnel,tra_data,tra_registrar,tra_time,tra_state) VALUES('产品营销员上岗培训','战天宁','上岗前的培训','2017-5-17','2017-5-18','张三，李四，王五','upload/train/hry.txt','刘婷','2017-5-15','起草');
+INSERT INTO train(tra_name,tra_lecturer,tra_goal,tra_start_time,tra_end_time,tra_personnel,tra_data,tra_registrar,tra_time,tra_state) VALUES('国内推广大使上岗培训','蔡雅','上岗前的培训','2017-5-18','2017-5-19','张三，李四，王五','upload/train/etzd.txt','李梦婷','2017-5-16','起草');
+INSERT INTO train(tra_name,tra_lecturer,tra_goal,tra_start_time,tra_end_time,tra_personnel,tra_data,tra_registrar,tra_time,tra_state) VALUES('国际推广大使上岗培训','Tom','上岗前的培训','2017-5-19','2017-5-20','张三，李四，王五','upload/train/cdga.txt','陈卓','2017-5-17','起草');
+INSERT INTO train(tra_name,tra_lecturer,tra_goal,tra_start_time,tra_end_time,tra_personnel,tra_data,tra_registrar,tra_time,tra_state) VALUES('财会人员上岗培训','王敏','上岗前的培训','2017-5-20','2017-5-21','张三，李四，王五','upload/train/aehyra.txt','李梦婷','2017-5-18','起草');
+INSERT INTO train(tra_name,tra_lecturer,tra_goal,tra_start_time,tra_end_time,tra_personnel,tra_data,tra_registrar,tra_time,tra_state) VALUES('人事人员上岗培训','易学习','上岗前的培训','2017-5-21','2017-5-22','张三，李四，王五','upload/train/zcgetea.txt','陈卓','2017-5-19','起草');
+INSERT INTO train(tra_name,tra_lecturer,tra_goal,tra_start_time,tra_end_time,tra_personnel,tra_data,tra_registrar,tra_time,tra_state) VALUES('薪酬专员岗前培训','赵六','上岗前的培训','2017-5-22','2017-5-23','张三，李四，王五','upload/train/gggdday.txt','陈卓','2017-5-20','起草');
+
+/* 薪酬项目表 */
+INSERT INTO project(proj_name,proj_desc) VALUES('基本工资','基本工资......');
+INSERT INTO project(proj_name,proj_desc) VALUES('绩效奖金','绩效奖金......');
+INSERT INTO project(proj_name,proj_desc) VALUES('交通补助','交通补助......');
+INSERT INTO project(proj_name,proj_desc) VALUES('通讯补助','通讯补助......');
+INSERT INTO project(proj_name,proj_desc) VALUES('餐补','餐补......');
+INSERT INTO project(proj_name,proj_desc) VALUES('住房补助','住房补助......');
+INSERT INTO project(proj_name,proj_desc) VALUES('出差补助','出差补助......');
+INSERT INTO project(proj_name,proj_desc) VALUES('加班补助','加班补助......');
+
+/* 公共属性表 */
+INSERT INTO property(pro_name,pro_desc) VALUES('是否启用','是否启用......');
+INSERT INTO property(pro_name,pro_desc) VALUES('是否启用1','是否启用1......');
+INSERT INTO property(pro_name,pro_desc) VALUES('是否启用2','是否启用2......');
+INSERT INTO property(pro_name,pro_desc) VALUES('是否启用3','是否启用3......');
+INSERT INTO property(pro_name,pro_desc) VALUES('是否启用4','是否启用4......');
+INSERT INTO property(pro_name,pro_desc) VALUES('试题级别','试题级别......');
+INSERT INTO property(pro_name,pro_desc) VALUES('试题级别1','试题级别1......');
+INSERT INTO property(pro_name,pro_desc) VALUES('试题级别2','试题级别2......');
+INSERT INTO property(pro_name,pro_desc) VALUES('试题级别3','试题级别3......');
+INSERT INTO property(pro_name,pro_desc) VALUES('试题级别4','试题级别4......');
+

@@ -1,0 +1,23 @@
+package cn.hrms.util;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.UUID;
+
+/**
+ * 工具类
+ * @author Administrator
+ *
+ */
+public class Tools {
+
+	public static String getUUID(){
+		String uuid = UUID.randomUUID().toString();
+		uuid = uuid.replace("-", "");
+		return uuid;
+	}
+	
+	public static String getCurrTime(){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		return sdf.format(new Date());
+	}
+}

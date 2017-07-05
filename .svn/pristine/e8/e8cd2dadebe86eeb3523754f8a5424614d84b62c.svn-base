@@ -1,0 +1,16 @@
+package cn.hrms.util;
+import java.util.UUID;
+
+/**
+ * 工具类
+ * @author Administrator
+ *
+ */
+public class Tools {
+
+	public static String getUUID(){
+		String uuid = UUID.randomUUID().toString();
+		uuid = uuid.replace("-", "");
+		return uuid;
+	}
+}

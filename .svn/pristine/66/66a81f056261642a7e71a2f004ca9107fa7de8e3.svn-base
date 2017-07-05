@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.pay.entity.Standard">
+	<resultMap type="cn.hrms.pay.entity.Standard" id="stanMap">
+		<result property="id" column="stan_id" />
+		<result property="name" column="stan_name" />
+		<result property="amount" column="stan_amount" />
+		<result property="registrar" column="stan_registrar" />
+		<result property="time" column="stan_time" />
+		<result property="state" column="stan_state" />
+	</resultMap>
+	
+	<select id="findStanById" resultMap="stanMap">
+		select * from standard where stan_id = #{id}
+	</select>
+	
+	<select id="findStan" resultMap="stanMap" parameterType="map">
+		select * from standard
+		<where>
+			<if test="stan.state != null">
+				and stan_state = #{stan.state}
+			</if>
+			<if test="stan.time != null and endTime == null">
+				and stan_time >= #{stan.time}
+			</if>
+			<if test="endTime != null and stan.time == null">
+				and #{endTime} >= stan_time 
+			</if>
+			<if test="stan.time != null and endTime != null">
+				and stan_time BETWEEN #{stan.time} AND #{endTime} 
+			</if>
+		</where>
+		limit #{start},#{pageSize}
+	</select>
+	
+	<select id="stanCount" resultType="int" parameterType="map">
+		select count(*) from standard 
+		<where>
+			<if test="stan.state != null">
+				and stan_state = #{stan.state}
+			</if>
+			<if test="stan.time != null and endTime == null">
+				and stan_time >= #{stan.time}
+			</if>
+			<if test="endTime != null and stan.time == null">
+				and #{endTime} >= stan_time 
+			</if>
+			<if test="stan.time != null and endTime != null">
+				and stan_time BETWEEN #{stan.time} AND #{endTime} 
+			</if>
+		</where>
+	</select>
+	
+	<insert id="addStan" parameterType="cn.hrms.pay.entity.Standard">
+		insert into standard(stan_name,stan_amount,stan_registrar,stan_time,stan_state)
+		values(#{name},#{amount},#{registrar},(select now()),#{state})
+	</insert>
+	
+	<delete id="delStan" parameterType="cn.hrms.pay.entity.Standard">
+		delete from standard where stan_id = #{id}
+	</delete>
+	
+	<update id="updStan" parameterType="cn.hrms.pay.entity.Standard">
+		update standard set stan_name = #{name}, stan_amount = #{amount}, stan_state = #{state}
+		where stan_id = #{id}
+	</update>
+</mapper>

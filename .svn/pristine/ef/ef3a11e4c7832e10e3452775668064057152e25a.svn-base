@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.pay.entity.StandardDetails">
+	<resultMap type="cn.hrms.pay.entity.StandardDetails" id="staDetMap">
+		<result column="sd_id" property="id" />
+		<result column="sd_money" property="money" />
+		
+		<association property="standard" column="sd_stan_id" select="cn.hrms.pay.entity.Standard.findStaById"/>
+		<association property="project" column="sd_proj_id" select="cn.hrms.sysset.entity.Project.findProById"/>
+	</resultMap>
+</mapper>

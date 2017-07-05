@@ -1,0 +1,86 @@
+package cn.hrms.sysset.entity;
+
+import java.io.Serializable;
+
+/**
+ * 用户
+ */
+public class Users implements Serializable {
+
+	private static final long serialVersionUID = -1614274346807259822L;
+	
+	/**
+	 * 用户名
+	 */
+	private String name;
+	
+	/**
+	 * 真实姓名
+	 */
+	private String realName;
+	
+	/**
+	 * 密码
+	 */
+	private String password;
+	
+	/**
+	 * 用户角色
+	 */
+	private Role role;
+	
+	/**
+	 * 联系电话
+	 */
+	private String telephone;
+
+	
+	/**
+	 * 构造函数
+	 */
+	public Users() { } 
+
+	public Users(String name, String realName, String password, Role role,
+			String telephone) {
+		this.name = name;
+		this.realName = realName;
+		this.password = password;
+		this.role = role;
+		this.telephone = telephone;
+	}
+
+	
+	/**
+	 * 属性封装
+	 */
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getRealName() {
+		return realName;
+	}
+	public void setRealName(String realName) {
+		this.realName = realName;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public Role getRole() {
+		return role;
+	}
+	public void setRole(Role role) {
+		this.role = role;
+	}
+	public String getTelephone() {
+		return telephone;
+	}
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+}

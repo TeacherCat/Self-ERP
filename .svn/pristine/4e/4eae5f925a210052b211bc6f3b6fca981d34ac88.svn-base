@@ -1,0 +1,319 @@
+package cn.hrms.personnel.entity;
+import java.io.Serializable;
+
+import cn.hrms.sysset.entity.Dept;
+import cn.hrms.sysset.entity.Post;
+
+/**
+ * 档案
+ */
+public class Archives implements Serializable {
+
+	private static final long serialVersionUID = 1843672241402422604L;
+	
+	/**
+	 * 档案编号
+	 */
+	private Integer id;
+	/**
+	 * 所属部门
+	 */
+	private Dept dept;
+	/**
+	 * 所属职位
+	 */
+	private Post post;
+	/**
+	 * 档案状态
+	 */
+	private String state;
+	/**
+	 * 姓名
+	 */
+	private String name;
+	/**
+	 * 性别
+	 */
+	private String sex;
+	/**
+	 * 身份证号
+	 */
+	private String card;
+	/**
+	 * 联系电话
+	 */
+	private String telephone;
+	/**
+	 * 邮箱
+	 */
+	private String email;
+	/**
+	 * 籍贯
+	 */
+	private String place;
+	/**
+	 * 住址
+	 */
+	private String address;
+	/**
+	 * 政治面貌
+	 */
+	private String politics;
+	/**
+	 * 学历
+	 */
+	private String education;
+	/**
+	 * 毕业院校
+	 */
+	private String school;
+	/**
+	 * 专业
+	 */
+	private String specialty;
+	/**
+	 * 银行卡号
+	 */
+	private String bank;
+	/**
+	 * 社保卡号
+	 */
+	private String socila;
+	/**
+	 * 个人履历
+	 */
+	private String record;
+	/**
+	 * 备注
+	 */
+	private String remarks;
+	/**
+	 * 照片
+	 */
+	private String photo;
+	/**
+	 * 登记人
+	 */
+	private String registrar;
+	/**
+	 * 建档时间
+	 */
+	private String time;
+	
+	
+	/**
+	 * 构造函数
+	 */
+	public Archives() {}
+
+	public Archives(Integer id, Dept dept, Post post, String state,
+			String name, String sex, String card, String telephone,
+			String email, String place, String address, String politics,
+			String education, String school, String specialty, String bank,
+			String socila, String record, String remarks, String photo,
+			String registrar, String time) {
+		this.id = id;
+		this.dept = dept;
+		this.post = post;
+		this.state = state;
+		this.name = name;
+		this.sex = sex;
+		this.card = card;
+		this.telephone = telephone;
+		this.email = email;
+		this.place = place;
+		this.address = address;
+		this.politics = politics;
+		this.education = education;
+		this.school = school;
+		this.specialty = specialty;
+		this.bank = bank;
+		this.socila = socila;
+		this.record = record;
+		this.remarks = remarks;
+		this.photo = photo;
+		this.registrar = registrar;
+		this.time = time;
+	}
+
+	
+	/**
+	 * 属性封装
+	 */
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Dept getDept() {
+		return dept;
+	}
+
+	public void setDept(Dept dept) {
+		this.dept = dept;
+	}
+
+	public Post getPost() {
+		return post;
+	}
+
+	public void setPost(Post post) {
+		this.post = post;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getSex() {
+		return sex;
+	}
+
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+
+	public String getCard() {
+		return card;
+	}
+
+	public void setCard(String card) {
+		this.card = card;
+	}
+
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPlace() {
+		return place;
+	}
+
+	public void setPlace(String place) {
+		this.place = place;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPolitics() {
+		return politics;
+	}
+
+	public void setPolitics(String politics) {
+		this.politics = politics;
+	}
+
+	public String getEducation() {
+		return education;
+	}
+
+	public void setEducation(String education) {
+		this.education = education;
+	}
+
+	public String getSchool() {
+		return school;
+	}
+
+	public void setSchool(String school) {
+		this.school = school;
+	}
+
+	public String getSpecialty() {
+		return specialty;
+	}
+
+	public void setSpecialty(String specialty) {
+		this.specialty = specialty;
+	}
+
+	public String getBank() {
+		return bank;
+	}
+
+	public void setBank(String bank) {
+		this.bank = bank;
+	}
+
+	public String getSocila() {
+		return socila;
+	}
+
+	public void setSocila(String socila) {
+		this.socila = socila;
+	}
+
+	public String getRecord() {
+		return record;
+	}
+
+	public void setRecord(String record) {
+		this.record = record;
+	}
+
+	public String getRemarks() {
+		return remarks;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+
+	public String getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
+	}
+
+	public String getRegistrar() {
+		return registrar;
+	}
+
+	public void setRegistrar(String registrar) {
+		this.registrar = registrar;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+	
+}

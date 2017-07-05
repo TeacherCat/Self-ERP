@@ -1,0 +1,59 @@
+package cn.hrms.sysset.action;
+
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import cn.hrms.sysset.biz.TopicBiz;
+import cn.hrms.sysset.entity.Topic;
+import cn.hrms.util.Page;
+
+public class TopicAction {
+	private TopicBiz topicBiz;
+	
+	@RequestMapping("topicList")
+	public String topicList(Topic topic, Integer currPageNo, Model model){
+		Page<Topic> page = new Page<Topic>();
+		page.setTotalCount(topicBiz.TopCount(topic));
+		page.setPageTotalCount();
+		if(currPageNo != null){
+			page.setCurrPageNo(currPageNo);
+		}
+		page.setPageList(topicBiz.findTop(topic, page));
+		model.addAttribute("page", page);
+		return "jsp/sysset/topic/topicList";
+	}
+	
+	@RequestMapping("topicAdd")
+	public String topicAdd(Topic topic, Integer res){
+		if(res == null){
+			topicBiz.addTop(topic);
+		}
+		return "jsp/sysset/topic/topicAdd";
+	}
+	
+	@RequestMapping("topicDel")
+	public String topicDel(Integer id){
+		topicBiz.delTop(id);
+		return "jsp/sysset/topic/topicList";
+	}
+	
+	@RequestMapping("topicUpd")
+	public String topicUpd(Topic topic, Integer res, Model model){
+		if(res == null){
+			topicBiz.updTop(topic);
+		}
+		model.addAttribute("topic", topicBiz.findTopById(topic.getId()));
+		return "jsp/sysset/topic/topicUpd";
+	}
+	
+	@RequestMapping("topicDetail")
+	public String topicDetail(Integer id, Model model){
+		model.addAttribute("topic", topicBiz.findTopById(id));
+		return "jsp/sysset/topic/topicDetail";
+	}
+
+	public void setTopicBiz(TopicBiz topicBiz) {
+		this.topicBiz = topicBiz;
+	}
+
+}

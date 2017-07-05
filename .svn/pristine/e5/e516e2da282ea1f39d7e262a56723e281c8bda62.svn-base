@@ -1,0 +1,4 @@
+DB_DRIVER=com.mysql.jdbc.Driver
+DB_URL=jdbc:mysql://127.0.0.1:3306/hrms?useUnicode=true&characterEncoding=UTF-8
+DB_USER=root
+DB_PWD=111111

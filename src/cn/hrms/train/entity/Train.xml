@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.train.entity.Train">
+
+	<resultMap type="cn.hrms.train.entity.Train" id="trainMap">
+		<id property="id" column="tra_id" />
+		<result property="name" column="tra_name" />
+		<result property="lecturer" column="tra_lecturer" />
+		<result property="goal" column="tra_goal" />
+		<result property="desc" column="tra_desc" />
+		<result property="startTime" column="tra_start_time" />
+		<result property="endTime" column="tra_end_time" />
+		<result property="personnel" column="tra_personnel" />
+		<result property="data" column="tra_data" />
+		<result property="registrar" column="tra_registrar" />
+		<result property="time" column="tra_time" />
+		<result property="state" column="tra_state" />
+	</resultMap>
+
+	<!-- 查询培训 -->
+	<select id="findTrain" resultMap="trainMap" parameterType="map">
+		select * from train
+		<where>
+			<if test="train.id != null">
+				and tra_id = #{train.id}
+			</if>
+			<if test="train.name != null">
+				and tra_name like concat(concat("%",#{train.name}),"%")
+			</if>
+			<if test="train.startTime != null and train.endTime == null">
+				and tra_time >= #{train.startTime}
+			</if>
+			<if test="train.endTime != null and train.startTime == null">
+				and #{train.endTime} >= tra_time 
+			</if>
+			<if test="train.startTime != null and train.endTime != null">
+				and tra_time BETWEEN #{train.startTime} AND #{train.endTime} 
+			</if>
+		</where>
+		ORDER BY (tra_time) DESC LIMIT #{start},#{size}
+	</select>
+	
+	<!-- 查询数据条数 -->
+	<select id="findTotalCount" resultType="int">
+		SELECT COUNT(tra_id) FROM train
+		<where>
+			<if test="id != null">
+				and tra_id = #{id}
+			</if>
+			<if test="name != null">
+				and tra_name like concat(concat("%",#{name}),"%")
+			</if>
+			<if test="startTime != null and endTime == null">
+				and tra_time >= #{startTime}
+			</if>
+			<if test="endTime !=null and startTime == null">
+				and #{endTime} >= tra_time 
+			</if>
+			<if test="startTime != null and endTime != null">
+				and tra_time BETWEEN #{startTime} AND #{endTime} 
+			</if>
+		</where>
+	</select>
+	
+	<!-- 新增培训 -->
+	<insert id="addTrain" parameterType="cn.hrms.train.entity.Train">
+		INSERT INTO train(tra_name,tra_lecturer,tra_goal,tra_desc,tra_start_time,tra_end_time,tra_personnel,tra_data,tra_registrar,tra_time,tra_state) VALUES(#{name},#{lecturer},#{goal},#{desc},#{startTime},#{endTime},#{personnel},#{data},#{registrar},#{time},#{state})
+	</insert>
+	
+	<!-- 修改培训信息 -->
+	<update id="updTrain" parameterType="cn.hrms.train.entity.Train">
+		UPDATE train SET tra_name=#{name},tra_lecturer=#{lecturer},tra_goal=#{goal},tra_desc=#{desc},tra_start_time=#{startTime},tra_end_time=#{endTime},tra_personnel=#{personnel},tra_data=#{data},tra_state=#{state} WHERE tra_id=#{id}
+	</update>
+	
+	<!-- 修改培训状态 -->
+	<update id="updTrainState" parameterType="cn.hrms.train.entity.Train">
+		UPDATE train SET tra_state=#{state} WHERE tra_id=#{id}
+	</update>
+	
+	<!-- 删除培训 -->
+	<delete id="delTrain" parameterType="int">
+		DELETE FROM train WHERE tra_id=#{id}
+	</delete>
+	
+</mapper>

@@ -1,0 +1,57 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>公共属性列表</title>
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/plugins/layui/css/layui.css" />
+	<script type="text/javascript" src="<%=request.getContextPath()%>/plugins/layui/layui.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.8.3.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/sysset.js"></script>
+</head>
+
+<body>
+	<form action="propertyList.do" method="post" id="myForm">
+	
+		<div class="layui-form-item" style="margin-top:20px;">
+			<div class="layui-inline">
+				<label class="layui-form-label">属性名称：</label>
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input" name="name" value="${pro.name }">
+				</div>
+			</div>
+			<input type="submit" class="layui-btn layui-btn-radius" style="margin-top:-5px;" value="查&nbsp;询" />
+			<a class="layui-btn layui-btn-radius" style="margin-top:-5px;" href="propertyAdd.do?res=1">新&nbsp;增&nbsp;属&nbsp;性</a>
+		</div>
+		
+		<div class="layui-field-box layui-form">
+			<table class="layui-table admin-table">
+				<thead>
+					<tr>
+						<th>属性编号</th>
+						<th>属性名称</th>
+						<th>属性描述</th>
+						<th style="width:200px;">操作</th>
+					</tr>
+				</thead>
+				<c:forEach var="pro" items="${page.pageList }">
+					<tr>
+						<td>${pro.id }</td>
+						<td>${pro.name }</td>
+						<td>${pro.desc }</td>
+						<td><a href="propertyUpd.do?id=${pro.id }&res=1" class="layui-btn layui-btn-normal layui-btn-mini">修改</a>
+							<a href="propertyDetail.do?id=${pro.id }" class="layui-btn layui-btn-mini">详情</a>
+							<a href="propertyDel.do?id=${pro.id }" class="layui-btn layui-btn-danger layui-btn-mini">删除</a>
+						</td>
+					</tr>
+				</c:forEach>
+			</table>
+			<p style="width:100px;margin:0px auto;margin-top:30px;color:red;">${msg}</p>
+		</div>
+	
+		<%@ include file="../../../jsp/public/page.jsp" %>
+	</form>
+</body>
+</html>

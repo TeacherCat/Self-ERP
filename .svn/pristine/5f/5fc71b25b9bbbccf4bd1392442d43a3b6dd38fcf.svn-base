@@ -1,0 +1,66 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>薪酬标准修改</title>
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/plugins/layui/css/layui.css" />
+	<script type="text/javascript" src="<%=request.getContextPath()%>/plugins/layui/layui.js"></script>
+</head>
+
+<body>
+	<div style="width:600px;margin:20px auto;">
+		
+		<div class="layui-form-item">
+			<label class="layui-form-label">标准名称：</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input">
+			</div>
+			<span class="msg">&nbsp;*&nbsp;</span>
+		</div>
+		
+		<div class="layui-form-item">
+			<label class="layui-form-label">标准总额：</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input">
+			</div>
+			<span class="msg">&nbsp;*&nbsp;</span>
+		</div>
+		
+		<div class="layui-form-item">
+			<label class="layui-form-label">标准状态：</label>
+			<select class="select">
+				<option>请选择省</option>
+				<option>开发部</option>
+				<option>市场部</option>
+				<option>福建省</option>
+			</select>
+			<span class="msg">&nbsp;*&nbsp;</span>
+		</div>
+		<hr/>
+		
+		<div class="layui-field-box layui-form" style="width:600px;">
+			<table class="layui-table admin-table">
+				<thead>
+					<tr>
+						<th width="40">项目编号</th>
+						<th width="40">项目名称</th>
+						<th width="20">项目金额(元)</th>
+					</tr>
+				</thead>
+				<tr>
+					<td>aaa</td>
+					<td>aaa</td>
+					<td><input type="text" class="layui-input"></td>
+				</tr>
+			</table>
+		</div>
+		
+		<input type="submit" value="修&nbsp;&nbsp;改" class="layui-btn layui-btn-radius" style="margin-top:20px;margin-left:100px;" />
+		<input type="submit" value="提&nbsp;&nbsp;交" class="layui-btn layui-btn-radius" style="margin-top:20px;" />
+		<a href="<%=request.getContextPath()%>/jsp/pay/standard/standardList.jsp" class="layui-btn layui-btn-radius" style="margin-top:20px">返&nbsp;&nbsp;回</a>
+		
+	</div>
+</body>
+</html>

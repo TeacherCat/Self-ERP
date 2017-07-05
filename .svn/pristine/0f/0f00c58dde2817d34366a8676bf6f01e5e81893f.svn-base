@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.train.entity.TrainAudit">
+
+	<resultMap type="cn.hrms.train.entity.TrainAudit" id="trainAuditMap">
+		<id property="id" column="aud_id" />
+		<result property="result" column="aud_result" />
+		<result property="opinion" column="aud_opinion" />
+		<result property="person" column="aud_person" />
+		<result property="time" column="aud_time" />
+	</resultMap>
+	
+	<select id="findTrainAuditByID" resultMap="trainAuditMap">
+		select * from train_audit where aud_id = #{id}
+	</select>
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.sysset.entity.Project">
+	<resultMap type="cn.hrms.sysset.entity.Project" id="proMap">
+		<result property="id" column="proj_id"/>
+		<result property="name" column="proj_name"/>
+		<result property="desc" column="proj_desc"/>
+	</resultMap>
+
+	<select id="findProById" resultMap="proMap">
+		select * from project where proj_id = #{id}
+	</select>
+	
+	<select id="findPro" resultMap="proMap" parameterType="map">
+		select * from project limit #{start},#{pageSize}
+	</select>
+	
+	<select id="proCount" resultType="int">
+		select count(*) from project
+	</select>
+	
+	<insert id="addPro" parameterType="cn.hrms.sysset.entity.Project">
+		insert into project(proj_name,proj_desc) values(#{name},#{desc})
+	</insert>
+	
+	<delete id="delPro" parameterType="cn.hrms.sysset.entity.Project">
+		delete from project where proj_id = #{id}
+	</delete>
+	
+	<update id="updPro" parameterType="cn.hrms.sysset.entity.Project">
+		update project set proj_name = #{name},proj_desc = #{desc} where proj_id = #{id}
+	</update>
+</mapper>

@@ -1,0 +1,18 @@
+package cn.hrms.test;
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import cn.hrms.sysset.dao.UsersDao;
+import cn.hrms.sysset.entity.Users;
+
+public class test {
+	public static void main(String[] args) {
+		ClassPathXmlApplicationContext cpa = new ClassPathXmlApplicationContext("applicationContext.xml");
+		
+		UsersDao usersDao = cpa.getBean("usersDao",UsersDao.class);
+		Users users = usersDao.loginUsers(new Users("admin","123456"));
+		System.out.println(users.getRealName()+"---"+users.getRole().getName());
+
+	}
+
+}

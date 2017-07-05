@@ -1,0 +1,45 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>修改薪酬项目</title>
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/plugins/layui/css/layui.css" />
+	<script type="text/javascript" src="<%=request.getContextPath()%>/plugins/layui/layui.js"></script>
+</head>
+
+<body>
+	<div style="width:500px;margin:20px auto;">
+		<form action="projectUpd.do" method="post">
+		
+			<div class="layui-form-item" style="display: none;">
+				<label class="layui-form-label">项目编号：</label>
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input" name="id" value="${project.id }">
+				</div>
+				<span class="msg">&nbsp;*&nbsp;</span>
+			</div>
+		
+			<div class="layui-form-item">
+				<label class="layui-form-label">项目名称：</label>
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input" name="name" value="${project.name }">
+				</div>
+				<span class="msg">&nbsp;*&nbsp;</span>
+			</div>
+			
+			<div class="layui-form-item">
+				<label class="layui-form-label">项目描述：</label>
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input" name="desc" value="${project.desc }">
+				</div>
+			</div>
+			
+			<input type="submit" value="修&nbsp;&nbsp;改" class="layui-btn layui-btn-radius" style="margin-top:20px;margin-left:100px;" />
+			<a href="projectList.do" class="layui-btn layui-btn-radius" style="margin-top:20px">返&nbsp;&nbsp;回</a>
+		
+		</form>
+	</div>
+</body>
+</html>

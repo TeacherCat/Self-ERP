@@ -1,0 +1,22 @@
+package cn.hrms.train.dao;
+import java.util.List;
+import cn.hrms.train.entity.Train;
+import cn.hrms.util.Page;
+
+public interface TrainDao {
+
+	/**
+	 * 按条件分页查询培训计划
+	 * @param train 查询条件
+	 * @param currPageNo 当前页
+	 * @return
+	 */
+	public List<Train> findTrain(Train train,Page<Train> page);
+	
+	/**
+	 * 查询总条数
+	 * @param train 查询条件
+	 * @return
+	 */
+	public Integer findTotalCount(Train train);
+}

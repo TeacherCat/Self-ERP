@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.sysset.entity.Topic">
+	<resultMap type="cn.hrms.sysset.entity.Topic" id="topicMap">
+		<result column="user_name" property="name" />
+		<result column="user_real_name" property="realName" />
+		<result column="user_password" property="password" />
+		<result column="user_telephone" property="telephone" />
+
+		<association property="role" column="user_role_id" select="cn.hrms.sysset.entity.Role.findRoleById"/>
+		<association property="dept" column="user_dept_id" select="cn.hrms.sysset.entity.Dept.findDeptById"/>
+		<association property="post" column="user_post_id" select="cn.hrms.sysset.entity.Post.findPostById"/>
+	</resultMap>
+</mapper>

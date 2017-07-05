@@ -1,0 +1,78 @@
+
+/* 用户角色表 */
+SELECT * FROM role;
+
+/* 用户表 */
+SELECT * FROM users;
+
+/* 部门表 */
+SELECT * FROM dept;
+
+/* 职位表 */
+SELECT * FROM post;
+
+/* 题库表 */
+SELECT * FROM topic;
+
+/* 公共属性表 */
+SELECT * FROM property;
+
+/* 公共属性详情表 */
+SELECT * FROM property_details;
+
+/* 薪酬项目表 */
+SELECT * FROM project;
+
+
+
+
+/* 档案表 */
+SELECT * FROM archives;
+
+/* 档案审核表 */
+SELECT * FROM archives_audit;
+
+
+
+/* 职位发布表 */
+SELECT * FROM releases;
+
+/* 简历表 */
+SELECT * FROM resumes;
+
+/* 面试结果表 */
+SELECT * FROM result;
+
+/* 录用表 */
+SELECT * FROM hire;
+
+
+
+/* 培训表 */
+SELECT * FROM train;
+
+/* 培训审核表 */
+SELECT * FROM train_audit;
+
+/* 培训反馈表 */
+SELECT * FROM train_back;
+
+
+
+/* 薪酬标准表 */
+SELECT * FROM standard;
+
+/* 薪酬标准详情表 */
+SELECT * FROM standard_details;
+
+/* 薪酬标准审核表 */
+SELECT * FROM standard_audit;
+
+/* 薪酬发放表 */
+SELECT * FROM provide;
+
+/* 薪酬发放详情 */
+SELECT * FROM provide_details;
+
+/* 薪酬发放审核表 */
+SELECT * FROM provide_audit;

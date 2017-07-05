@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.train.entity.TrainAudit">
+	<resultMap type="cn.hrms.train.entity.TrainAudit" id="traAudMap">
+		<result column="ta_result" property="result" />
+		<result column="ta_opinion" property="opinion" />
+		<result column="ta_person" property="person" />
+		<result column="ta_time" property="time" />
+
+		<association property="train" column="tra_id" select="cn.hrms.train.entity.Train.findTraById"/>
+	</resultMap>
+</mapper>

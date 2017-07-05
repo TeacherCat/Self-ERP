@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.sysset.entity.Dept">
+	<resultMap type="cn.hrms.sysset.entity.Dept" id="deptMap">
+		<result column="dept_" property="id" />
+		<result column="dept_" property="id" />
+		<result column="dept_" property="id" />
+		<result column="dept_" property="id" />
+		<result column="dept_" property="id" />
+		<result column="dept_" property="id" />
+	</resultMap>
+	
+	<select id="findDeptById" resultType="cn.hrms.sysset.entity.Dept">
+		select * from dept where dept_id = #{id}
+	</select>
+	
+	<insert id="addDept" parameterType="cn.hrms.sysset.entity.Dept">
+		insert into dept(dept_name,dept_desc,dept_remarks,dept_phone,dept_parent)
+		values(#{name},#{desc},#{remarks},#{phone},#{parent})
+	</insert>
+</mapper>

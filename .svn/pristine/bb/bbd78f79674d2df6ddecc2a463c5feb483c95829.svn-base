@@ -1,0 +1,127 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>找回密码</title>
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/login.css" />
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/plugins/layui/css/layui.css" />
+	<script type="text/javascript" src="<%=request.getContextPath()%>/plugins/layui/layui.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.8.3.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			//表单验证
+			$("#myForm").submit(function(){
+				var flg = true;
+				if($("input[name='name']").val()==""){
+					$("input[name='name']").attr("placeholder","用户名不能为空");
+					flg = false;
+				}
+				if($("input[name='password']").val()==""){
+					$("input[name='password']").attr("placeholder","新密码不能为空");
+					flg = false;
+				}
+				if($("input[name='password']").val()!="" && $("input[name='password']").val().length < 6){
+					$("input[name='password']").val("");
+					$("input[name='password']").attr("placeholder","新密码长度至少6位");
+					flg = false;
+				}
+				if($("input[name='code']").val()==""){
+					$("input[name='code']").attr("placeholder","验证码不能为空");
+					flg = false;
+				}
+				return flg;
+			});
+			
+			//验证用户名
+			$("input[name='name']").blur(function(){
+				$.post(
+					"<%=request.getContextPath()%>/checkUserName.do",
+					"name="+$("input[name='name']").val(),
+					function(data){
+						if(data == "0"){
+							$("input[name='name']").val("");
+							$("input[name='name']").attr("placeholder","用户名不存在");
+							$("#send").attr("disabled","disabled");
+						}else{
+							$("#send").removeAttr("disabled");
+							$("input[name='phone']").val(data);
+						}
+					},
+					"text"
+				);
+			});
+			
+			//点击发送			
+			$("#send").click(function(){
+				$("#send").attr("disabled","disabled");
+				t = setInterval("times()", 1000);
+				$.post(
+					"<%=request.getContextPath()%>/sendMessage.do",
+					"phone="+$("input[name='phone']").val(),
+					function(data){
+						alert(data);
+					},
+					"text"
+				);
+			});
+		});
+
+		//计时器
+		var s = 60;
+		function times(){
+			s += -1;
+			$("#send").val(s + " s");
+			if(s == 0){
+				s = 60;
+				clearInterval(t);
+				$("#send").removeAttr("disabled");
+				$("#send").val("发  送");
+			}
+		};
+
+    </script>
+</head>
+
+<body class="beg-login-bg" style="border:0px;">
+	<div class="beg-login-box">
+		
+		<h1>找&#12288;回&#12288;密&#12288;码</h1>
+		<div class="beg-login-main">
+			<form id="myForm" action="<%=request.getContextPath()%>/findPwd.do" class="layui-form" method="post">
+				<input type="hidden" name="phone" value="" />
+				<div class="layui-form-item">
+					<label class="beg-login-icon">
+						<i class="layui-icon">&#xe612;</i>
+					</label>
+					<input type="text" placeholder="输入用户名" class="layui-input" name="name" value="${u.name}" maxlength="16">
+				</div>
+				<div class="layui-form-item">
+					<label class="beg-login-icon">
+						<i class="layui-icon">&#xe605;</i>
+					</label>
+					<input type="password" placeholder="输入验证码" class="layui-input" name="code" style="width:150px;display:inline;" maxlength="6">
+					<input type="button" id="send" style="width:70px;margin-left:45px;height:36px;padding-left:0px;" value="发&nbsp;送" disabled="disabled" >
+				</div>
+				<div class="layui-form-item">
+					<label class="beg-login-icon">
+						<i class="layui-icon">&#xe642;</i>
+					</label>
+					<input type="password" placeholder="输入新密码" class="layui-input" name="password" maxlength="16">
+				</div>
+				<div class="layui-form-item">
+					<span style="margin-left:60px;">${msg}</span>
+				</div>
+				<div class="layui-form-item">
+					<div class="beg-pull-right">
+						<input type="submit" value="确&#12288;&#12288;定&nbsp;&nbsp;&nbsp;&nbsp;" class="layui-btn layui-btn-primary" />
+						<a href="<%=request.getContextPath()%>/jsp/public/login.jsp" class="layui-btn layui-btn-primary" >&#12288;返&#12288;&#12288;回&nbsp;&nbsp;&nbsp;&nbsp;</a>
+					</div>
+					<div class="beg-clear"></div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,83 @@
+package cn.hrms.sysset.entity;
+
+import java.io.Serializable;
+
+/*
+ * 职称
+ */
+public class Titles implements Serializable {
+
+	private static final long serialVersionUID = -4504111261293152035L;
+	
+	/*
+	 * 职称编号
+	 */
+	private Integer id;
+	
+	/*
+	 * 职称名称
+	 */
+	private String name;
+	
+	/*
+	 * 所属部门
+	 */
+	private Dept dept;
+	
+	/*
+	 * 职称描述
+	 */
+	private String desc;
+	
+	/*
+	 * 备注
+	 */
+	private String remarks;
+	
+	public Titles(Integer id, String name, Dept dept, String desc,
+			String remarks) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.dept = dept;
+		this.desc = desc;
+		this.remarks = remarks;
+	}
+	
+	public Titles() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Dept getDept() {
+		return dept;
+	}
+	public void setDept(Dept dept) {
+		this.dept = dept;
+	}
+	public String getDesc() {
+		return desc;
+	}
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+	public String getRemarks() {
+		return remarks;
+	}
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+
+}

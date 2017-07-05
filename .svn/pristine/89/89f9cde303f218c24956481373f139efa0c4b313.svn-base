@@ -1,0 +1,107 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>修改密码</title>
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/login.css" />
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/plugins/layui/css/layui.css" />
+	<script type="text/javascript" src="<%=request.getContextPath()%>/plugins/layui/layui.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.8.3.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			//表单验证
+			$("#myForm").submit(function(){
+				var flg = true;
+				if($("input[name='oldPwd']").val()==""){
+					$("input[name='oldPwd']").attr("placeholder","原密码不能为空");
+					flg = false;
+				}
+				if($("input[name='password']").val()==""){
+					$("input[name='password']").attr("placeholder","新密码不能为空");
+					flg = false;
+				}
+				if($("input[name='okPwd']").val()==""){
+					$("input[name='okPwd']").attr("placeholder","新密码不能为空");
+					flg = false;
+				}
+				return flg;
+			});
+			
+			//验证原密码
+			$("input[name='oldPwd']").blur(function(){
+				$.post(
+					"<%=request.getContextPath()%>/checkOldPwd.do",
+					"name="+$("input[name='name']").val() + "&password="+$("input[name='oldPwd']").val(),
+					function(data){
+						if(data == "0"){
+							$("input[name='oldPwd']").val("");
+							$("input[name='oldPwd']").attr("placeholder","原密码不正确");
+						}
+					},
+					"text"
+				);
+			});
+			
+			//新密码长度
+			$("input[name='password']").blur(function(){
+				if($(this).val().length < 6){
+					$(this).val("");
+					$(this).attr("placeholder","新密码长度至少6位");
+				}
+			});
+			$("input[name='okPwd']").blur(function(){
+				if($(this).val().length < 6){
+					$(this).val("");
+					$(this).attr("placeholder","新密码长度至少6位");
+					return;
+				}
+				if($(this).val() != $("input[name='password']").val()){
+					$(this).val("");
+					$(this).attr("placeholder","两次密码输入不一致");
+					return;
+				}
+			});
+			
+		});
+    </script>
+</head>
+
+<body class="beg-login-bg" style="border:0px;">
+	<div class="beg-login-box">
+		
+		<h1>修&#12288;改&#12288;密&#12288;码</h1>
+		<div class="beg-login-main">
+			<form id="myForm" action="<%=request.getContextPath()%>/changePwd.do" class="layui-form" method="post">
+				<input type="hidden" name="name" value="${sessionScope.users.name}">
+				<div class="layui-form-item">
+					<label class="beg-login-icon">
+						<i class="layui-icon">&#xe642;</i>
+					</label>
+					<input type="password" placeholder="输入原密码" class="layui-input" name="oldPwd">
+				</div>
+				<div class="layui-form-item">
+					<label class="beg-login-icon">
+						<i class="layui-icon">&#xe642;</i>
+					</label>
+					<input type="password" placeholder="输入新密码" class="layui-input" name="password">
+				</div>
+				<div class="layui-form-item">
+					<label class="beg-login-icon">
+						<i class="layui-icon">&#xe642;</i>
+					</label>
+					<input type="password" placeholder="确认新密码" class="layui-input" name="okPwd">
+				</div>
+				<div class="layui-form-item">
+					<div class="beg-pull-right">
+						<input type="submit" value="修&#12288;&#12288;改&nbsp;&nbsp;&nbsp;&nbsp;" class="layui-btn layui-btn-primary" />
+						<a href="<%=request.getContextPath()%>/index.do" class="layui-btn layui-btn-primary" >&#12288;返&#12288;&#12288;回&nbsp;&nbsp;&nbsp;&nbsp;</a>
+					</div>
+					<div class="beg-clear"></div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

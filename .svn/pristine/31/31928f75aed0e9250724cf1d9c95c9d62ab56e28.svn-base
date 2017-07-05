@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.pay.entity.StandardAudit">
+	<resultMap type="cn.hrms.pay.entity.StandardAudit" id="staAudMap">
+		<result column="sa_result" property="result" />
+		<result column="sa_opinion" property="opinion" />
+		<result column="sa_person" property="person" />
+		<result column="sa_time" property="time" />
+		
+		<association property="standard" column="sa_stan_id" select="cn.hrms.pay.entity.Standard.findStanById"/>
+	</resultMap>
+	
+	<select id="findStaAudById" resultType="cn.hrms.pay.entity.StandardAudit">
+		select * form standard_audit where sa_stan_id = #{standard.id}
+	</select>
+	
+	<insert id="addStaAud" parameterType="cn.hrms.pay.entity.StandardAudit">
+		insert into standard_audit(sa_stan_id,sa_result,sa_opinion,sa_person,sa_time)
+		values(#{standard.id},#{result},#{opinion},#{person},#{time})
+	</insert>
+	
+	<delete id="delStaAud" parameterType="cn.hrms.pay.entity.StandardAudit">
+		delete from standard_audit where sa_stan_id = #{standard.id}
+	</delete>
+	
+	<update id="updStaAud" parameterType="cn.hrms.pay.entity.StandardAudit">
+		update standard_audit set sa_result = #{result}, sa_opinion = #{opinion},
+									sa_person = #{person}, sa_time = #{time}
+		where sa_stan_id = #{standard.id}
+	</update>
+</mapper>

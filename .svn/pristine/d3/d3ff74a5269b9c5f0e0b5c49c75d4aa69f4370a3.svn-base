@@ -1,0 +1,77 @@
+package cn.hrms.pay.entity;
+
+import java.io.Serializable;
+
+/*
+ * 薪酬标准详情
+ */
+public class StandardDetails implements Serializable {
+
+	private static final long serialVersionUID = 6599536307124510252L;
+	
+	/*
+	 * 标准编号
+	 */
+	private Integer id;
+	
+	/*
+	 * 薪酬标准编号
+	 */
+	private String feed;
+	
+	/*
+	 * 项目名称
+	 */
+	private String name;
+	
+	/*
+	 * 项目金额
+	 */
+	private String money;
+
+	public StandardDetails(Integer id, String feed, String name, String money) {
+		super();
+		this.id = id;
+		this.feed = feed;
+		this.name = name;
+		this.money = money;
+	}
+
+	public StandardDetails() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getFeed() {
+		return feed;
+	}
+
+	public void setFeed(String feed) {
+		this.feed = feed;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getMoney() {
+		return money;
+	}
+
+	public void setMoney(String money) {
+		this.money = money;
+	}
+
+}

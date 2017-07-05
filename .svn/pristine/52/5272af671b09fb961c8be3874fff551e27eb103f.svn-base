@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.pay.entity.StandardDetails">
+	<resultMap type="cn.hrms.pay.entity.StandardDetails" id="staDetMap">
+		<result column="sd_id" property="id" />
+		<result column="sd_money" property="money" />
+		
+		<association property="standard" column="sd_stan_id" select="cn.hrms.pay.entity.Standard.findStanById"/>
+		<association property="project" column="sd_proj_id" select="cn.hrms.sysset.entity.Project.findProById"/>
+	</resultMap>
+	
+	<select id="findStaDetById" resultType="cn.hrms.pay.entity.StandardDetails">
+		select * from standard_details where sd_id = #{id}
+	</select>
+	
+	<select id="findStanById" resultType="cn.hrms.pay.entity.StandardDetails">
+		select * from standard_details where sd_stan_id = #{standard.id}
+	</select>
+	
+	<insert id="addStaDet" parameterType="cn.hrms.pay.entity.StandardDetails">
+		insert into standard_details(sd_stan_id,sd_proj_id,sd_money)
+		values(#{standard.id},#{project.id},#{money})
+	</insert>
+	
+	<delete id="delStaDet" parameterType="cn.hrms.pay.entity.StandardDetails">
+		delete from standard_details where sd_stan_id = #{standard.id}
+	</delete>
+	
+	<update id="updStaDet" parameterType="cn.hrms.pay.entity.StandardDetails">
+		update standard_details set sd_money = #{money}, sd_stan_id = #{standard.id}, sd_proj_id = #{project.id}
+		where sd_id = #{id}
+	</update>
+</mapper>

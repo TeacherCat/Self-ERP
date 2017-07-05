@@ -1,0 +1,96 @@
+package cn.hrms.util;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Page<T> {
+	/**
+	 * 每页显示数据数量
+	 */
+	private int pageSize = 8;
+	
+	/**
+	 * 数据总条数
+	 */
+	private int totalCount;
+	
+	/**
+	 * 总页数，默认一页
+	 */
+	private int pageTotalCount = 1;
+	
+	/**
+	 * 当前页，默认第一页
+	 */
+	private int currPageNo = 1;
+	
+	/**
+	 * 当前页显示数据的集合
+	 */
+	private List<T> pageList = new ArrayList<T>();
+	
+	/**
+	 * 无参构造函数
+	 */
+	public Page() {
+		super();
+	}
+	
+	/**
+	 * 有参构造函数
+	 */
+	public Page(int pageSize, int totalCount, int pageTotalCount,
+			int currPageNo, List<T> pageList) {
+		super();
+		this.pageSize = pageSize;
+		this.totalCount = totalCount;
+		this.pageTotalCount = pageTotalCount;
+		this.currPageNo = currPageNo;
+		this.pageList = pageList;
+	}
+	
+	public int getPageSize() {
+		return pageSize;
+	}
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+	public int getTotalCount() {
+		return totalCount;
+	}
+	public void setTotalCount(int totalCount) {
+		this.totalCount = totalCount;
+	}
+	public int getPageTotalCount() {
+		return pageTotalCount;
+	}
+	public void setPageTotalCount() {
+		//使用三元运算符判断数据总条数能否被每页条数整除，如果不能则总页数+1
+		int number = totalCount%pageSize==0?totalCount/pageSize:totalCount/pageSize+1;
+		if(number == 0){
+			number = 1;
+		}
+		this.pageTotalCount = number; 
+	}
+	public int getCurrPageNo() {
+		return currPageNo;
+	}
+	
+	public void setCurrPageNo(int currPageNo) {
+		//判断当前页码是否小于1，是则当前页码为1
+		if(currPageNo < 1){
+			currPageNo = 1; 
+		}
+		//判断当前页码是否大于总页数，是则页码为总页数
+		if(currPageNo > pageTotalCount){
+			currPageNo = pageTotalCount;
+		}
+		this.currPageNo = currPageNo;
+	}
+	
+	public List<T> getPageList() {
+		return pageList;
+	}
+	public void setPageList(List<T> pageList) {
+		this.pageList = pageList;
+	}
+}

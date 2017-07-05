@@ -1,0 +1,57 @@
+package cn.hrms.util;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+public class Message {
+
+	public static String post(String path, String params) throws Exception {
+		BufferedReader in = null;
+		PrintWriter out = null;
+		HttpURLConnection httpConn = null;
+		try {
+			URL url = new URL(path);
+			httpConn = (HttpURLConnection) url.openConnection();
+			httpConn.setRequestMethod("POST");
+			httpConn.setDoInput(true);
+			httpConn.setDoOutput(true);
+			out = new PrintWriter(httpConn.getOutputStream());
+			out.println(params);
+			out.flush();
+
+			if (httpConn.getResponseCode() == HttpURLConnection.HTTP_OK) {
+				StringBuffer content = new StringBuffer();
+				String tempStr = "";
+				in = new BufferedReader(new InputStreamReader(
+						httpConn.getInputStream()));
+				while ((tempStr = in.readLine()) != null) {
+					content.append(tempStr);
+				}
+				return content.toString();
+			} else {
+				throw new Exception("请求出现了问题!");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			in.close();
+			out.close();
+			httpConn.disconnect();
+		}
+		return null;
+	}
+
+	/**
+	 * 发送验证码
+	 * @param phone
+	 * @param code
+	 * @throws Exception
+	 */
+	public static void sendMessage(String phone,String code) throws Exception{
+		Message.post("http://utf8.sms.webchinese.cn",
+		"Uid=qq1961109935&Key=2102070eeafc3b0ba776&smsMob="+ phone +"&smsText=验证码："+ code +"，请勿泄露。");
+	}
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.pay.entity.ProvideDetails">
+	<resultMap type="cn.hrms.pay.entity.ProvideDetails" id="proDetMap">
+		<result column="pd_id" property="id" />
+		<result column="pd_standard" property="standard" />
+		<result column="pd_performance" property="performance" />
+		<result column="pd_evection" property="evection" />
+		<result column="pd_overtime" property="overtime" />
+		<result column="pd_deduct" property="deduct" />
+		<result column="pd_amount" property="amount" />
+		
+		<association property="prov" column="pd_prov_id" select="cn.hrms.pay.entity.Provide.findProvById"/>
+		<association property="arc" column="pd_arc_id" select="cn.hrms.personnel.entity.Archive.findArcById"/>
+	</resultMap>
+</mapper>

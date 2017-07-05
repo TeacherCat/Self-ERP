@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.pay.entity.ProvideAudit">
+	<resultMap type="cn.hrms.pay.entity.ProvideAudit" id="proAudMap">
+		<result column="pa_result" property="result" />
+		<result column="pa_opinion" property="opinion" />
+		<result column="pa_person" property="person" />
+		<result column="pa_time" property="time" />
+		
+		<association property="provide" column="pa_prov_id" select="cn.hrms.personnel.entity.Archive.findProvById"/>
+	</resultMap>
+</mapper>

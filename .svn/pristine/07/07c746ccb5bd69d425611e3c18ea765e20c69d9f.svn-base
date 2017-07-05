@@ -1,0 +1,7 @@
+package cn.hrms.entity;
+
+public class A {
+	public void Show(){
+		
+	}
+}

@@ -1,0 +1,24 @@
+package cn.hrms.biz.impl;
+
+import java.util.List;
+
+import cn.hrms.biz.UserBiz;
+import cn.hrms.dao.UserDao;
+import cn.hrms.entity.User;
+
+public class UserBizImpl implements UserBiz{
+
+	private UserDao userDao;
+	
+	public List<User> findUser() {
+		return userDao.findUser();
+	}
+
+	public int addUser(User user) {
+		return userDao.addUser(user);
+	}
+	
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
+	}
+}

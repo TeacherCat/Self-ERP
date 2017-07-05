@@ -1,0 +1,19 @@
+package cn.hrms.util;
+
+/**
+ * 静态常量
+ */
+public class Final {
+
+	public static final String fileUploadError = "文件大小超过限制，最大文件大小为20M!";
+	
+	public static final String addSuccess = "新增成功！";
+	
+	public static final String updSuccess = "修改成功！";
+	
+	public static final String delSuccess = "删除成功！";
+	
+	public static final String auditSuccess = "提交审核成功！";
+	
+	public static final String backSuccess = "提交反馈成功！";
+}

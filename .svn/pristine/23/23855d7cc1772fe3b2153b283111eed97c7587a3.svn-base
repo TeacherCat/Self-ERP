@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.sysset.entity.Dept">
+	<resultMap type="cn.hrms.sysset.entity.Dept" id="deptMap">
+		<result column="dept_id" property="id" />
+		<result column="dept_name" property="name" />
+		<result column="dept_desc" property="desc" />
+		<result column="dept_remarks" property="remarks" />
+		<result column="dept_phone" property="phone" />
+		<result column="dept_parent" property="parent" />
+	</resultMap>
+	
+	<select id="findDeptById" resultType="cn.hrms.sysset.entity.Dept">
+		select * from dept where dept_id = #{id}
+	</select>
+	
+	<insert id="addDept" parameterType="cn.hrms.sysset.entity.Dept">
+		insert into dept(dept_name,dept_desc,dept_remarks,dept_phone,dept_parent)
+		values(#{name},#{desc},#{remarks},#{phone},#{parent})
+	</insert>
+	
+	<delete id="delDept" parameterType="cn.hrms.sysset.entity.Dept">
+		delete from dept where dept_id = #{id}
+	</delete>
+	
+	<update id="updDept" parameterType="cn.hrms.sysset.entity.Dept">
+		update dept set dept_id = #{id}, dept_name = #{name}, dept_desc = #{desc},
+						dept_remarks = #{remarks}, dept_phone = #{phone}, dept_parent = #{parent}
+		where dept_id = #{id}
+	</update>
+</mapper>

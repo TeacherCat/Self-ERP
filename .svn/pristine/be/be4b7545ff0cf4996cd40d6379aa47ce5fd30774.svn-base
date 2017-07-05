@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.sysset.entity.Users">
+	<resultMap type="cn.hrms.sysset.entity.Users" id="usersMap">
+		<result column="users_name" property="name" />
+		<result column="users_real_name" property="realName" />
+		<result column="users_password" property="password" />
+		<result column="users_telephone" property="telephone" />
+		<association property="role" column="users_role_id" select="cn.hrms.sysset.entity.Role.findRoleById"/>
+	</resultMap>
+	
+	<select id="loginUsers" resultMap="usersMap" parameterType="cn.hrms.sysset.entity.Users">
+		select * from users where users_name = #{name} and users_password = #{password}
+	</select>
+	
+	<select id="findUsersById" resultMap="usersMap">
+		select * from users where users_name = #{name}
+	</select>
+	
+	<select id="findUsers" resultMap="usersMap" parameterType="map">
+		select * from users
+		<where>
+			<if test="users.name != null">
+				and users_name like concat(concat('%',#{users.name}),'%')
+			</if>
+			<if test="users.realName != null">
+				and users_real_name like concat(concat('%',#{users.realName}),'%')
+			</if>
+			<if test="users.role != null">
+				and users_role_id = #{users.role.id}
+			</if>
+		</where> 
+		limit #{start},#{pageSize}
+	</select>
+	
+	<select id="usersCount" resultType="int">
+		select count(*) from users
+		<where>
+			<if test="name != null">
+				and users_name like concat(concat('%',#{name}),'%')
+			</if>
+			<if test="realName != null">
+				and users_real_name like concat(concat('%',#{realName}),'%')
+			</if>
+			<if test="role != null">
+				and users_role_id = #{role.id}
+			</if>
+		</where>
+	</select>
+	
+	<insert id="addUsers" parameterType="cn.hrms.sysset.entity.Users">
+		insert into users(users_name,users_real_name,users_password,users_role_id,users_telephone) 
+		values(#{name},#{realName},#{password},#{role.id},#{telephone})
+	</insert>
+	
+	<delete id="delUsers" parameterType="cn.hrms.sysset.entity.Users">
+		delete from users where users_name = #{name}
+	</delete>
+	
+	<update id="updUsers" parameterType="cn.hrms.sysset.entity.Users">
+		update users set users_real_name = #{realName}, users_password = #{password}, 
+						users_telephone = #{telephone}, users_role_id = #{role.id}
+		where users_name = #{name}
+	</update>
+	
+	<!-- 修改密码 -->
+	<update id="updUsersPwd" parameterType="cn.hrms.sysset.entity.Users">
+		update users set users_password = #{password} where users_name = #{name}
+	</update>
+</mapper>

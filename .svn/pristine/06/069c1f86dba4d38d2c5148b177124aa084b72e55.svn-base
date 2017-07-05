@@ -1,0 +1,224 @@
+package cn.hrms.sysset.action;
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import cn.hrms.sysset.biz.RoleBiz;
+import cn.hrms.sysset.biz.UsersBiz;
+import cn.hrms.sysset.entity.Users;
+import cn.hrms.util.Final;
+import cn.hrms.util.Message;
+import cn.hrms.util.Page;
+import cn.hrms.util.Tools;
+
+@Controller("usersAction")
+public class UsersAction {
+
+	private UsersBiz usersBiz;
+	private RoleBiz roleBiz;
+	
+	/**
+	 * 进入主页
+	 * @return
+	 */
+	@RequestMapping("index")
+	public String index(){
+		return "jsp/public/index";
+	}
+	
+	/**
+	 * 登录
+	 * @param users 用户对象
+	 * @param number 验证码
+	 * @param model 传值
+	 * @param session 会话
+	 * @return
+	 */
+	@RequestMapping("login")
+	public String login(Users users,String number,Model model,HttpSession session){
+		String srand = session.getAttribute("number").toString();
+		if(!srand.equals(number)){
+			model.addAttribute("msg", Final.codeError);
+			return "jsp/public/login";
+		}
+		Users u = usersBiz.loginUsers(users);
+		if(u==null){
+			model.addAttribute("msg", Final.loginError);
+			return "jsp/public/login";
+		}
+		session.setAttribute("users", u);
+		return "jsp/public/index";
+	}
+	
+	/**
+	 * 退出
+	 * @param session 会话
+	 * @return
+	 */
+	@RequestMapping("exit")
+	public String exit(HttpSession session){
+		session.removeAttribute("users");
+		return "jsp/public/login";
+	}
+	
+	/**
+	 * 修改密码
+	 * @param users 用户信息
+	 * @param model 传值
+	 * @return
+	 * @throws IOException 
+	 * @throws ServletException 
+	 */
+	@RequestMapping("changePwd")
+	public String changePwd(Users users, HttpSession session,Model model){
+		usersBiz.updUsersPwd(users);
+		model.addAttribute("msg", Final.changePwdSuccess);
+		session.removeAttribute("users");
+		return "jsp/public/login";
+	}
+	
+	/**
+	 * 找回密码
+	 * @param users 用户信息
+	 * @param code 验证码
+	 * @param session 会话
+	 * @param model 传值
+	 * @return
+	 */
+	@RequestMapping("findPwd")
+	public String findPwd(Users users,String code,HttpSession session,Model model){
+		String sessionCode = (String) session.getAttribute("code");
+		if(sessionCode != null && sessionCode.equals(code)){
+			usersBiz.updUsersPwd(users);
+			model.addAttribute("msg", Final.findPwdSuccess);
+			return "jsp/public/login";
+		}else{
+			model.addAttribute("msg", Final.phoneCodeError);
+			model.addAttribute("u", users);
+			return "jsp/public/findpassword";
+		}
+	}
+	
+	/**
+	 * 发送验证码
+	 * @param phone 手机号
+	 * @param session 会话
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("sendMessage")
+	public String sendMessage(String phone,HttpServletResponse response,HttpSession session) throws Exception{
+		String code = Tools.getRandom();
+		session.setAttribute("code", code);
+		Integer result = Message.sendMsgUtf8("qq1961109935", "2102070eeafc3b0ba776", "验证码："+code+"，请勿泄露。", phone);
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		if(result == 1){
+			out.print(Final.sendMessageSuccess);
+		}
+		return null;
+	}
+	
+	/**
+	 * 验证原密码是否正确
+	 * @param response 响应
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping("checkOldPwd")
+	public String checkOldPwd(String name,String password, HttpServletResponse response) throws IOException{
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		if(usersBiz.loginUsers(new Users(name,password)) == null){
+			out.print("0");
+		}
+		return null;
+	}
+	
+	/**
+	 * 验证用户名是否存在
+	 * @param name 用户名
+	 * @param response 响应
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping("checkUserName")
+	public String checkUserName(String name,HttpServletResponse response) throws IOException{
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		Users users = usersBiz.findUsersById(name); 
+		if(users == null){
+			out.print(0);
+		}else{
+			out.print(users.getTelephone());
+		}
+		return null;
+	}
+	
+	@RequestMapping("usersList")
+	public String usersList(Users users, Integer currPageNo, Model model){
+		if(users.getRole() != null && users.getRole().getId() == 0){
+			users.setRole(null);
+		}
+		Page<Users> page = new Page<Users>();
+		page.setTotalCount(usersBiz.usersCount(users));
+		page.setPageTotalCount();
+		if(currPageNo != null){
+			page.setCurrPageNo(currPageNo);
+		}
+		page.setPageList(usersBiz.findUsers(users, page));
+		model.addAttribute("page", page);
+		model.addAttribute("roleList", roleBiz.findRole());
+		return "jsp/sysset/users/usersList";
+	}
+	
+	@RequestMapping("usersAdd")
+	public String usersAdd(Users users, Integer res, Model model,HttpServletResponse response) throws IOException{
+		if(res != null){
+			model.addAttribute("roleList", roleBiz.findRole());
+			return "jsp/sysset/users/usersAdd";
+		}else{
+			usersBiz.addUsers(users);
+			model.addAttribute("msg", Final.addSuccess);
+			return usersList(new Users(), 1, model);
+		}
+	}
+	
+	@RequestMapping("usersDel")
+	public String usersDel(String name){
+		usersBiz.delUsers(name);
+		return null;
+	}
+	
+	@RequestMapping("usersUpd")
+	public String usersUpd(Users users, Integer res, Model model){
+		if(res != null){
+			model.addAttribute("users", usersBiz.findUsersById(users.getName()));
+			model.addAttribute("roleList", roleBiz.findRole());
+			return "jsp/sysset/users/usersUpd";
+		}else{
+			usersBiz.updUsers(users);
+			model.addAttribute("msg", Final.updSuccess);
+			return usersList(new Users(), 1, model);
+		}
+	}
+	
+	@RequestMapping("usersDetail")
+	public String usersDetail(String name, Model model){
+		model.addAttribute("users", usersBiz.findUsersById(name));
+		model.addAttribute("roleList", roleBiz.findRole());
+		return "jsp/sysset/users/usersDetail";
+	}
+	
+	public void setUsersBiz(UsersBiz usersBiz) {
+		this.usersBiz = usersBiz;
+	}
+
+	public void setRoleBiz(RoleBiz roleBiz) {
+		this.roleBiz = roleBiz;
+	}
+	
+}

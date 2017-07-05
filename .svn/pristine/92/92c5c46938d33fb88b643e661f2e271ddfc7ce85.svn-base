@@ -1,0 +1,45 @@
+package cn.hrms.sysset.biz.impl;
+import java.util.List;
+
+import cn.hrms.sysset.biz.UsersBiz;
+import cn.hrms.sysset.dao.UsersDao;
+import cn.hrms.sysset.entity.Users;
+import cn.hrms.util.Page;
+
+public class UsersBizImpl implements UsersBiz{
+
+	private UsersDao usersDao;
+	
+	public Users loginUsers(Users users) {
+		return usersDao.loginUsers(users);
+	}
+
+	public List<Users> findUsers(Users users, Page<Users> page) {
+		return usersDao.findUsers(users, page);
+	}
+
+	public Users findUsersById(String name) {
+		return usersDao.findUsersById(name);
+	}
+
+	public int usersCount(Users users) {
+		return usersDao.usersCount(users);
+	}
+
+	public int addUsers(Users users) {
+		return usersDao.addUsers(users);
+	}
+
+	public int delUsers(String name) {
+		return usersDao.delUsers(name);
+	}
+
+	public int updUsers(Users users) {
+		return usersDao.updUsers(users);
+	}
+
+	public void setUsersDao(UsersDao usersDao) {
+		this.usersDao = usersDao;
+	}
+
+}

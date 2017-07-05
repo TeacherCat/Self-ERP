@@ -1,0 +1,37 @@
+package cn.hrms.sysset.biz;
+
+import java.util.List;
+
+import cn.hrms.sysset.entity.Dept;
+
+public interface DeptBiz {
+	
+	/**
+	 * 查找部门
+	 * @param dept 条件
+	 * @return
+	 */
+	public List<Dept> findDept(Dept dept);
+	
+	/**
+	 * 新增部门
+	 * @param dept 部门信息
+	 * @return
+	 */
+	public int addDept(Dept dept);
+	
+	/**
+	 * 删除部门
+	 * @param id 部门编号
+	 * @return
+	 */
+	public int delDept(Integer id);
+	
+	/**
+	 * 修改部门
+	 * @param dept 部门信息
+	 * @return
+	 */
+	public int updDept(Dept dept);
+
+}

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.sysset.entity.Post">
+	<resultMap type="cn.hrms.sysset.entity.Post" id="postMap">
+		<result column="post_id" property="id" />
+		<result column="post_name" property="name" />
+		<result column="post_desc" property="desc" />
+		<result column="post_remarks" property="remarks" />
+		<association property="dept" column="post_dept_id" select="cn.hrms.sysset.entity.Dept.findDeptById"/>
+	</resultMap>
+	
+	<select id="findPostById" resultMap="postMap">
+		select * from post where post_id = #{id}
+	</select>
+	
+	<select id="findPost" resultMap="postMap" parameterType="map">
+		select * from post
+		<where>
+			<if test="post.name != null">
+				and post_name like concat(concat("%",#{post.name}),"%")
+			</if>
+			<if test="post.dept != null">
+				and post_dept_id = #{post.dept.id}
+			</if>
+		</where>
+		limit #{start}, #{pageSize}
+	</select>
+	
+	<select id="findPostByDeptId" resultMap="postMap">
+		select * from post where post_dept_id = #{id}
+	</select>
+	
+	<select id="postCount" resultType="int">
+		select count(*) from post
+		<where>
+			<if test="name != null">
+				and post_name like concat(concat("%",#{name}),"%")
+			</if>
+			<if test="dept != null">
+				and post_dept_id = #{dept.id}
+			</if>
+		</where>
+	</select>
+	
+	<insert id="addPost" parameterType="cn.hrms.sysset.entity.Post">
+		insert into post(post_name,post_dept_id,post_desc,post_remarks)
+		values(#{name},#{dept.id},#{desc},#{remarks})
+	</insert>
+	
+	<delete id="delPost" parameterType="cn.hrms.sysset.entity.Post">
+		delete from post where post_id = #{id}
+	</delete>
+	
+	<update id="updPost" parameterType="cn.hrms.sysset.entity.Post">
+		update post set post_name = #{name},post_dept_id = #{dept.id},post_desc = #{desc},post_remarks = #{remarks}
+		where post_id = #{id}
+	</update>
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.pay.entity.Provide">
+	<resultMap type="cn.hrms.pay.entity.Provide" id="provMap">
+		<result column="prov_id" property="id" />
+		<result column="prov_first_unit" property="firstUnit" />
+		<result column="prov_second_unit" property="secondUnit" />
+		<result column="prov_count" property="count" />
+		<result column="prov_amount" property="amount" />
+		<result column="prov_registrar" property="registrar" />
+		<result column="prov_time" property="time" />
+		<result column="prov_state" property="state" />
+		
+		<association property="standard" column="prov_stan_id" select="cn.hrms.pay.entity.Standard.findStaById"/>
+	</resultMap>
+	
+	<select id="findProvById" resultType="cn.hrms.pay.entity.Provide">
+		select * from provide where prov_id = #{id}
+	</select>
+</mapper>

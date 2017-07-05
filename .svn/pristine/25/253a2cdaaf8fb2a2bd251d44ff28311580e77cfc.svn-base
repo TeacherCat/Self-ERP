@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.recruit.entity.Result">
+	
+	<resultMap type="cn.hrms.recruit.entity.Result" id="resultMap">
+		<id column="resu_id" property="id" />
+		<result column="resu_result" property="result" />
+		<result column="resu_person" property="person" />
+		<result column="resu_time" property="time" />
+	</resultMap>
+	
+	<!-- 根据编号查询唯一面试结果对象 -->
+	<select id="findResult" resultMap="resultMap">
+		select * from result where resu_id = #{id}
+	</select>
+	
+	<!-- 添加面试结果 -->
+	<insert id="addResult" parameterType="cn.hrms.recruit.entity.Result">
+		INSERT INTO result VALUES(#{id},#{result},#{opinion},#{person},#{time})
+	</insert>
+	
+	<!-- 删除面试结果 -->
+	<delete id="delResult" parameterType="int">
+		DELETE FROM result WHERE resu_id = #{id}
+	</delete>
+	
+</mapper>

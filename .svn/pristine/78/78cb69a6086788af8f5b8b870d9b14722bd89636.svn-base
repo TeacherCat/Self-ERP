@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.personnel.entity.Archives">
+	
+	<resultMap type="cn.hrms.personnel.entity.Archives" id="archivesMap">
+		<id column="arc_id" property="id" />
+		<result column="arc_state" property="state" />
+		<result column="arc_name" property="name" />
+		<result column="arc_sex" property="sex" />
+		<result column="arc_card" property="card" />
+		<result column="arc_telephone" property="telephone" />
+		<result column="arc_email" property="email" />
+		<result column="arc_place" property="place" />
+		<result column="arc_address" property="address" />
+		<result column="arc_politics" property="politics" />
+		<result column="arc_education" property="education" />
+		<result column="arc_school" property="school" />
+		<result column="arc_specialty" property="specialty" />
+		<result column="arc_bank" property="bank" />
+		<result column="arc_socila" property="socila" />
+		<result column="arc_record" property="record" />
+		<result column="arc_remarks" property="remarks" />
+		<result column="arc_photo" property="photo" />
+		<result column="arc_registrar" property="registrar" />
+		<result column="arc_time" property="time" />
+		<association property="dept" column="arc_dept_id" select="cn.hrms.sysset.entity.Dept.findDeptById"/>
+		<association property="post" column="arc_post_id" select="cn.hrms.sysset.entity.Post.findPostById"/>
+	</resultMap>
+	
+	<!-- 查询档案 -->
+	<select id="findArchives" resultMap="archivesMap" parameterType="map">
+		select * from archives
+		<where>
+			<if test="archives.id != null">
+				and arc_id = #{archives.id}
+			</if>
+			<if test="archives.name != null">
+				and arc_name like concat(concat("%",#{archives.name}),"%")
+			</if>
+			<if test="archives.sex != null">
+				and arc_sex = #{archives.sex}
+			</if>
+			<if test="archives.place != null">
+				and arc_place like concat(concat("%",#{archives.place}),"%")
+			</if>
+			<if test="archives.education != null">
+				and arc_education = #{archives.education}
+			</if>
+			<if test="archives.state != null">
+				and arc_state = #{archives.state}
+			</if>
+		</where>
+		ORDER BY (arc_time) DESC LIMIT #{start},#{size}
+	</select>
+	
+	<!-- 查询总条数 -->
+	<select id="findTotalCount" parameterType="cn.hrms.personnel.entity.Archives" resultType="int" >
+		SELECT COUNT(arc_id) FROM archives
+		<where>
+			<if test="id != null">
+				and arc_id = #{id}
+			</if>
+			<if test="name != null">
+				and arc_name like concat(concat("%",#{name}),"%")
+			</if>
+			<if test="sex != null">
+				and arc_sex = #{sex}
+			</if>
+			<if test="place != null">
+				and arc_place like concat(concat("%",#{place}),"%")
+			</if>
+			<if test="education != null">
+				and arc_education = #{education}
+			</if>
+			<if test="state != null">
+				and arc_state = #{state}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 新增档案 -->
+	<insert id="addArchives" parameterType="cn.hrms.personnel.entity.Archives">
+		INSERT INTO archives(arc_dept_id,arc_post_id,arc_state,arc_name,arc_sex,arc_card,arc_telephone,arc_email,arc_place,arc_address,arc_politics,arc_education,arc_school,arc_specialty,arc_bank,arc_socila,arc_record,arc_remarks,arc_photo,arc_registrar,arc_time)
+		VALUES(#{dept.id},#{post.id},#{state},#{name},#{sex},#{card},#{telephone},#{email},#{place},#{address},#{politics},#{education},#{school},#{specialty},#{bank},#{socila},#{record},#{remarks},#{photo},#{registrar},#{time})
+	</insert>
+	
+	<!-- 修改档案 -->
+	<update id="updArchives" parameterType="cn.hrms.personnel.entity.Archives">
+		UPDATE archives SET arc_dept_id=#{dept.id},arc_post_id=#{post.id},arc_state=#{state},arc_name=#{name},arc_sex=#{sex},arc_telephone=#{telephone},arc_email=#{email},
+		arc_place=#{place},arc_address=#{address},arc_politics=#{politics},arc_education=#{education},arc_school=#{school},arc_specialty=#{specialty},arc_bank=#{bank},arc_socila=#{socila},arc_record=#{record},
+		arc_remarks=#{remarks},arc_photo=#{photo},arc_registrar=#{registrar} WHERE arc_id=#{id}
+	</update>
+	
+	<!-- 修改档案状态 -->
+	<update id="updArchivesState" parameterType="cn.hrms.personnel.entity.Archives">
+		UPDATE archives SET arc_state=#{state} WHERE arc_id=#{id}
+	</update>
+	
+	<!-- 删除档案 -->
+	<delete id="delArchives" parameterType="int">
+		DELETE FROM archives WHERE arc_id=#{id}
+	</delete>
+	
+</mapper>

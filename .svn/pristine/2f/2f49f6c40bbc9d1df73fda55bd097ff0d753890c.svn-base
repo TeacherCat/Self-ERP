@@ -1,0 +1,488 @@
+/*
+SQLyog Community v12.3.3 (64 bit)
+MySQL - 5.7.17-log : Database - hrms
+*********************************************************************
+*/
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`hrms` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+USE `hrms`;
+
+/*Table structure for table `archives` */
+
+DROP TABLE IF EXISTS `archives`;
+
+CREATE TABLE `archives` (
+  `arc_id` int(11) NOT NULL AUTO_INCREMENT,
+  `arc_dept_id` int(11) NOT NULL,
+  `arc_post_id` int(11) NOT NULL,
+  `arc_state` varchar(50) NOT NULL,
+  `arc_name` varchar(50) NOT NULL,
+  `arc_sex` varchar(50) NOT NULL,
+  `arc_card` varchar(50) NOT NULL,
+  `arc_telephone` varchar(50) NOT NULL,
+  `arc_email` varchar(50) NOT NULL,
+  `arc_place` varchar(50) DEFAULT NULL,
+  `arc_address` varchar(50) DEFAULT NULL,
+  `arc_politics` varchar(50) DEFAULT NULL,
+  `arc_education` varchar(50) NOT NULL,
+  `arc_school` varchar(50) DEFAULT NULL,
+  `arc_specialty` varchar(50) DEFAULT NULL,
+  `arc_bank` varchar(50) DEFAULT NULL,
+  `arc_socila` varchar(50) DEFAULT NULL,
+  `arc_record` varchar(200) DEFAULT NULL,
+  `arc_remarks` varchar(200) DEFAULT NULL,
+  `arc_photo` varchar(50) DEFAULT NULL,
+  `arc_relation` varchar(200) DEFAULT NULL,
+  `arc_accessory` varchar(50) DEFAULT NULL,
+  `arc_registrar` varchar(50) NOT NULL,
+  `arc_time` date NOT NULL,
+  PRIMARY KEY (`arc_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `archives` */
+
+/*Table structure for table `archives_audit` */
+
+DROP TABLE IF EXISTS `archives_audit`;
+
+CREATE TABLE `archives_audit` (
+  `aud_id` int(11) NOT NULL AUTO_INCREMENT,
+  `aud_result` varchar(50) NOT NULL,
+  `aud_person` varchar(50) NOT NULL,
+  `aud_time` date NOT NULL,
+  PRIMARY KEY (`aud_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `archives_audit` */
+
+/*Table structure for table `dept` */
+
+DROP TABLE IF EXISTS `dept`;
+
+CREATE TABLE `dept` (
+  `dept_id` int(11) NOT NULL AUTO_INCREMENT,
+  `dept_name` varchar(50) NOT NULL,
+  `dept_desc` varchar(200) DEFAULT NULL,
+  `dept_remarks` varchar(200) DEFAULT NULL,
+  `dept_phone` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`dept_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+
+/*Data for the table `dept` */
+
+insert  into `dept`(`dept_id`,`dept_name`,`dept_desc`,`dept_remarks`,`dept_phone`) values 
+(2,'项目开发部','开发部的直属部门',NULL,'0755-26666666'),
+(3,'产品营销部','营销部的直属部门',NULL,'0755-27777777'),
+(4,'管理部','公司的各个管理部门',NULL,'0755-28888888'),
+(5,'开发1部','项目开发部1部门',NULL,'0755-22013654'),
+(6,'开发2部','项目开发部2部门',NULL,'0755-20300247'),
+(7,'开发3部','项目开发部3部门',NULL,'0755-29652220'),
+(8,'营销1部','产品营销部1部门',NULL,'0755-25550236'),
+(9,'营销2部','产品营销部2部门',NULL,'0755-20332541'),
+(10,'营销3部','产品营销部3部门',NULL,'0755-25952022'),
+(11,'人力资源部','人事管理的中心部门',NULL,'0755-23361020'),
+(12,'财务部','财务管理中心部门',NULL,'0755-23361020');
+
+/*Table structure for table `hire` */
+
+DROP TABLE IF EXISTS `hire`;
+
+CREATE TABLE `hire` (
+  `hire_id` int(11) NOT NULL,
+  `hire_preson` varchar(50) NOT NULL,
+  `hire_time` date NOT NULL,
+  `hire_decision` varchar(50) NOT NULL,
+  PRIMARY KEY (`hire_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `hire` */
+
+/*Table structure for table `post` */
+
+DROP TABLE IF EXISTS `post`;
+
+CREATE TABLE `post` (
+  `post_id` int(11) NOT NULL AUTO_INCREMENT,
+  `post_name` varchar(50) NOT NULL,
+  `post_dept_id` int(11) NOT NULL,
+  `post_desc` varchar(200) DEFAULT NULL,
+  `post_remarks` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`post_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+
+/*Data for the table `post` */
+
+insert  into `post`(`post_id`,`post_name`,`post_dept_id`,`post_desc`,`post_remarks`) values 
+(1,'开发工程师',1,'开发工程师......',NULL),
+(2,'测试工程师',1,'测试工程师......',NULL),
+(3,'项目经理',1,'项目经理......',NULL),
+(4,'产品专员',2,'产品专员......',NULL),
+(5,'营销专员',2,'营销专员......',NULL),
+(6,'产品经理',2,'产品经理......',NULL),
+(7,'财务专员',3,'财务专员......',NULL),
+(8,'财务经理',3,'财务经理......',NULL),
+(9,'人事专员',3,'人事专员......',NULL),
+(10,'人事经理',3,'人事经理......',NULL),
+(11,'薪酬专员',3,'薪酬专员......',NULL),
+(12,'薪酬经理',3,'薪酬经理......',NULL);
+
+/*Table structure for table `project` */
+
+DROP TABLE IF EXISTS `project`;
+
+CREATE TABLE `project` (
+  `proj_id` int(11) NOT NULL AUTO_INCREMENT,
+  `proj_name` varchar(50) NOT NULL,
+  `proj_desc` varbinary(200) DEFAULT NULL,
+  PRIMARY KEY (`proj_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `project` */
+
+/*Table structure for table `property` */
+
+DROP TABLE IF EXISTS `property`;
+
+CREATE TABLE `property` (
+  `pro_id` int(11) NOT NULL AUTO_INCREMENT,
+  `pro_name` varchar(50) NOT NULL,
+  `pro_desc` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`pro_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `property` */
+
+/*Table structure for table `property_details` */
+
+DROP TABLE IF EXISTS `property_details`;
+
+CREATE TABLE `property_details` (
+  `det_id` int(11) NOT NULL AUTO_INCREMENT,
+  `det_pro_id` int(11) NOT NULL,
+  `det_name` varchar(50) NOT NULL,
+  `det_desc` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`det_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `property_details` */
+
+/*Table structure for table `provide` */
+
+DROP TABLE IF EXISTS `provide`;
+
+CREATE TABLE `provide` (
+  `prov_id` int(11) NOT NULL AUTO_INCREMENT,
+  `prov_stan_id` int(11) NOT NULL,
+  `prov_dept_id` varchar(50) NOT NULL,
+  `prov_count` int(11) NOT NULL,
+  `prov_amount` double NOT NULL,
+  `prov_registrar` varchar(50) NOT NULL,
+  `prov_time` date NOT NULL,
+  `prov_state` varchar(50) NOT NULL,
+  PRIMARY KEY (`prov_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `provide` */
+
+/*Table structure for table `provide_audit` */
+
+DROP TABLE IF EXISTS `provide_audit`;
+
+CREATE TABLE `provide_audit` (
+  `aud_id` int(11) NOT NULL,
+  `aud_result` varchar(50) NOT NULL,
+  `aud_opinion` varchar(50) NOT NULL,
+  `aud_person` varchar(50) NOT NULL,
+  `aud_time` date NOT NULL,
+  PRIMARY KEY (`aud_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `provide_audit` */
+
+/*Table structure for table `provide_details` */
+
+DROP TABLE IF EXISTS `provide_details`;
+
+CREATE TABLE `provide_details` (
+  `det_id` int(11) NOT NULL AUTO_INCREMENT,
+  `det_prov_id` int(11) NOT NULL,
+  `det_arc_id` int(11) NOT NULL,
+  `det_standard` double NOT NULL,
+  `det_performance` double DEFAULT NULL,
+  `det_evection` double DEFAULT NULL,
+  `det_overtime` double DEFAULT NULL,
+  `det_deduct` double DEFAULT NULL,
+  `det_amount` double NOT NULL,
+  PRIMARY KEY (`det_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `provide_details` */
+
+/*Table structure for table `releases` */
+
+DROP TABLE IF EXISTS `releases`;
+
+CREATE TABLE `releases` (
+  `rele_id` int(11) NOT NULL AUTO_INCREMENT,
+  `rele_dept_id` int(11) NOT NULL,
+  `rele_post_id` int(11) NOT NULL,
+  `rele_type` varchar(50) NOT NULL,
+  `rele_count` int(11) NOT NULL,
+  `rele_education` varchar(50) NOT NULL,
+  `rele_limit` double NOT NULL,
+  `rele_desc` varchar(200) DEFAULT NULL,
+  `rele_requier` varchar(200) DEFAULT NULL,
+  `rele_registrar` varchar(50) NOT NULL,
+  `rele_start_time` date NOT NULL,
+  `rele_end_time` date NOT NULL,
+  PRIMARY KEY (`rele_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `releases` */
+
+/*Table structure for table `result` */
+
+DROP TABLE IF EXISTS `result`;
+
+CREATE TABLE `result` (
+  `resu_id` int(11) NOT NULL,
+  `resu_level` varchar(50) NOT NULL,
+  `resu_preson` varchar(50) NOT NULL,
+  `resu_time` date NOT NULL,
+  `resu_evaluate` varchar(50) NOT NULL,
+  PRIMARY KEY (`resu_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `result` */
+
+/*Table structure for table `resumes` */
+
+DROP TABLE IF EXISTS `resumes`;
+
+CREATE TABLE `resumes` (
+  `res_id` int(11) NOT NULL AUTO_INCREMENT,
+  `res_rele_id` varchar(50) NOT NULL,
+  `res_name` varchar(50) NOT NULL,
+  `res_sex` varchar(50) NOT NULL,
+  `res_card` varchar(50) NOT NULL,
+  `res_telephone` varchar(50) NOT NULL,
+  `res_email` varchar(50) NOT NULL,
+  `res_place` varchar(50) DEFAULT NULL,
+  `res_address` varchar(50) DEFAULT NULL,
+  `res_politics` varchar(50) DEFAULT NULL,
+  `res_education` varchar(50) NOT NULL,
+  `res_school` varchar(50) DEFAULT NULL,
+  `res_specialty` varchar(50) DEFAULT NULL,
+  `res_limit` varchar(50) NOT NULL,
+  `res_job` varchar(50) NOT NULL,
+  `res_graduate` varchar(50) NOT NULL,
+  `res_salary` varchar(50) NOT NULL,
+  `res_type` varchar(50) NOT NULL,
+  `res_record` varchar(200) DEFAULT NULL,
+  `res_accessory` varchar(50) DEFAULT NULL,
+  `res_recommend_interview` varchar(50) DEFAULT NULL,
+  `res_referral` varchar(50) DEFAULT NULL,
+  `res_recommend_time` date DEFAULT NULL,
+  `res_recommend_idea` varchar(50) DEFAULT NULL,
+  `res_time` date NOT NULL,
+  `res_state` varchar(50) NOT NULL,
+  PRIMARY KEY (`res_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `resumes` */
+
+/*Table structure for table `role` */
+
+DROP TABLE IF EXISTS `role`;
+
+CREATE TABLE `role` (
+  `role_id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_name` varchar(50) NOT NULL,
+  PRIMARY KEY (`role_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+/*Data for the table `role` */
+
+insert  into `role`(`role_id`,`role_name`) values 
+(1,'人事专员'),
+(2,'人事经理'),
+(3,'薪酬专员'),
+(4,'薪酬经理'),
+(5,'人力资源负责人');
+
+/*Table structure for table `standard` */
+
+DROP TABLE IF EXISTS `standard`;
+
+CREATE TABLE `standard` (
+  `stan_id` int(11) NOT NULL AUTO_INCREMENT,
+  `stan_name` varchar(50) NOT NULL,
+  `stan_amount` double NOT NULL,
+  `stan_registrar` varchar(50) NOT NULL,
+  `stan_time` date NOT NULL,
+  `stan_state` varchar(50) NOT NULL,
+  PRIMARY KEY (`stan_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `standard` */
+
+/*Table structure for table `standard_audit` */
+
+DROP TABLE IF EXISTS `standard_audit`;
+
+CREATE TABLE `standard_audit` (
+  `aud_id` int(11) NOT NULL,
+  `aud_result` varchar(50) NOT NULL,
+  `aud_opinion` varchar(50) NOT NULL,
+  `aud_person` varchar(50) NOT NULL,
+  `aud_time` date NOT NULL,
+  PRIMARY KEY (`aud_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `standard_audit` */
+
+/*Table structure for table `standard_details` */
+
+DROP TABLE IF EXISTS `standard_details`;
+
+CREATE TABLE `standard_details` (
+  `det_id` int(11) NOT NULL AUTO_INCREMENT,
+  `det_stan_id` int(11) NOT NULL,
+  `det_name` varchar(50) NOT NULL,
+  `det_money` double NOT NULL,
+  PRIMARY KEY (`det_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `standard_details` */
+
+/*Table structure for table `titles` */
+
+DROP TABLE IF EXISTS `titles`;
+
+CREATE TABLE `titles` (
+  `tit_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tit_name` varchar(50) NOT NULL,
+  `tit_dept_id` int(11) NOT NULL,
+  `tit_desc` varchar(200) DEFAULT NULL,
+  `tit_remarks` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`tit_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `titles` */
+
+/*Table structure for table `topic` */
+
+DROP TABLE IF EXISTS `topic`;
+
+CREATE TABLE `topic` (
+  `top_id` int(11) NOT NULL AUTO_INCREMENT,
+  `top_name` varchar(50) NOT NULL,
+  `top_type` varchar(50) NOT NULL,
+  `
+top_level` varchar(50) NOT NULL,
+  `top_dept_id` int(11) NOT NULL,
+  `top_person` varchar(50) NOT NULL,
+  `top_time` date NOT NULL,
+  `top_content` varchar(200) DEFAULT NULL,
+  `top_remarks` varchar(200) DEFAULT NULL,
+  `top_accessory` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`top_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `topic` */
+
+/*Table structure for table `train` */
+
+DROP TABLE IF EXISTS `train`;
+
+CREATE TABLE `train` (
+  `tra_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tra_name` varchar(50) NOT NULL,
+  `tra_lecturer` varchar(50) NOT NULL,
+  `tra_goal` varchar(50) DEFAULT NULL,
+  `tra_desc` varchar(200) DEFAULT NULL,
+  `tra_start_time` date NOT NULL,
+  `tra_end_time` date NOT NULL,
+  `tra_personnel` varchar(50) DEFAULT NULL,
+  `tra_data` varchar(50) DEFAULT NULL,
+  `tra_registrar` varchar(50) NOT NULL,
+  `tra_time` date NOT NULL,
+  `tra_state` varchar(50) NOT NULL,
+  PRIMARY KEY (`tra_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `train` */
+
+/*Table structure for table `train_audit` */
+
+DROP TABLE IF EXISTS `train_audit`;
+
+CREATE TABLE `train_audit` (
+  `aud_id` int(11) NOT NULL,
+  `aud_result` varchar(50) NOT NULL,
+  `aud_opinion` varchar(50) NOT NULL,
+  `aud_person` varchar(50) NOT NULL,
+  `aud_time` date NOT NULL,
+  PRIMARY KEY (`aud_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `train_audit` */
+
+/*Table structure for table `train_back` */
+
+DROP TABLE IF EXISTS `train_back`;
+
+CREATE TABLE `train_back` (
+  `back_id` int(11) NOT NULL,
+  `back_result` varchar(50) NOT NULL,
+  `back_opinion` varchar(50) DEFAULT NULL,
+  `back_person` varchar(50) NOT NULL,
+  `back_time` date NOT NULL,
+  PRIMARY KEY (`back_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `train_back` */
+
+/*Table structure for table `users` */
+
+DROP TABLE IF EXISTS `users`;
+
+CREATE TABLE `users` (
+  `user_name` varchar(50) NOT NULL,
+  `user_real_name` varchar(50) NOT NULL,
+  `user_password` varchar(50) NOT NULL,
+  `user_role_id` int(11) NOT NULL,
+  `user_telephone` varchar(50) NOT NULL,
+  PRIMARY KEY (`user_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `users` */
+
+insert  into `users`(`user_name`,`user_real_name`,`user_password`,`user_role_id`,`user_telephone`) values 
+('admin','张三','123456',5,'13581310901'),
+('chenzhuo','陈卓','123456',1,'15845201254'),
+('limengting','李梦婷','123456',1,'15810002361'),
+('liuhuan','刘欢','123456',1,'15920123022'),
+('liuting','刘婷','123456',1,'15812023230'),
+('quxiaoxiao','曲潇潇','123456',3,'15822023675'),
+('wanmengli','万梦力','123456',3,'13420225563'),
+('xudan','徐丹','123456',3,'13612012013'),
+('yangyang','杨阳','123456',1,'15862001023'),
+('zhaoya','赵雅','123456',2,'13602132025'),
+('zhaoyazhi','赵雅芝','123456',3,'15920887402'),
+('zhoumeng','周萌','123456',4,'13888992021'),
+('zhouwenyu','周文宇','123456',3,'15620123022');
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

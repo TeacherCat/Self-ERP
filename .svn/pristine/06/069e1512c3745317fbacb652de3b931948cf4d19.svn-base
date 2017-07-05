@@ -1,0 +1,112 @@
+package cn.hrms.pay.action;
+
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import cn.hrms.pay.biz.StaAudBiz;
+import cn.hrms.pay.biz.StaDetBiz;
+import cn.hrms.pay.biz.StandardBiz;
+import cn.hrms.pay.entity.Standard;
+import cn.hrms.pay.entity.StandardAudit;
+import cn.hrms.pay.entity.StandardDetails;
+import cn.hrms.sysset.biz.ProjectBiz;
+import cn.hrms.sysset.entity.Project;
+import cn.hrms.util.Final;
+import cn.hrms.util.Page;
+
+@Controller("standardAction")
+public class StandardAction {
+	private StandardBiz standardBiz;
+	private StaDetBiz staDetBiz;
+	private ProjectBiz projectBiz;
+	private StaAudBiz staAudBiz;
+	
+	@RequestMapping("standardList")
+	public String standardList(Standard stan, String endTime, Integer currPageNo, Model model){
+		if(stan.getState() != null && stan.getState().equals("0")){
+			stan.setState(null);
+		}
+		if(stan.getTime() == ""){
+			stan.setTime(null);
+		}
+		if(endTime == ""){
+			endTime = null;
+		}
+		Page<Standard> page = new Page<Standard>();
+		page.setTotalCount(standardBiz.stanCoun(stan, endTime));
+		page.setPageTotalCount();
+		if(currPageNo != null){
+			page.setCurrPageNo(currPageNo);
+		}
+		page.setPageList(standardBiz.findStan(stan, endTime, page));
+		model.addAttribute("page", page);
+		model.addAttribute("stan", stan);
+		model.addAttribute("endTime", endTime);
+		return "jsp/pay/standard/standardList";
+	}
+	
+	@RequestMapping("standardAdd")
+	public String standardAdd(Standard stan, String money[], Integer res,Model model){
+		List<Project> proList = projectBiz.findPro();
+		if(res == null){
+			standardBiz.addStan(stan);
+			for (int i = 0; i < money.length; i++) {
+				staDetBiz.addStaDet(new StandardDetails(proList.get(i), money[i]));
+			}
+			model.addAttribute("msg", Final.addSuccess);
+		}
+		model.addAttribute("proList", proList);
+		return "jsp/pay/standard/standardAdd";
+	}
+	
+	@RequestMapping("standardDel")
+	public String standardDel(Integer id, Integer currPageNo, Model model){
+		standardBiz.delStan(id);
+		staDetBiz.delStaDet(id);
+		staAudBiz.delStaAud(id);
+		return null;
+	}
+	
+	@RequestMapping("standardUpd")
+	public String standardUpd(Standard stan, Integer res, Model model){
+		if(res == null){
+			
+			model.addAttribute("msg", Final.updSuccess);
+		}
+		return "jsp/pay/standard/standardUpd";
+	}
+	
+	@RequestMapping("standardDetail")
+	public String standardDetail(Integer id, Model model){
+		model.addAttribute("stan", standardBiz.findStanById(id));
+		model.addAttribute("staDet", staDetBiz.findStanById(id));
+		model.addAttribute("staAud", staAudBiz.findStaAudById(id));
+		return "jsp/pay/standard/standardDetail";
+	}
+	
+	@RequestMapping("standardAudit")
+	public String standardAudit(StandardAudit staAud, Integer res, Model model){
+		
+		return "jsp/pay/standard/standardAudit";
+	}
+
+	public void setStandardBiz(StandardBiz standardBiz) {
+		this.standardBiz = standardBiz;
+	}
+
+	public void setStaDetBiz(StaDetBiz staDetBiz) {
+		this.staDetBiz = staDetBiz;
+	}
+
+	public void setProjectBiz(ProjectBiz projectBiz) {
+		this.projectBiz = projectBiz;
+	}
+
+	public void setStaAudBiz(StaAudBiz staAudBiz) {
+		this.staAudBiz = staAudBiz;
+	}
+
+}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.recruit.entity.Hire">
+	
+	<resultMap type="cn.hrms.recruit.entity.Hire" id="hireMap">
+		<id column="hire_id" property="id" />
+		<result column="hire_opinion" property="opinion" />
+		<result column="hire_person" property="person" />
+		<result column="hire_time" property="time" />
+	</resultMap>
+	
+	<!-- 根据编号查询唯一录用对象 -->
+	<select id="findHire" resultMap="hireMap">
+		select * from hire where hire_id = #{id}
+	</select>
+	
+	<!-- 新增录用对象 -->
+	<insert id="addHire" parameterType="cn.hrms.recruit.entity.Hire">
+		INSERT INTO hire VALUES(#{id},#{opinion},#{person},#{time})
+	</insert>
+	
+	<!-- 删除录用对象 -->
+	<delete id="delHire" parameterType="int">
+		DELETE FROM hire WHERE hire_id = #{id}
+	</delete>
+	
+</mapper>

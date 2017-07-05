@@ -1,0 +1,158 @@
+
+//执行上传文件操作的函数		
+function ajaxFileUpload() {
+	$.ajaxFileUpload({
+		url : "${pageContext.request.contextPath}/fileUpload.do?name=train&pathName="+$("input[name='data']").val(),
+		secureuri : false, //是否启用安全提交,默认为false   
+		fileElementId : 'data', //文件选择框的id属性  
+		dataType : 'text',
+		success : function(data) {
+			if(data.substring(0,1) == 1){
+				$("input[name='data']").val(data.substring(1));
+				$("#data").val(data.substring(1));
+				$("#result").text("上传成功！");
+			}else{
+				$("#result").text(data.substring(1));
+			}
+		},
+		error : function(data) {
+			$("#result").text("文件上传失败！");
+		}
+	});
+}
+
+//dom加载完后运行
+$(function(){
+	
+	//职位非空判断
+	$("#postForm").submit(function(){
+    	$(this).find(".msg").html("&nbsp;*&nbsp;");
+    	var flg = true;
+    	if($(this).find("input[name='name']").val()==""){
+    		$(this).find("input[name='name']").parent().next().html("*职位名称不能为空");
+    		flg = false;
+    	}
+    	if($(this).find("select[name='dept.id']").val()=="0"){
+    		$(this).find("select[name='dept.id']").next(".msg").html("*所属部门不能为空");
+    		flg = false;
+    	}
+    	return flg;
+    });
+	
+	//部门非空判断
+	$("#deptForm").submit(function(){
+    	$(this).find(".msg").html("&nbsp;*&nbsp;");
+    	var flg = true;
+    	if($(this).find("input[name='name']").val()==""){
+    		$(this).find("input[name='name']").parent().next().html("*部门名称不能为空");
+    		flg = false;
+    	}
+    	return flg;
+    });
+	
+	//薪酬项目非空判断
+	$("#proForm").submit(function(){
+    	$(this).find(".msg").html("&nbsp;*&nbsp;");
+    	var flg = true;
+    	if($(this).find("input[name='name']").val()==""){
+    		$(this).find("input[name='name']").parent().next().html("*项目名称不能为空");
+    		flg = false;
+    	}
+    	return flg;
+    });
+	
+	//公共属性非空判断
+	$("#propForm").submit(function(){
+    	$(this).find(".msg").html("&nbsp;*&nbsp;");
+    	var flg = true;
+    	if($(this).find("input[name='name']").val()==""){
+    		$(this).find("input[name='name']").parent().next().html("*属性名称不能为空");
+    		flg = false;
+    	}
+    	return flg;
+    });
+	
+	//试题非空判断
+	$("#topForm").submit(function(){
+    	$(this).find(".msg").html("&nbsp;*&nbsp;");
+    	var flg = true;
+    	if($(this).find("input[name='name']").val()==""){
+    		$(this).find("input[name='name']").parent().next().html("*试题名称不能为空");
+    		flg = false;
+    	}
+    	if($(this).find("select[name='type']").val()=="0"){
+    		$(this).find("select[name='type']").next(".msg").html("*试题类型不能为空");
+    		flg = false;
+    	}
+    	if($(this).find("select[name='level']").val()=="0"){
+    		$(this).find("select[name='level']").next(".msg").html("*试题级别不能为空");
+    		flg = false;
+    	}
+    	if($(this).find("select[name='dept.id']").val()=="0"){
+    		$(this).find("select[name='dept.id']").next(".msg").html("*所属部门不能为空");
+    		flg = false;
+    	}
+    	return flg;
+    });
+	
+	//用户非空判断
+	$("#usersForm").submit(function(){
+    	$(this).find(".msg").html("&nbsp;*&nbsp;");
+    	var flg = true;
+    	if($(this).find("input[name='name']").val()==""){
+    		$(this).find("input[name='name']").parent().next().html("*用户名称不能为空");
+    		flg = false;
+    	}
+    	if($(this).find("input[name='realName']").val()==""){
+    		$(this).find("input[name='realName']").parent().next().html("*真实姓名不能为空");
+    		flg = false;
+    	}
+    	if($(this).find("input[name='password']").val()==""){
+    		$(this).find("input[name='password']").parent().next().html("*登陆密码不能为空");
+    		flg = false;
+    	}
+    	if($(this).find("select[name='role.id']").val()=="0"){
+    		$(this).find("select[name='role.id']").next(".msg").html("*用户角色不能为空");
+    		flg = false;
+    	}
+    	if($(this).find("input[name='telephone']").val()==""){
+    		$(this).find("input[name='telephone']").parent().next().html("*联系电话不能为空");
+    		flg = false;
+    	}
+    	return flg;
+    });
+	
+	//分页
+	$("#page button").click(function(){
+		var name = $(this).attr("name");
+    	var currPageNo = parseInt($("#currPageNo").val());
+    	if(name == "home"){
+    		currPageNo = 1;
+    	}
+    	if(name == "prev"){
+    		currPageNo += -1; 
+    	}
+    	if(name == "next"){
+    		currPageNo += 1;
+    	}
+    	if(name == "last"){
+    		currPageNo = $("#totalPageCount").val();
+    	}
+    	if(name == "ok"){
+    		var reg = new RegExp("^[0-9]*[1-9][0-9]*$");
+    		if(!reg.test($("#num").val())){return;}
+    		currPageNo = $("#num").val();
+    	}
+    	$("#currPageNo").val(currPageNo);
+    	$("#myForm").submit();
+	});
+	
+	//日期
+    $("#begin,#end").click(function(){
+        WdatePicker({
+            highLineWeekDay:true //周末高亮
+            ,readOnly:true      //只读，只可用控件input中 修改内容
+            ,dateFmt:'yyyy-MM-dd HH:mm:ss'
+        });
+    });
+});

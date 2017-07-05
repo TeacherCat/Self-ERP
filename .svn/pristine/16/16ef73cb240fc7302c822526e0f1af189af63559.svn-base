@@ -1,0 +1,449 @@
+/*
+SQLyog Community v12.3.3 (64 bit)
+MySQL - 5.5.54 : Database - hrms
+*********************************************************************
+*/
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`hrms` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+USE `hrms`;
+
+/*Table structure for table `archive` */
+
+DROP TABLE IF EXISTS `archive`;
+
+CREATE TABLE `archive` (
+  `arc_id` int(11) NOT NULL AUTO_INCREMENT,
+  `arc_dept_id` int(11) NOT NULL,
+  `arc_post_id` int(11) NOT NULL,
+  `arc_tit_id` varchar(50) NOT NULL,
+  `arc_state` varchar(50) NOT NULL,
+  `arc_name` varchar(50) NOT NULL,
+  `arc_sex` varchar(50) NOT NULL,
+  `arc_identity_card` varchar(50) NOT NULL,
+  `arc_telephone` varchar(50) NOT NULL,
+  `arc_email` varchar(50) NOT NULL,
+  `arc_place` varchar(50) NOT NULL,
+  `arc_address` varchar(50) NOT NULL,
+  `arc_politics_status` varchar(50) NOT NULL,
+  `arc_education` varchar(50) NOT NULL,
+  `arc_school` varchar(50) NOT NULL,
+  `arc_specialty` varchar(50) NOT NULL,
+  `arc_bank` varchar(50) NOT NULL,
+  `arc_bank_card` varchar(50) NOT NULL,
+  `arc_socila_security` varchar(50) NOT NULL,
+  `arc_record` varchar(200) DEFAULT NULL,
+  `arc_remarks` varchar(200) DEFAULT NULL,
+  `arc_photo` varchar(50) NOT NULL,
+  `arc_relation` varchar(200) DEFAULT NULL,
+  `arc_accessory` varchar(50) NOT NULL,
+  `arc_registrar` varchar(50) NOT NULL,
+  `arc_time` date NOT NULL,
+  PRIMARY KEY (`arc_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `archive` */
+
+/*Table structure for table `archive_audit` */
+
+DROP TABLE IF EXISTS `archive_audit`;
+
+CREATE TABLE `archive_audit` (
+  `aud_id` int(11) NOT NULL AUTO_INCREMENT,
+  `aud_resuit` varchar(50) NOT NULL,
+  `aud_person` varchar(50) NOT NULL,
+  `aud_time` date NOT NULL,
+  PRIMARY KEY (`aud_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `archive_audit` */
+
+/*Table structure for table `dept` */
+
+DROP TABLE IF EXISTS `dept`;
+
+CREATE TABLE `dept` (
+  `dept_id` int(11) NOT NULL AUTO_INCREMENT,
+  `dept_name` varchar(50) NOT NULL,
+  `dept_desc` varchar(200) DEFAULT NULL,
+  `dept_remarks` varchar(200) DEFAULT NULL,
+  `dept_phone` varchar(50) DEFAULT NULL,
+  `dept_parent` int(11) NOT NULL,
+  PRIMARY KEY (`dept_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+/*Data for the table `dept` */
+
+insert  into `dept`(`dept_id`,`dept_name`,`dept_desc`,`dept_remarks`,`dept_phone`,`dept_parent`) values 
+(1,'ETGW',NULL,NULL,NULL,1);
+
+/*Table structure for table `feedback` */
+
+DROP TABLE IF EXISTS `feedback`;
+
+CREATE TABLE `feedback` (
+  `feed_id` int(11) NOT NULL AUTO_INCREMENT,
+  `feed_assess_result` varchar(50) NOT NULL,
+  `feed_result` varchar(50) NOT NULL,
+  `feed_opinion` varchar(50) DEFAULT NULL,
+  `feed_person` varchar(50) NOT NULL,
+  `feed_time` date NOT NULL,
+  PRIMARY KEY (`feed_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `feedback` */
+
+/*Table structure for table `hire` */
+
+DROP TABLE IF EXISTS `hire`;
+
+CREATE TABLE `hire` (
+  `hire_id` int(11) NOT NULL AUTO_INCREMENT,
+  `hire_preson` varchar(50) NOT NULL,
+  `hire_time` date NOT NULL,
+  `hire_decision` varchar(50) NOT NULL,
+  PRIMARY KEY (`hire_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `hire` */
+
+/*Table structure for table `post` */
+
+DROP TABLE IF EXISTS `post`;
+
+CREATE TABLE `post` (
+  `post_id` int(11) NOT NULL AUTO_INCREMENT,
+  `post_name` varchar(50) NOT NULL,
+  `post_dept_id` int(11) NOT NULL,
+  `post_desc` varchar(200) DEFAULT NULL,
+  `post_remarks` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`post_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `post` */
+
+/*Table structure for table `project` */
+
+DROP TABLE IF EXISTS `project`;
+
+CREATE TABLE `project` (
+  `proj_id` int(11) NOT NULL AUTO_INCREMENT,
+  `proj_name` varchar(50) NOT NULL,
+  `proj_desc` varbinary(200) DEFAULT NULL,
+  PRIMARY KEY (`proj_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `project` */
+
+/*Table structure for table `property` */
+
+DROP TABLE IF EXISTS `property`;
+
+CREATE TABLE `property` (
+  `pro_id` int(11) NOT NULL AUTO_INCREMENT,
+  `pro_name` varchar(50) NOT NULL,
+  `pro_desc` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`pro_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `property` */
+
+/*Table structure for table `property_details` */
+
+DROP TABLE IF EXISTS `property_details`;
+
+CREATE TABLE `property_details` (
+  `det_id` int(11) NOT NULL AUTO_INCREMENT,
+  `det_pro_id` int(11) NOT NULL,
+  `det_name` varchar(50) NOT NULL,
+  `det_desc` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`det_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `property_details` */
+
+/*Table structure for table `provide` */
+
+DROP TABLE IF EXISTS `provide`;
+
+CREATE TABLE `provide` (
+  `prov_id` int(11) NOT NULL AUTO_INCREMENT,
+  `prov_feed_id` int(11) NOT NULL,
+  `prov_first_unit` varchar(50) NOT NULL,
+  `prov_second_unit` varchar(50) NOT NULL,
+  `prov_count` int(11) NOT NULL,
+  `prov_amount` double NOT NULL,
+  `prov_registrar` varchar(50) NOT NULL,
+  `prov_time` date NOT NULL,
+  `prov_state` varchar(50) NOT NULL,
+  PRIMARY KEY (`prov_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `provide` */
+
+/*Table structure for table `provide_ audit` */
+
+DROP TABLE IF EXISTS `provide_ audit`;
+
+CREATE TABLE `provide_ audit` (
+  `pa_id` int(11) NOT NULL AUTO_INCREMENT,
+  `pa_result` varchar(50) NOT NULL,
+  `pa_opinion` varchar(50) NOT NULL,
+  `pa_person` varchar(50) NOT NULL,
+  `pa_time` date NOT NULL,
+  PRIMARY KEY (`pa_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `provide_ audit` */
+
+/*Table structure for table `provide_details` */
+
+DROP TABLE IF EXISTS `provide_details`;
+
+CREATE TABLE `provide_details` (
+  `pd_id` int(11) NOT NULL AUTO_INCREMENT,
+  `pd_prov_id` int(11) NOT NULL,
+  `pd_arc_id` int(11) NOT NULL,
+  `pd_standard` double NOT NULL,
+  `pd_performance` double DEFAULT NULL,
+  `pd_evection` double DEFAULT NULL,
+  `pd_overtime` double DEFAULT NULL,
+  `pd_deduct` double DEFAULT NULL,
+  `pd_amount` double NOT NULL,
+  PRIMARY KEY (`pd_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `provide_details` */
+
+/*Table structure for table `release` */
+
+DROP TABLE IF EXISTS `release`;
+
+CREATE TABLE `release` (
+  `rele_id` int(11) NOT NULL AUTO_INCREMENT,
+  `rele_dept_id` int(11) NOT NULL,
+  `rele_post_id` int(11) NOT NULL,
+  `rele_type` varchar(50) NOT NULL,
+  `rele_count` varchar(50) NOT NULL,
+  `rele_edu_requier` varchar(50) NOT NULL,
+  `rele_age_limit` varchar(50) NOT NULL,
+  `rele_desc` varchar(200) DEFAULT NULL,
+  `rele_join_requier` varchar(200) DEFAULT NULL,
+  `rele_registrar` varchar(50) NOT NULL,
+  `rele_start_time` date NOT NULL,
+  `rele_end_time` date NOT NULL,
+  PRIMARY KEY (`rele_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `release` */
+
+/*Table structure for table `result` */
+
+DROP TABLE IF EXISTS `result`;
+
+CREATE TABLE `result` (
+  `resu_id` int(11) NOT NULL AUTO_INCREMENT,
+  `resu_level` varchar(50) NOT NULL,
+  `resu_preson` varchar(50) NOT NULL,
+  `resu_time` date NOT NULL,
+  `resu_evaluate` varchar(50) NOT NULL,
+  PRIMARY KEY (`resu_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `result` */
+
+/*Table structure for table `resume` */
+
+DROP TABLE IF EXISTS `resume`;
+
+CREATE TABLE `resume` (
+  `res_id` int(11) NOT NULL AUTO_INCREMENT,
+  `res_rele_id` varchar(50) NOT NULL,
+  `res_name` varchar(50) NOT NULL,
+  `res_sex` varchar(50) NOT NULL,
+  `res_identity_card` varchar(50) NOT NULL,
+  `res_telephone` varchar(50) NOT NULL,
+  `res_email` varchar(50) NOT NULL,
+  `res_place` varchar(50) NOT NULL,
+  `res_address` varchar(50) NOT NULL,
+  `res_politics_status` varchar(50) NOT NULL,
+  `res_education` varchar(50) NOT NULL,
+  `res_schools` varchar(50) NOT NULL,
+  `res_specialty` varchar(50) NOT NULL,
+  `res_age_limit` varchar(50) NOT NULL,
+  `res_job` varchar(50) NOT NULL,
+  `res_fresh_graduate` varchar(50) NOT NULL,
+  `res_salary_requier` varchar(50) NOT NULL,
+  `res_join_type` varchar(50) NOT NULL,
+  `res_record` varchar(200) DEFAULT NULL,
+  `res_accessory` varchar(50) DEFAULT NULL,
+  `res_recommend_interview` varchar(50) DEFAULT NULL,
+  `res_referral` varchar(50) DEFAULT NULL,
+  `res_recommend_time` date DEFAULT NULL,
+  `res_recommend_idea` varchar(50) DEFAULT NULL,
+  `res_time` date DEFAULT NULL,
+  `res_state` varchar(50) NOT NULL,
+  PRIMARY KEY (`res_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `resume` */
+
+/*Table structure for table `role` */
+
+DROP TABLE IF EXISTS `role`;
+
+CREATE TABLE `role` (
+  `role_id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_name` varchar(50) NOT NULL,
+  PRIMARY KEY (`role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `role` */
+
+/*Table structure for table `standard` */
+
+DROP TABLE IF EXISTS `standard`;
+
+CREATE TABLE `standard` (
+  `stan_id` int(11) NOT NULL AUTO_INCREMENT,
+  `stan_name` varchar(50) NOT NULL,
+  `stan_amount` varchar(50) NOT NULL,
+  `stan_registrar` varchar(50) NOT NULL,
+  `stan_time` date NOT NULL,
+  `stan_state` varchar(50) NOT NULL,
+  PRIMARY KEY (`stan_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `standard` */
+
+/*Table structure for table `standard_audit` */
+
+DROP TABLE IF EXISTS `standard_audit`;
+
+CREATE TABLE `standard_audit` (
+  `sa_id` int(11) NOT NULL,
+  `sa_result` varchar(50) NOT NULL,
+  `sa_opinion` varchar(50) NOT NULL,
+  `sa_person` varchar(50) NOT NULL,
+  `sa_time` date NOT NULL,
+  PRIMARY KEY (`sa_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `standard_audit` */
+
+/*Table structure for table `standard_details` */
+
+DROP TABLE IF EXISTS `standard_details`;
+
+CREATE TABLE `standard_details` (
+  `sd_id` int(11) NOT NULL AUTO_INCREMENT,
+  `sd_feed_id` int(11) NOT NULL,
+  `sd_name` varchar(50) NOT NULL,
+  `sd_money` double NOT NULL,
+  PRIMARY KEY (`sd_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `standard_details` */
+
+/*Table structure for table `titles` */
+
+DROP TABLE IF EXISTS `titles`;
+
+CREATE TABLE `titles` (
+  `tit_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tit_name` varchar(50) NOT NULL,
+  `tit_dept_id` int(11) NOT NULL,
+  `tit_desc` varchar(200) DEFAULT NULL,
+  `tit_remarks` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`tit_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `titles` */
+
+/*Table structure for table `topic` */
+
+DROP TABLE IF EXISTS `topic`;
+
+CREATE TABLE `topic` (
+  `top_id` int(11) NOT NULL AUTO_INCREMENT,
+  `top_name` varchar(50) NOT NULL,
+  `top_type` varchar(50) NOT NULL,
+  `
+top_level` varchar(50) NOT NULL,
+  `top_dept_id` int(11) NOT NULL,
+  `top_person` varchar(50) NOT NULL,
+  `top_time` date NOT NULL,
+  `top_content` varchar(200) DEFAULT NULL,
+  `top_remarks` varchar(200) DEFAULT NULL,
+  `top_accessory` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`top_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `topic` */
+
+/*Table structure for table `train` */
+
+DROP TABLE IF EXISTS `train`;
+
+CREATE TABLE `train` (
+  `tra_id` int(11) NOT NULL AUTO_INCREMENT,
+  `tra_name` varchar(50) NOT NULL,
+  `tra_lecturer` varchar(50) NOT NULL,
+  `tra_goal` varchar(50) DEFAULT NULL,
+  `tra_desc` varchar(200) DEFAULT NULL,
+  `tra_start_time` date NOT NULL,
+  `tra_end_time` date NOT NULL,
+  `tra_personnel` varchar(50) DEFAULT NULL,
+  `tra_data` varchar(50) NOT NULL,
+  `tra_registrar` varchar(50) NOT NULL,
+  `tra_time` date NOT NULL,
+  `tra_state` varchar(50) NOT NULL,
+  PRIMARY KEY (`tra_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `train` */
+
+/*Table structure for table `train_audit` */
+
+DROP TABLE IF EXISTS `train_audit`;
+
+CREATE TABLE `train_audit` (
+  `ta_id` int(11) NOT NULL AUTO_INCREMENT,
+  `ta_result` varchar(50) NOT NULL,
+  `ta_opinion` varchar(50) NOT NULL,
+  `ta_person` varchar(50) NOT NULL,
+  `ta_time` date NOT NULL,
+  PRIMARY KEY (`ta_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `train_audit` */
+
+/*Table structure for table `user` */
+
+DROP TABLE IF EXISTS `user`;
+
+CREATE TABLE `user` (
+  `user_name` varchar(50) NOT NULL,
+  `user_real_name` varchar(50) NOT NULL,
+  `user_password` varchar(50) NOT NULL,
+  `user_role_id` int(11) NOT NULL,
+  `user_dept_id` int(11) NOT NULL,
+  `user_post_id` int(11) NOT NULL,
+  `user_telephone` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`user_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+/*Data for the table `user` */
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;

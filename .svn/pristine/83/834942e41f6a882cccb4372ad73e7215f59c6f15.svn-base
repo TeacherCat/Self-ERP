@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.train.entity.Train">
+	<resultMap type="cn.hrms.personnel.entity.Archive" id="ArcMap">
+		<result column="aud_resuit" property="resuit" />
+		<result column="aud_person" property="person" />
+		<result column="aud_time" property="time" />
+		
+		<association property="archive" column="aud_arc_id" select="cn.hrms.personnel.entity.Archive.findArcById"/>
+	</resultMap>
+</mapper>

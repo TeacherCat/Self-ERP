@@ -1,0 +1,22 @@
+package cn.hrms.personnel.biz;
+import java.util.List;
+import cn.hrms.personnel.entity.Archives;
+import cn.hrms.util.Page;
+
+public interface ArchivesBiz {
+	
+	/**
+	 * 按条件分页查询档案
+	 * @param archives 档案对象
+	 * @param page 分页对象
+	 * @return
+	 */
+	public List<Archives> findArchives(Archives archives,Page<Archives> page);
+	
+	/**
+	 * 查询总条数
+	 * @param archives 查询条件
+	 * @return
+	 */
+	public Integer findTotalCount(Archives archives);
+}

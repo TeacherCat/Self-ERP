@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.train.entity.Train">
+	<select id="findTraById" resultType="cn.hrms.train.entity.Train">
+		select * from train where tra_id = #{id}
+	</select>
+</mapper>

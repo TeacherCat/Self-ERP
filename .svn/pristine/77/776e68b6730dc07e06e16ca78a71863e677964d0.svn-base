@@ -1,0 +1,93 @@
+package cn.hrms.recruit.entity;
+
+import java.io.Serializable;
+import java.util.Date;
+
+/*
+ * 面试结果
+ */
+public class Result implements Serializable {
+
+	private static final long serialVersionUID = 3025328051974127750L;
+	
+	/*
+	 * 简历编号
+	 */
+	private Resume resume;
+	
+	/*
+	 * 面试级别
+	 */
+	private String level;
+	
+	/*
+	 * 面试人
+	 */
+	private String preson;
+	
+	/*
+	 * 面试时间
+	 */
+	private Date time;
+	
+	/*
+	 * 评价
+	 */
+	private String evaluate;
+
+	public Result(Resume resume, String level, String preson, Date time,
+			String evaluate) {
+		super();
+		this.resume = resume;
+		this.level = level;
+		this.preson = preson;
+		this.time = time;
+		this.evaluate = evaluate;
+	}
+
+	public Result() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Resume getResume() {
+		return resume;
+	}
+
+	public void setResume(Resume resume) {
+		this.resume = resume;
+	}
+
+	public String getLevel() {
+		return level;
+	}
+
+	public void setLevel(String level) {
+		this.level = level;
+	}
+
+	public String getPreson() {
+		return preson;
+	}
+
+	public void setPreson(String preson) {
+		this.preson = preson;
+	}
+
+	public Date getTime() {
+		return time;
+	}
+
+	public void setTime(Date time) {
+		this.time = time;
+	}
+
+	public String getEvaluate() {
+		return evaluate;
+	}
+
+	public void setEvaluate(String evaluate) {
+		this.evaluate = evaluate;
+	}
+	
+}

@@ -1,0 +1,172 @@
+package cn.hrms.recruit.entity;
+
+import java.io.Serializable;
+import java.util.Date;
+
+import cn.hrms.sysset.entity.Dept;
+import cn.hrms.sysset.entity.Post;
+
+/*
+ * 职位发布
+ */
+public class Release implements Serializable {
+
+	private static final long serialVersionUID = 8972392821517490353L;
+	
+	/*
+	 * 发布编号
+	 */
+	private Integer id;
+	
+	/*
+	 * 所属部门
+	 */
+	private Dept dept;
+	
+	/*
+	 * 所属职位
+	 */
+	private Post post;
+	
+	/*
+	 * 招聘类型
+	 */
+	private String type;
+	
+	/*招聘人数
+	 * 
+	 */
+	private Integer count;
+	
+	/*
+	 * 学历要求
+	 */
+	private String eduRequier;
+	
+	/*
+	 * 工作年限
+	 */
+	private String ageLimit;
+	
+	/*
+	 * 职位描述
+	 */
+	private String desc;
+	
+	/*
+	 * 招聘要求
+	 */
+	private String joinRequier;
+	
+	/*
+	 * 登记人
+	 */
+	private String registrar;
+	
+	/*
+	 * 登记时间
+	 */
+	private Date startTime;
+	
+	/*
+	 * 截止日期
+	 */
+	private Date endTime;
+	
+	public Release(Integer id, Dept dept, Post post, String type,
+			Integer count, String eduRequier, String ageLimit, String desc,
+			String joinRequier, String registrar, Date startTime, Date endTime) {
+		super();
+		this.id = id;
+		this.dept = dept;
+		this.post = post;
+		this.type = type;
+		this.count = count;
+		this.eduRequier = eduRequier;
+		this.ageLimit = ageLimit;
+		this.desc = desc;
+		this.joinRequier = joinRequier;
+		this.registrar = registrar;
+		this.startTime = startTime;
+		this.endTime = endTime;
+	}
+	
+	public Release() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public Dept getDept() {
+		return dept;
+	}
+	public void setDept(Dept dept) {
+		this.dept = dept;
+	}
+	public Post getPost() {
+		return post;
+	}
+	public void setPost(Post post) {
+		this.post = post;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public Integer getCount() {
+		return count;
+	}
+	public void setCount(Integer count) {
+		this.count = count;
+	}
+	public String getEduRequier() {
+		return eduRequier;
+	}
+	public void setEduRequier(String eduRequier) {
+		this.eduRequier = eduRequier;
+	}
+	public String getAgeLimit() {
+		return ageLimit;
+	}
+	public void setAgeLimit(String ageLimit) {
+		this.ageLimit = ageLimit;
+	}
+	public String getDesc() {
+		return desc;
+	}
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+	public String getJoinRequier() {
+		return joinRequier;
+	}
+	public void setJoinRequier(String joinRequier) {
+		this.joinRequier = joinRequier;
+	}
+	public String getRegistrar() {
+		return registrar;
+	}
+	public void setRegistrar(String registrar) {
+		this.registrar = registrar;
+	}
+	public Date getStartTime() {
+		return startTime;
+	}
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+	public Date getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
+
+}

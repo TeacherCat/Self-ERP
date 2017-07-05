@@ -1,0 +1,90 @@
+package cn.hrms.sysset.entity;
+
+import java.io.Serializable;
+
+/**
+ * 职位
+ */
+public class Post implements Serializable {
+
+	private static final long serialVersionUID = 4732802977851060344L;
+	
+	/**
+	 * 职位编号
+	 */
+	private Integer id;
+	
+	/**
+	 * 职位名称
+	 */
+	private String name;
+	
+	/**
+	 * 所属部门
+	 */
+	private Dept dept;
+	
+	/**
+	 * 职位描述
+	 */
+	private String desc;
+	
+	/**
+	 * 备注
+	 */
+	private String remarks;
+	
+	
+	/**
+	 * 构造函数
+	 */
+	public Post() { }
+	
+	public Post(Integer id, String name, Dept dept, String desc, String remarks) {
+		this.id = id;
+		this.name = name;
+		this.dept = dept;
+		this.desc = desc;
+		this.remarks = remarks;
+	}
+	
+	public Post(Integer id) {
+		super();
+		this.id = id;
+	}
+
+	/**
+	 * 属性封装
+	 */
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public Dept getDept() {
+		return dept;
+	}
+	public void setDept(Dept dept) {
+		this.dept = dept;
+	}
+	public String getDesc() {
+		return desc;
+	}
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+	public String getRemarks() {
+		return remarks;
+	}
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+	
+}

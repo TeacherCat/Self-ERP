@@ -1,0 +1,48 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>修改公共属性</title>
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/plugins/layui/css/layui.css" />
+	<script type="text/javascript" src="<%=request.getContextPath()%>/plugins/layui/layui.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-1.8.3.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/sysset.js"></script>
+</head>
+
+<body>
+	<div style="width:500px;margin:20px auto;">
+		<form action="propertyUpd.do" method="post" id="propForm">
+		
+			<div class="layui-form-item" style="display: none;">
+				<label class="layui-form-label">属性编号：</label>
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input" name="id" value="${pro.id }">
+				</div>
+				<span class="msg">&nbsp;*&nbsp;</span>
+			</div>
+		
+			<div class="layui-form-item">
+				<label class="layui-form-label">属性名称：</label>
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input" name="name" value="${pro.name }">
+				</div>
+				<span class="msg">&nbsp;*&nbsp;</span>
+			</div>
+			
+			<div class="layui-form-item">
+				<label class="layui-form-label">属性描述：</label>
+				<div class="layui-input-inline">
+					<input type="text" class="layui-input" name="desc" value="${pro.desc }">
+				</div>
+			</div>
+			
+			<p style="width:100px;margin:0px auto;margin-top:30px;color:red;">${msg}</p>
+			<input type="submit" value="修&nbsp;&nbsp;改" class="layui-btn layui-btn-radius" style="margin-top:20px;margin-left:100px;" />
+			<a href="propertyList.do" class="layui-btn layui-btn-radius" style="margin-top:20px">返&nbsp;&nbsp;回</a>
+		
+		</form>
+	</div>
+</body>
+</html>

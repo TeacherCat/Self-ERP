@@ -1,0 +1,46 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>登录</title>
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/plugins/layui/css/layui.css" />
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/login.css" />
+</head>
+
+<body class="beg-login-bg">
+	<div class="beg-login-box">
+		
+		<h1>企 业 人 力 资 源 管 理 系 统</h1>
+		<div class="beg-login-main">
+			<form action="<%=request.getContextPath()%>/index.jsp" class="layui-form" method="post">
+				<div class="layui-form-item">
+					<label class="beg-login-icon">
+						<i class="layui-icon">&#xe612;</i>
+					</label>
+					<input type="text" placeholder="输入登录名" class="layui-input">
+				</div>
+				<div class="layui-form-item">
+					<label class="beg-login-icon">
+						<i class="layui-icon">&#xe642;</i>
+					</label>
+					<input type="password" placeholder="输入密码" class="layui-input">
+				</div>
+				<div class="layui-form-item">
+					用户名或密码错误，请核对后再登录
+				</div>
+				<div class="layui-form-item">
+					<div class="beg-pull-right">
+						<input type="submit" value="登&nbsp;&nbsp;录&nbsp;&nbsp;&nbsp;&nbsp;" class="layui-btn layui-btn-primary" />
+						<input type="reset" value="重&nbsp;&nbsp;置&nbsp;&nbsp;&nbsp;&nbsp;" class="layui-btn layui-btn-primary" />
+					</div>
+					<div class="beg-clear"></div>
+				</div>
+			</form>
+		</div>
+		
+		<p class="footer">&nbsp;©&nbsp;版权所有&nbsp;&nbsp;&nbsp;&nbsp;北大青鸟 3T126 开发小组</p>
+		
+	</div>
+</body>
+</html>

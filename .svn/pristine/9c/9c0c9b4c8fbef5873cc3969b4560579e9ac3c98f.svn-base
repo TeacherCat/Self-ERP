@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.sysset.entity.Topic">
+	<resultMap type="cn.hrms.sysset.entity.Topic" id="topicMap">
+		<result column="top_id" property="id" />
+		<result column="top_name" property="name" />
+		<result column="top_type" property="type" />
+		<result column="top_level" property="level" />
+		<result column="top_person" property="person" />
+		<result column="top_time" property="time" />
+		<result column="top_content" property="content" />
+		<result column="top_remarks" property="remarks" />
+		<result column="top_accessory" property="data" />
+
+		<association property="dept" column="top_dept_id" select="cn.hrms.sysset.entity.Dept.findDeptById"/>
+	</resultMap>
+	<select id="findTopById" resultMap="topicMap">
+		select * from topic where top_id = #{id}
+	</select>
+	
+	<select id="findTop" resultMap="topicMap" parameterType="map">
+		select * from topic
+		<where>
+			<if test="topic.name != null">
+				and top_name like concat(concat("%", #{topic.name}), "%")
+			</if>
+			<if test="topic.level != null">
+				and top_level = #{topic.level}
+			</if>
+			<if test="topic.dept != null">
+				and top_dept_id = #{topic.dept.id}
+			</if>
+		</where>
+		limit #{start},#{pageSize}
+	</select>
+	
+	<select id="topCount" resultType="int">
+		select count(*) from topic
+		<where>
+			<if test="name != null">
+				and top_name like concat(concat("%", #{name}), "%")
+			</if>
+			<if test="level != null">
+				and top_type = #{level}
+			</if>
+			<if test="dept != null">
+				and top_dept_id = #{dept.id}
+			</if>
+		</where>
+	</select>
+	
+	<insert id="addTop" parameterType="cn.hrms.sysset.entity.Topic">
+		insert into topic(top_name,top_type,top_level,top_person,top_time,
+						top_content,top_remarks,top_accessory,top_dept_id)
+		values(#{name},#{type},#{level},#{person},(select now()),#{content},#{remarks},#{data},#{dept.id})
+	</insert>
+	
+	<delete id="delTop" parameterType="cn.hrms.sysset.entity.Topic">
+		delete from topic where top_id = #{id}
+	</delete>
+	
+	<update id="updTop" parameterType="cn.hrms.sysset.entity.Topic">
+		update topic set top_name = #{name},top_type = #{type},top_level = #{level},top_person = #{person},
+						top_content = #{content},top_remarks = #{remarks},top_accessory = #{data},top_dept_id = #{dept.id}
+		where top_id = #{id}
+	</update>
+</mapper>

@@ -1,0 +1,49 @@
+package cn.hrms.sysset.dao.impl;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+
+import cn.hrms.sysset.dao.PostDao;
+import cn.hrms.sysset.entity.Post;
+import cn.hrms.util.Page;
+
+public class PostDaoImpl extends SqlSessionDaoSupport implements PostDao{
+
+	@Override
+	public List<Post> findPost(Post post, Page<Post> page) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("post", post);
+		params.put("start", (page.getCurrPageNo() - 1)*page.getPageSize());
+		params.put("pageSize", page.getPageSize());
+		return this.getSqlSession().selectList("cn.hrms.sysset.entity.Post.findPost", params);
+	}
+
+	@Override
+	public Post findPostById(Integer id) {
+		return this.getSqlSession().selectOne("cn.hrms.sysset.entity.Post.findPostById", id);
+	}
+
+	@Override
+	public int postCount(Post post) {
+		return this.getSqlSession().selectOne("cn.hrms.sysset.entity.Post.postCount", post);
+	}
+
+	@Override
+	public int addPost(Post post) {
+		return this.getSqlSession().insert("cn.hrms.sysset.entity.Post.addPost", post);
+	}
+
+	@Override
+	public int delPost(Integer id) {
+		return this.getSqlSession().delete("cn.hrms.sysset.entity.Post.delPost", id);
+	}
+
+	@Override
+	public int updPost(Post post) {
+		return this.getSqlSession().update("cn.hrms.sysset.entity.Post.updPost", post);
+	}
+
+}

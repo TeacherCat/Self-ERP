@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.train.entity.TrainAudit">
+
+	<resultMap type="cn.hrms.train.entity.TrainAudit" id="trainAuditMap">
+		<id property="id" column="aud_id" />
+		<result property="result" column="aud_result" />
+		<result property="opinion" column="aud_opinion" />
+		<result property="person" column="aud_person" />
+		<result property="time" column="aud_time" />
+	</resultMap>
+	
+	<!-- 根据编号查询培训审核对象 -->
+	<select id="findTrainAuditByID" resultMap="trainAuditMap">
+		select * from train_audit where aud_id = #{id}
+	</select>
+	
+	<!-- 添加培训审核 -->
+	<insert id="addTrainAudit" parameterType="cn.hrms.train.entity.TrainAudit">
+		INSERT INTO train_audit VALUES(#{id},#{result},#{opinion},#{person},#{time})
+	</insert>
+	
+	<!-- 修改培训审核 -->
+	<update id="updTrainAudit" parameterType="cn.hrms.train.entity.TrainAudit">
+		UPDATE train_audit SET aud_result=#{result},aud_opinion=#{opinion},aud_person=#{person},aud_time=#{time} WHERE aud_id=#{id}
+	</update>
+	
+	<!-- 删除培训审核 -->
+	<delete id="delTrainAudit" parameterType="int">
+		DELETE FROM train_audit WHERE aud_id = #{id}
+	</delete>
+</mapper>

@@ -1,0 +1,177 @@
+package cn.hrms.train.action;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import cn.hrms.train.biz.TrainAuditBiz;
+import cn.hrms.train.biz.TrainBackBiz;
+import cn.hrms.train.biz.TrainBiz;
+import cn.hrms.train.entity.Train;
+import cn.hrms.train.entity.TrainAudit;
+import cn.hrms.train.entity.TrainBack;
+import cn.hrms.util.Final;
+import cn.hrms.util.Page;
+import cn.hrms.util.Tools;
+
+@Controller
+public class TrainAction {
+
+	private TrainBiz trainBiz;
+	private TrainAuditBiz trainAuditBiz;
+	private TrainBackBiz trainBackBiz;
+	
+	/**
+	 * 培训计划列表显示
+	 * @param train 查询条件
+	 * @param currPageNo 当前页
+	 * @param model 传值
+	 * @return
+	 */
+	@RequestMapping("trainList")
+	public String trainList(Train train,Integer currPageNo,Model model){
+		if(train.getStartTime()==""){
+			train.setStartTime(null);
+		}
+		if(train.getEndTime()==""){
+			train.setEndTime(null);
+		}
+		Page<Train> page = new Page<Train>();
+		page.setTotalCount(trainBiz.findTotalCount(train));
+		page.setPageTotalCount();
+		if(currPageNo != null){
+			page.setCurrPageNo(currPageNo);
+		}
+		page.setPageList(trainBiz.findTrain(train, page));
+		model.addAttribute("page", page);
+		model.addAttribute("train", train);
+		return "jsp/train/trainList";
+	}
+	
+	/**
+	 * 新增培训计划
+	 * @param train 培训对象
+	 * @param model 传值
+	 * @return
+	 */
+	@RequestMapping("addTrain")
+	public String addTrain(Train train,Model model){
+		train.setTime(Tools.getCurrTime());
+		trainBiz.addTrain(train);
+		model.addAttribute("msg",Final.addSuccess);
+		return trainList(new Train(),1,model);
+	}
+	
+	/**
+	 * 修改培训计划
+	 * @param train 培训对象
+	 * @param updID 要修改的培训对象编号
+	 * @param model 传值
+	 * @return
+	 */
+	@RequestMapping("updTrain")
+	public String updTrain(Train train,Integer trainID,Model model){
+		if(trainID != null){
+			train = trainBiz.findTrain(new Train(trainID), new Page<Train>()).get(0);
+			model.addAttribute("train", train);
+			return "jsp/train/trainUpd";
+		}else{
+			trainBiz.updTrain(train);
+			model.addAttribute("msg", Final.updSuccess);
+		}
+		return trainList(new Train(),1,model);
+	}
+	
+	/**
+	 * 删除培训对象(包含该培训的审核记录和反馈记录)
+	 * @param id 要删除的培训对象编号
+	 * @param currPageNo 当前页
+	 * @param model 传值
+	 * @return
+	 */
+	@RequestMapping("delTrain")
+	public String delTrain(Integer id,Integer currPageNo,Model model){
+		trainBiz.delTrain(id);
+		trainAuditBiz.delTrainAudit(id);
+		trainBackBiz.delTrainBack(id);
+		model.addAttribute("msg", Final.delSuccess);
+		return trainList(new Train(),currPageNo,model);
+	}
+	
+	/**
+	 * 审核培训对象
+	 * @param trainAudit 审核对象
+	 * @param id 培训编号
+	 * @param model 传值
+	 * @return
+	 */
+	@RequestMapping("auditTrain")
+	public String auditTrain(TrainAudit trainAudit, Integer trainID,Model model){
+		if(trainID != null){
+			Train train = trainBiz.findTrain(new Train(trainID), new Page<Train>()).get(0);
+			model.addAttribute("train", train);
+			return "jsp/train/trainAudit";
+		}else{
+			trainAudit.setTime(Tools.getCurrTime());
+			//修改培训状态为审核的结果
+			trainBiz.updTrainState(new Train(trainAudit.getId(),trainAudit.getResult()));
+			//如果存在当前培训的审核记录就进行修改操作，否则进行新增操作
+			if(trainAuditBiz.findTrainAudit(trainAudit.getId()) != null){
+				trainAuditBiz.updTrainAudit(trainAudit);
+			}else{
+				trainAuditBiz.addTrainAudit(trainAudit);
+			}
+			model.addAttribute("msg", Final.auditSuccess);
+		}
+		return trainList(new Train(),1,model);
+	}
+	
+	/**
+	 * 反馈培训对象
+	 * @param trainBack 反馈对象
+	 * @param id 培训编号
+	 * @param model 传值
+	 * @return
+	 */
+	@RequestMapping("backTrain")
+	public String backTrain(TrainBack trainBack, Integer trainID, Model model){
+		if(trainID != null){
+			Train train = trainBiz.findTrain(new Train(trainID), new Page<Train>()).get(0);
+			TrainAudit trainAudit = trainAuditBiz.findTrainAudit(trainID);
+			model.addAttribute("train", train);
+			model.addAttribute("trainAudit", trainAudit);
+			return "jsp/train/trainBack";
+		}else{
+			trainBack.setTime(Tools.getCurrTime());
+			//修改培训状态为 "已结束"
+			trainBiz.updTrainState(new Train(trainBack.getId(),"已结束"));
+			//添加培训反馈记录
+			trainBackBiz.addTrainBack(trainBack);
+			model.addAttribute("msg", Final.backSuccess);
+		}
+		return trainList(new Train(),1,model);
+	}
+	
+	@RequestMapping("detailTrain")
+	public String detailTrain(Integer trainID, Model model){
+		Train train = trainBiz.findTrain(new Train(trainID), new Page<Train>()).get(0);
+		TrainAudit trainAudit = trainAuditBiz.findTrainAudit(trainID);
+		TrainBack trainBack = trainBackBiz.findTrainBack(trainID);
+		model.addAttribute("train", train);
+		model.addAttribute("trainAudit", trainAudit);
+		model.addAttribute("trainBack", trainBack);
+		return "jsp/train/trainDetail";
+	}
+
+	
+	
+	public void setTrainBiz(TrainBiz trainBiz) {
+		this.trainBiz = trainBiz;
+	}
+	public void setTrainAuditBiz(TrainAuditBiz trainAuditBiz) {
+		this.trainAuditBiz = trainAuditBiz;
+	}
+	public void setTrainBackBiz(TrainBackBiz trainBackBiz) {
+		this.trainBackBiz = trainBackBiz;
+	}
+	
+}

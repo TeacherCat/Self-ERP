@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.sysset.entity.Role">
+	
+	<resultMap type="cn.hrms.sysset.entity.Role" id="roleMap">
+		<result property="id" column="role_id" />
+		<result property="name" column="role_name" />
+	</resultMap>
+	
+	<!-- 根据编号查询角色 -->
+	<select id="findRoleById" resultMap="roleMap">
+		select * from role where role_id = #{id}
+	</select>
+	
+	<!-- 查询所有角色 -->
+	<select id="findRole" resultMap="roleMap">
+		select * from role
+	</select>
+</mapper>

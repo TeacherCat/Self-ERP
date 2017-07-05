@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.train.entity.Feedback">
+	<resultMap type="cn.hrms.train.entity.Feedback" id="feedMap">
+		<result column="feed_assess_result" property="assessResult" />
+		<result column="feed_result" property="result" />
+		<result column="feed_opinion" property="opinion" />
+		<result column="feed_person" property="person" />
+		<result column="feed_time" property="time" />
+
+		<association property="train" column="tra_id" select="cn.hrms.train.entity.Train.findTraById"/>
+	</resultMap>
+</mapper>

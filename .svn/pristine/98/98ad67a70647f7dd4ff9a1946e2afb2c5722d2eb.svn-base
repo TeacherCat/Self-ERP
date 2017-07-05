@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.recruit.entity.Resumes">
+
+	<resultMap type="cn.hrms.recruit.entity.Resumes" id="resumesMap">
+		<id column="res_id" property="id" />
+		<result column="res_name" property="name" />
+		<result column="res_sex" property="sex" />
+		<result column="res_age" property="age" />
+		<result column="res_education" property="education" />
+		<result column="res_telephone" property="telephone" />
+		<result column="res_data" property="data" />
+		<result column="res_registrar" property="registrar" />
+		<result column="res_time" property="time" />
+		<result column="res_state" property="state" />
+		<association property="releases" column="res_rele_id" select="cn.hrms.recruit.entity.Releases.findReleasesById"/>
+	</resultMap>
+	
+	<!-- 根据编号查询唯一简历对象 -->
+	<select id="findResumesById" resultMap="resumesMap" >
+		select * from resumes where res_id = #{id}
+	</select>
+	
+	<!-- 按条件分页查询简历 -->
+	<select id="findResumes" resultMap="resumesMap" parameterType="map">
+		select * from resumes
+		<where>
+			<if test="resumes.id != null">
+				and res_id = #{resumes.id}
+			</if>
+			<if test="resumes.name != null">
+				and res_name like concat(concat("%",#{resumes.name}),"%")
+			</if>
+			<if test="resumes.sex != null">
+				and res_sex = #{resumes.sex}
+			</if>
+			<if test="resumes.age != null and resumes.age==1">
+				and 26 > res_age
+			</if>
+			<if test="resumes.age != null and resumes.age==2">
+				and res_age between 26 and 30
+			</if>
+			<if test="resumes.age != null and resumes.age==3">
+				and res_age between 31 and 40
+			</if>
+			<if test="resumes.age != null and resumes.age==4">
+				and res_age > 40
+			</if>
+			<if test="resumes.education != null">
+				and res_education = #{resumes.education}
+			</if>
+			<if test="resumes.state != null">
+				and res_state = #{resumes.state}
+			</if>
+		</where>
+		ORDER BY (res_time) DESC LIMIT #{start},#{size}
+	</select>
+
+	<!-- 查询总条数 -->
+	<select id="findTotalCount" parameterType="cn.hrms.recruit.entity.Resumes" resultType="int" >
+		SELECT COUNT(res_id) FROM resumes
+		<where>
+			<if test="id != null">
+				and res_id = #{id}
+			</if>
+			<if test="name != null">
+				and res_name like concat(concat("%",#{name}),"%")
+			</if>
+			<if test="sex != null">
+				and res_sex = #{sex}
+			</if>
+			<if test="age != null and age==1">
+				and 26 > res_age
+			</if>
+			<if test="age != null and age==2">
+				and res_age between 26 and 30
+			</if>
+			<if test="age != null and age==3">
+				and res_age between 31 and 40
+			</if>
+			<if test="age != null and age==4">
+				and res_age > 40
+			</if>
+			<if test="education != null">
+				and res_education = #{education}
+			</if>
+			<if test="state != null">
+				and res_state = #{state}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 新增简历 -->
+	<insert id="addResumes" parameterType="cn.hrms.recruit.entity.Resumes">
+		INSERT INTO resumes(res_rele_id,res_name,res_sex,res_age,res_education,res_telephone,res_data,res_registrar,res_time,res_state)
+		VALUES(#{releases.id},#{name},#{sex},#{age},#{education},#{telephone},#{data},#{registrar},#{time},#{state})
+	</insert>
+	
+	<!-- 修改简历 -->
+	<update id="updResumes" parameterType="cn.hrms.recruit.entity.Resumes">
+		UPDATE resumes SET res_rele_id=#{releases.id},res_name=#{name},res_sex=#{sex},res_age=#{sex},res_education=#{education},res_telephone=#{telephone},
+		res_data=#{data},res_registrar=#{registrar},res_time=#{time},res_state=#{state}, WHERE res_id=#{id}
+	</update>
+	
+	<!-- 删除简历 -->
+	<delete id="delResumes" parameterType="int">
+		DELETE FROM resumes WHERE res_id = #{id}
+	</delete>
+	
+</mapper>

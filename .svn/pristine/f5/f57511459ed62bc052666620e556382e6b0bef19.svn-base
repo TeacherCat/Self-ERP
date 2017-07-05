@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.pay.entity.Standard">
+	<select id="findStaById" resultType="cn.hrms.pay.entity.Standard">
+		select * from standard where stan_id = #{id}
+	</select>
+</mapper>

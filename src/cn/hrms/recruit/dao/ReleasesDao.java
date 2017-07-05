@@ -1,0 +1,58 @@
+package cn.hrms.recruit.dao;
+
+import java.util.List;
+
+import cn.hrms.recruit.entity.Releases;
+import cn.hrms.util.Page;
+
+public interface ReleasesDao {
+
+	/**
+	 * 根据编号查询唯一职位发布对象
+	 * @param id 发布编号
+	 * @return
+	 */
+	public Releases findReleasesByID(Integer id);
+	
+	/**
+	 * 查询所有职位发布
+	 * @return
+	 */
+	public List<Releases> findAllReleases();
+	
+	/**
+	 * 按条件分页查询职位发布对象
+	 * @param releases 查询条件
+	 * @param page 分页对象
+	 * @return
+	 */
+	public List<Releases> findReleases(Releases releases, Page<Releases> page);
+	
+	/**
+	 * 查询总条数
+	 * @param releases 查询条件
+	 * @return
+	 */
+	public Integer findTotalCount(Releases releases);
+	
+	/**
+	 * 新增职位发布
+	 * @param releases
+	 * @return
+	 */
+	public Integer addReleases(Releases releases);
+	
+	/**
+	 * 修改职位发布
+	 * @param releases
+	 * @return
+	 */
+	public Integer updReleases(Releases releases);
+	
+	/**
+	 * 删除职位发布
+	 * @param id
+	 * @return
+	 */
+	public Integer delReleases(Integer id);
+}

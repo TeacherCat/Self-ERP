@@ -1,0 +1,342 @@
+package cn.hrms.recruit.entity;
+
+import java.io.Serializable;
+import java.util.Date;
+
+/*
+ * 简历
+ */
+public class Resume implements Serializable {
+
+	private static final long serialVersionUID = 7601376674636085665L;
+	
+	/*
+	 * 简历编号
+	 */
+	private Integer id;
+	
+	/*
+	 * 发布状态
+	 */
+	private Release rele;
+	
+	/*
+	 * 姓名
+	 */
+	private String name;
+	
+	/*
+	 * 性别
+	 */
+	private String sex;
+	
+	/*
+	 * 身份证号
+	 */
+	private String identityCard;
+	
+	/*
+	 * 联系电话
+	 */
+	private String telephone;
+	
+	/*
+	 * 邮箱
+	 */
+	private String email;
+	
+	/*
+	 * 籍贯
+	 */
+	private String place;
+	
+	/*
+	 * 住址
+	 */
+	private String address;
+	
+	/*
+	 * 政治面貌
+	 */
+	private String politicsStatus;
+	
+	/*
+	 * 学历
+	 */
+	private String education;
+	
+	/*
+	 * 毕业院校
+	 */
+	private String school;
+	
+	/*
+	 * 专业
+	 */
+	private String specialty;
+	
+	/*
+	 * 工作年限
+	 */
+	private String ageLimit;
+	
+	/*
+	 * 是否在职
+	 */
+	private String job;
+	
+	/*
+	 * 是否应届生
+	 */
+	private String freshGraduate;
+	
+	/*
+	 * 薪酬要求
+	 */
+	private String salaryRequier;
+	
+	/*
+	 * 招聘类型
+	 */
+	private String joinType;
+	
+	/*
+	 * 个人履历
+	 */
+	private String record;
+	
+	/*
+	 * 简历附件
+	 */
+	private String accessory;
+	
+	/*
+	 * 是否推荐面试
+	 */
+	private String recommend_interview;
+	
+	/*
+	 * 推荐人
+	 */
+	private String referral;
+	
+	/*
+	 * 推荐时间
+	 */
+	private String recommend_time;
+	
+	/*
+	 * 推荐意见
+	 */
+	private String recommend_idea;
+	
+	/*
+	 * 登记时间
+	 */
+	private Date time;
+	
+	/*
+	 * 简历状态
+	 */
+	private Date state;
+	
+	public Resume(Integer id, Release rele, String name, String sex,
+			String identityCard, String telephone, String email, String place,
+			String address, String politicsStatus, String education,
+			String school, String specialty, String ageLimit, String job,
+			String freshGraduate, String salaryRequier, String joinType,
+			String record, String accessory, String recommend_interview,
+			String referral, String recommend_time, String recommend_idea,
+			Date time, Date state) {
+		super();
+		this.id = id;
+		this.rele = rele;
+		this.name = name;
+		this.sex = sex;
+		this.identityCard = identityCard;
+		this.telephone = telephone;
+		this.email = email;
+		this.place = place;
+		this.address = address;
+		this.politicsStatus = politicsStatus;
+		this.education = education;
+		this.school = school;
+		this.specialty = specialty;
+		this.ageLimit = ageLimit;
+		this.job = job;
+		this.freshGraduate = freshGraduate;
+		this.salaryRequier = salaryRequier;
+		this.joinType = joinType;
+		this.record = record;
+		this.accessory = accessory;
+		this.recommend_interview = recommend_interview;
+		this.referral = referral;
+		this.recommend_time = recommend_time;
+		this.recommend_idea = recommend_idea;
+		this.time = time;
+		this.state = state;
+	}
+	
+	public Resume() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public Release getRele() {
+		return rele;
+	}
+	public void setRele(Release rele) {
+		this.rele = rele;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getSex() {
+		return sex;
+	}
+	public void setSex(String sex) {
+		this.sex = sex;
+	}
+	public String getIdentityCard() {
+		return identityCard;
+	}
+	public void setIdentityCard(String identityCard) {
+		this.identityCard = identityCard;
+	}
+	public String getTelephone() {
+		return telephone;
+	}
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPlace() {
+		return place;
+	}
+	public void setPlace(String place) {
+		this.place = place;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getPoliticsStatus() {
+		return politicsStatus;
+	}
+	public void setPoliticsStatus(String politicsStatus) {
+		this.politicsStatus = politicsStatus;
+	}
+	public String getEducation() {
+		return education;
+	}
+	public void setEducation(String education) {
+		this.education = education;
+	}
+	public String getSchool() {
+		return school;
+	}
+	public void setSchool(String school) {
+		this.school = school;
+	}
+	public String getSpecialty() {
+		return specialty;
+	}
+	public void setSpecialty(String specialty) {
+		this.specialty = specialty;
+	}
+	public String getAgeLimit() {
+		return ageLimit;
+	}
+	public void setAgeLimit(String ageLimit) {
+		this.ageLimit = ageLimit;
+	}
+	public String getJob() {
+		return job;
+	}
+	public void setJob(String job) {
+		this.job = job;
+	}
+	public String getFreshGraduate() {
+		return freshGraduate;
+	}
+	public void setFreshGraduate(String freshGraduate) {
+		this.freshGraduate = freshGraduate;
+	}
+	public String getSalaryRequier() {
+		return salaryRequier;
+	}
+	public void setSalaryRequier(String salaryRequier) {
+		this.salaryRequier = salaryRequier;
+	}
+	public String getJoinType() {
+		return joinType;
+	}
+	public void setJoinType(String joinType) {
+		this.joinType = joinType;
+	}
+	public String getRecord() {
+		return record;
+	}
+	public void setRecord(String record) {
+		this.record = record;
+	}
+	public String getAccessory() {
+		return accessory;
+	}
+	public void setAccessory(String accessory) {
+		this.accessory = accessory;
+	}
+	public String getRecommend_interview() {
+		return recommend_interview;
+	}
+	public void setRecommend_interview(String recommend_interview) {
+		this.recommend_interview = recommend_interview;
+	}
+	public String getReferral() {
+		return referral;
+	}
+	public void setReferral(String referral) {
+		this.referral = referral;
+	}
+	public String getRecommend_time() {
+		return recommend_time;
+	}
+	public void setRecommend_time(String recommend_time) {
+		this.recommend_time = recommend_time;
+	}
+	public String getRecommend_idea() {
+		return recommend_idea;
+	}
+	public void setRecommend_idea(String recommend_idea) {
+		this.recommend_idea = recommend_idea;
+	}
+	public Date getTime() {
+		return time;
+	}
+	public void setTime(Date time) {
+		this.time = time;
+	}
+	public Date getState() {
+		return state;
+	}
+	public void setState(Date state) {
+		this.state = state;
+	}
+
+}

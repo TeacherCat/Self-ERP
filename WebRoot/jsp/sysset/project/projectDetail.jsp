@@ -1,0 +1,34 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>薪酬项目详情</title>
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/plugins/layui/css/layui.css" />
+	<script type="text/javascript" src="<%=request.getContextPath()%>/plugins/layui/layui.js"></script>
+</head>
+
+<body>
+	<div style="width:500px;margin:20px auto;">
+		
+		<div class="layui-form-item">
+			<label class="layui-form-label">项目编号：</label>
+			<label style="line-height:38px;">${project.id }</label>
+		</div>
+		
+		<div class="layui-form-item">
+			<label class="layui-form-label">项目名称：</label>
+			<label style="line-height:38px;">${project.name }</label>
+		</div>
+		
+		<div class="layui-form-item">
+			<label class="layui-form-label">项目描述：</label>
+			<label style="line-height:38px;">${project.desc }</label>
+		</div>
+		
+		<a href="projectList.do" class="layui-btn layui-btn-radius" style="margin:20px 100px;">返&nbsp;&nbsp;回</a>
+		
+	</div>
+</body>
+</html>

@@ -1,0 +1,10 @@
+package cn.hrms.biz;
+import java.util.List;
+import cn.hrms.entity.User;
+
+public interface UserBiz {
+
+	public List<User> findUser();
+	
+	public int addUser(User user);
+}

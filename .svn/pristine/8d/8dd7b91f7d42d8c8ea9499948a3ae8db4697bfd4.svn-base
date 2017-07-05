@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.sysset.entity.Dept">
+	<resultMap type="cn.hrms.sysset.entity.Dept" id="deptMap">
+		<result property="id" column="dept_id"/>
+		<result property="name" column="dept_name"/>
+		<result property="desc" column="dept_desc"/>
+		<result property="remarks" column="dept_remarks"/>
+		<result property="phone" column="dept_phone"/>
+	</resultMap>
+	
+	<select id="findDeptById" resultMap="deptMap">
+		select * from dept where dept_id = #{id}
+	</select>
+	
+	<select id="findDeptByName" resultMap="deptMap">
+		select * from dept
+		<where>
+			<if test="name != null">
+				and dept_name like concat(concat("%", #{name}), "%")
+			</if>
+		</where>
+	</select>
+	
+	<select id="findDept" resultMap="deptMap" parameterType="map">
+		select * from dept
+		<where>
+			<if test="dept.name != null">
+				and dept_name like concat(concat("%", #{dept.name}), "%")
+			</if>
+			limit #{start}, #{pageSize}
+		</where>
+	</select>
+	
+	<select id="deptCount" resultType="int">
+		select count(*) from dept
+		<where>
+			<if test="dept.name != null">
+				and dept_name like concat(concat("%", #{dept.name}), "%")
+			</if>
+		</where>
+	</select>
+	
+	<insert id="addDept" parameterType="cn.hrms.sysset.entity.Dept">
+		insert into dept(dept_name,dept_desc,dept_remarks,dept_phone)
+		values(#{name},#{desc},#{remarks},#{phone})
+	</insert>
+	
+	<delete id="delDept" parameterType="cn.hrms.sysset.entity.Dept">
+		delete from dept where dept_id = #{id}
+	</delete>
+	
+	<update id="updDept" parameterType="cn.hrms.sysset.entity.Dept">
+		update dept set dept_id = #{id}, dept_name = #{name}, dept_desc = #{desc},
+						dept_remarks = #{remarks}, dept_phone = #{phone}
+		where dept_id = #{id}
+	</update>
+</mapper>

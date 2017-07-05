@@ -1,0 +1,95 @@
+package cn.hrms.sysset.entity;
+
+import java.io.Serializable;
+
+/*
+ * 部门
+ */
+public class Dept implements Serializable{
+	
+	private static final long serialVersionUID = -2184601973927036277L;
+	
+	/*
+	 * 部门编号
+	 */
+	private Integer id;
+	
+	/*
+	 * 部门全称
+	 */
+	private String name;
+	
+	/*
+	 * 部门描述
+	 */
+	private String desc;
+	
+	/*
+	 * 备注
+	 */
+	private String remarks;
+	
+	/*
+	 * 部门电话
+	 */
+	private String phone;
+	
+	/*
+	 * 父级部门
+	 */
+	private Integer parent;
+	
+	public Dept(Integer id, String name, String desc, String remarks,
+			String phone, Integer parent) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.desc = desc;
+		this.remarks = remarks;
+		this.phone = phone;
+		this.parent = parent;
+	}
+	
+	public Dept() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getDesc() {
+		return desc;
+	}
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+	public String getRemarks() {
+		return remarks;
+	}
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public Integer getParent() {
+		return parent;
+	}
+	public void setParent(Integer parent) {
+		this.parent = parent;
+	}
+	
+}

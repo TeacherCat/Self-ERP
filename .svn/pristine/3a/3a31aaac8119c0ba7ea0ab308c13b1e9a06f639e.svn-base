@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.sysset.entity.Role">
+	<select id="findRoleById" resultType="cn.hrms.sysset.entity.Role">
+		select * from role where role_id = #{id}
+	</select>
+</mapper>

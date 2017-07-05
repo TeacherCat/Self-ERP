@@ -1,0 +1,151 @@
+package cn.hrms.pay.entity;
+
+import java.io.Serializable;
+
+import cn.hrms.personnel.entity.Archive;
+
+/*
+ * 薪酬发放详情
+ */
+public class ProvideDetails implements Serializable {
+
+	private static final long serialVersionUID = 3873621056464832694L;
+	
+	/*
+	 * 详情编号
+	 */
+	private Integer id;
+	
+	/*
+	 * 发放编号
+	 */
+	private Provide prov;
+	
+	/*
+	 * 档案编号
+	 */
+	private Archive arc;
+	
+	/*
+	 * 标准工资
+	 */
+	private Double standard;
+	
+	/*
+	 * 绩效工资
+	 */
+	private Double performance;
+	
+	/*
+	 * 出差补助
+	 */
+	private Double evection;
+	
+	/*
+	 * 加班补助
+	 */
+	private Double overtime;
+	
+	/*
+	 * 应扣金额
+	 */
+	private Double deduct;
+	
+	/*
+	 * 发放总额
+	 */
+	private Double amount;
+
+	public ProvideDetails(Integer id, Provide prov, Archive arc,
+			Double standard, Double performance, Double evection,
+			Double overtime, Double deduct, Double amount) {
+		super();
+		this.id = id;
+		this.prov = prov;
+		this.arc = arc;
+		this.standard = standard;
+		this.performance = performance;
+		this.evection = evection;
+		this.overtime = overtime;
+		this.deduct = deduct;
+		this.amount = amount;
+	}
+
+	public ProvideDetails() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Provide getProv() {
+		return prov;
+	}
+
+	public void setProv(Provide prov) {
+		this.prov = prov;
+	}
+
+	public Archive getArc() {
+		return arc;
+	}
+
+	public void setArc(Archive arc) {
+		this.arc = arc;
+	}
+
+	public Double getStandard() {
+		return standard;
+	}
+
+	public void setStandard(Double standard) {
+		this.standard = standard;
+	}
+
+	public Double getPerformance() {
+		return performance;
+	}
+
+	public void setPerformance(Double performance) {
+		this.performance = performance;
+	}
+
+	public Double getEvection() {
+		return evection;
+	}
+
+	public void setEvection(Double evection) {
+		this.evection = evection;
+	}
+
+	public Double getOvertime() {
+		return overtime;
+	}
+
+	public void setOvertime(Double overtime) {
+		this.overtime = overtime;
+	}
+
+	public Double getDeduct() {
+		return deduct;
+	}
+
+	public void setDeduct(Double deduct) {
+		this.deduct = deduct;
+	}
+
+	public Double getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Double amount) {
+		this.amount = amount;
+	}
+
+}

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.pay.entity.StandardAudit">
+	<resultMap type="cn.hrms.pay.entity.StandardAudit" id="staAudMap">
+		<result column="sa_result" property="result" />
+		<result column="sa_opinion" property="opinion" />
+		<result column="sa_person" property="person" />
+		<result column="sa_time" property="time" />
+		
+		<association property="standard" column="sa_stan_id" select="cn.hrms.pay.entity.Standard.findStanById"/>
+	</resultMap>
+	
+	<!-- 根据薪酬标准编号查询薪酬标准审核 -->
+	<select id="findStaAudById" resultMap="staAudMap">
+		select * from standard_audit where sa_stan_id = #{standard.id}
+	</select>
+	
+	<!-- 新增薪酬标准审核 -->
+	<insert id="addStaAud" parameterType="cn.hrms.pay.entity.StandardAudit">
+		insert into standard_audit(sa_stan_id,sa_opinion,sa_person,sa_time)
+		values(#{standard.id},#{opinion},#{person},(select now()))
+	</insert>
+	
+	<!-- 删除薪酬标准审核 -->
+	<delete id="delStaAud" parameterType="cn.hrms.pay.entity.StandardAudit">
+		delete from standard_audit where sa_stan_id = #{standard.id}
+	</delete>
+	
+	<!-- 修改薪酬标准审核 -->
+	<update id="updStaAud" parameterType="cn.hrms.pay.entity.StandardAudit">
+		update standard_audit set sa_opinion = #{opinion}
+		where sa_stan_id = #{standard.id}
+	</update>
+</mapper>

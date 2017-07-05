@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.recruit.entity.Release">
+	<resultMap type="cn.hrms.recruit.entity.Release" id="releMap">
+		<result column="rele_id" property="id" />
+		<result column="rele_type" property="type" />
+		<result column="rele_count" property="count" />
+		<result column="rele_edu_requier" property="eduRequier" />
+		<result column="rele_age_limit" property="ageLimit" />
+		<result column="rele_desc" property="desc" />
+		<result column="rele_join_requier" property="joinRequier" />
+		<result column="rele_registrar" property="registrar" />
+		<result column="rele_start_time" property="startTime" />
+		<result column="rele_end_time" property="endTime" />
+		
+		<association property="dept" column="rele_dept_id" select="cn.hrms.sysset.entity.Dept.findDeptById"/>
+		<association property="post" column="rele_post_id" select="cn.hrms.sysset.entity.Post.findPostById"/>
+	</resultMap>
+	
+	<select id="findReleById" resultType="cn.hrms.recruit.entity.Release">
+		select * from release where rele_id = #{id}
+	</select>
+</mapper>

@@ -1,0 +1,26 @@
+package cn.hrms.train.biz.impl;
+import java.util.List;
+
+import cn.hrms.train.biz.TrainBiz;
+import cn.hrms.train.dao.TrainDao;
+import cn.hrms.train.entity.Train;
+import cn.hrms.util.Page;
+
+public class TrainBizImpl implements TrainBiz{
+
+	private TrainDao trainDao;
+	
+	public List<Train> findTrain(Train train, Page<Train> page) {
+		return trainDao.findTrain(train, page);
+	}
+
+	public Integer findTotalCount(Train train){
+		return trainDao.findTotalCount(train);
+	}
+
+	
+	public void setTrainDao(TrainDao trainDao) {
+		this.trainDao = trainDao;
+	}
+	
+}

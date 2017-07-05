@@ -1,0 +1,95 @@
+package cn.hrms.sysset.action;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import cn.hrms.sysset.biz.RoleBiz;
+import cn.hrms.sysset.biz.UsersBiz;
+import cn.hrms.sysset.entity.Users;
+import cn.hrms.util.Page;
+
+@Controller("usersAction")
+public class UsersAction {
+
+	private UsersBiz usersBiz;
+	private RoleBiz roleBiz;
+	
+	@RequestMapping("login")
+	public String login(Users users,String number,Model model,HttpSession session){
+		/*String srand = session.getAttribute("number").toString();
+		String msg = "";
+		if(!srand.equals(number)){
+			msg = "验证码错误!";
+			model.addAttribute("msg", msg);
+			return "login";
+		}
+		Users u = usersBiz.loginUsers(users);
+		if(u==null){
+			msg = "用户名或密码错误!";
+			model.addAttribute("msg", msg);
+			return "login";
+		}*/
+		//session.setAttribute("users", new Users("admin", "123456"));
+		return "index";
+	}
+	
+	@RequestMapping("usersList")
+	public String usersList(Users users, Integer currPageNo, Model model){
+		if(users.getRole() != null && users.getRole().getId() == 0){
+			users.setRole(null);
+		}
+		Page<Users> page = new Page<Users>();
+		page.setTotalCount(usersBiz.usersCount(users));
+		page.setPageTotalCount();
+		if(currPageNo != null){
+			page.setCurrPageNo(currPageNo);
+		}
+		page.setPageList(usersBiz.findUsers(users, page));
+		model.addAttribute("page", page);
+		model.addAttribute("roleList", roleBiz.findRole());
+		return "jsp/sysset/users/usersList";
+	}
+	
+	@RequestMapping("usersAdd")
+	public String usersAdd(Users users, Integer res, Model model){
+		if(res == null){
+			usersBiz.addUsers(users);
+		}
+		model.addAttribute("roleList", roleBiz.findRole());
+		return "jsp/sysset/users/usersAdd";
+	}
+	
+	@RequestMapping("usersDel")
+	public String usersDel(Users users, Model model){
+		usersBiz.delUsers(users.getName());
+		return "jsp/sysset/users/usersList";
+	}
+	
+	@RequestMapping("usersUpd")
+	public String usersUpd(Users users, Integer res, Model model){
+		if(res == null){
+			usersBiz.updUsers(users);
+		}
+		model.addAttribute("users", usersBiz.findUsersById(users.getName()));
+		model.addAttribute("roleList", roleBiz.findRole());
+		return "jsp/sysset/users/usersUpd";
+	}
+	
+	@RequestMapping("usersDetail")
+	public String usersDetail(String name, Model model){
+		model.addAttribute("users", usersBiz.findUsersById(name));
+		model.addAttribute("roleList", roleBiz.findRole());
+		return "jsp/sysset/users/usersDetail";
+	}
+	
+	public void setUsersBiz(UsersBiz usersBiz) {
+		this.usersBiz = usersBiz;
+	}
+
+	public void setRoleBiz(RoleBiz roleBiz) {
+		this.roleBiz = roleBiz;
+	}
+	
+}

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.pay.entity.Standard">
+	<resultMap type="cn.hrms.pay.entity.Standard" id="stanMap">
+		<result property="id" column="stan_id" />
+		<result property="name" column="stan_name" />
+		<result property="amount" column="stan_amount" />
+		<result property="registrar" column="stan_registrar" />
+		<result property="time" column="stan_time" />
+		<result property="state" column="stan_state" />
+	</resultMap>
+	
+	<!-- 根据编号查询薪酬标准 -->
+	<select id="findStanById" resultMap="stanMap">
+		select * from standard where stan_id = #{id}
+	</select>
+	
+	<!-- 根据名称、总额、状态、时间倒序分页查询薪酬标准 -->
+	<select id="findStan" resultMap="stanMap" parameterType="map">
+		select * from standard
+		<where>
+			<if test="stan.name != null">
+				and stan_name like concat(concat("%",#{stan.name}),"%")
+			</if>
+			<if test="stan.amount == 1">
+				and 5000 >= stan_amount
+			</if>
+			<if test="stan.amount == 2">
+				and stan_amount between 5000 and 10000
+			</if>
+			<if test="stan.amount == 3">
+				and stan_amount between 10000 and 20000
+			</if>
+			<if test="stan.amount == 4">
+				and stan_amount >= 20000
+			</if>
+			<if test="stan.state != null">
+				and stan_state = #{stan.state}
+			</if>
+			<if test="stan.time != null and endTime == null">
+				and stan_time >= #{stan.time}
+			</if>
+			<if test="endTime != null and stan.time == null">
+				and #{endTime} >= stan_time 
+			</if>
+			<if test="stan.time != null and endTime != null">
+				and stan_time between #{stan.time} and #{endTime} 
+			</if>
+		</where>
+		order by (stan_time) desc limit #{start},#{pageSize}
+	</select>
+	
+	<!-- 根据名称、总额、状态、时间查询总条数 -->
+	<select id="stanCount" resultType="int" parameterType="map">
+		select count(*) from standard 
+		<where>
+			<if test="stan.name != null">
+				and stan_name like concat(concat("%",#{stan.name}),"%")
+			</if>
+			<if test="stan.amount == 1">
+				and stan_amount >= 5000 
+			</if>
+			<if test="stan.amount == 2">
+				and stan_amount between 5000 and 10000
+			</if>
+			<if test="stan.amount == 3">
+				and stan_amount between 10000 and 20000
+			</if>
+			<if test="stan.amount == 4">
+				and 20000 >= stan_amount
+			</if>
+			<if test="stan.state != null">
+				and stan_state = #{stan.state}
+			</if>
+			<if test="stan.time != null and endTime == null">
+				and stan_time >= #{stan.time}
+			</if>
+			<if test="endTime != null and stan.time == null">
+				and #{endTime} >= stan_time 
+			</if>
+			<if test="stan.time != null and endTime != null">
+				and stan_time between #{stan.time} and #{endTime} 
+			</if>
+		</where>
+	</select>
+	
+	<!-- 新增薪酬标准 -->
+	<insert id="addStan" parameterType="cn.hrms.pay.entity.Standard">
+		insert into standard(stan_name,stan_amount,stan_registrar,stan_time,stan_state)
+		values(#{name},#{amount},#{registrar},(select now()),#{state})
+	</insert>
+	
+	<!-- 删除薪酬标准 -->
+	<delete id="delStan" parameterType="cn.hrms.pay.entity.Standard">
+		delete from standard where stan_id = #{id}
+	</delete>
+	
+	<!-- 修改薪酬标准 -->
+	<update id="updStan" parameterType="cn.hrms.pay.entity.Standard">
+		update standard set stan_name = #{name}, stan_amount = #{amount}, stan_state = #{state}
+		where stan_id = #{id}
+	</update>
+</mapper>

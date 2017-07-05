@@ -1,0 +1,86 @@
+package cn.hrms.recruit.action;
+
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import cn.hrms.recruit.biz.ReleasesBiz;
+import cn.hrms.recruit.biz.ResumesBiz;
+import cn.hrms.recruit.entity.Releases;
+import cn.hrms.recruit.entity.Resumes;
+import cn.hrms.util.Final;
+import cn.hrms.util.Page;
+import cn.hrms.util.Tools;
+
+@Controller
+public class ResumesAction {
+
+	private ResumesBiz resumesBiz;
+	private ReleasesBiz releasesBiz;
+	
+	/**
+	 * 简历列表
+	 * @param resumes 简历对象
+	 * @param currPageNo 当前页
+	 * @param model 传值
+	 * @return
+	 */
+	@RequestMapping("resumesList")
+	public String resumesList(Resumes resumes, Integer currPageNo, Model model){
+		if("0".equals(resumes.getSex())){
+			resumes.setSex(null);
+		}
+		if("0".equals(resumes.getAge())){
+			resumes.setAge(null);
+		}
+		if("0".equals(resumes.getEducation())){
+			resumes.setEducation(null);
+		}
+		if("0".equals(resumes.getState())){
+			resumes.setState(null);
+		}
+		Page<Resumes> page = new Page<Resumes>();
+		page.setTotalCount(resumesBiz.findTotalCount(resumes));
+		page.setPageTotalCount();
+		if(currPageNo != null){
+			page.setCurrPageNo(currPageNo);
+		}
+		page.setPageList(resumesBiz.findResumes(resumes, page));
+		model.addAttribute("page", page);
+		model.addAttribute("resumes", resumes);
+		return "jsp/recruit/resumes/resumesList";
+	}
+	
+	/**
+	 * 简历登记
+	 * @param resumes
+	 * @param num
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("addResumes")
+	public String addResumes(Resumes resumes, Integer num, Model model){
+		if(num != null){
+			List<Releases> releasesList = releasesBiz.findReleases(new Releases(), new Page<Releases>());
+			model.addAttribute("releasesList", releasesList);
+			return "jsp/recruit/resumes/resumesAdd";
+		}else{
+			resumes.setTime(Tools.getCurrTime());
+			resumesBiz.addResumes(resumes);
+			model.addAttribute("msg", Final.addSuccess);
+			return resumesList(new Resumes(), 1, model);
+		}
+	}
+	
+	
+	
+	public void setResumesBiz(ResumesBiz resumesBiz) {
+		this.resumesBiz = resumesBiz;
+	}
+	public void setReleasesBiz(ReleasesBiz releasesBiz) {
+		this.releasesBiz = releasesBiz;
+	}
+	
+}

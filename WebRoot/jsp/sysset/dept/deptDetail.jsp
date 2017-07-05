@@ -1,0 +1,47 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>部门详情</title>
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/plugins/layui/css/layui.css" />
+	<script type="text/javascript" src="<%=request.getContextPath()%>/plugins/layui/layui.js"></script>
+</head>
+
+<body>
+	<div style="width:500px;margin:20px auto;">
+		
+		<div class="layui-form-item">
+			<label class="layui-form-label">部门名称：</label>
+			<div class="layui-input-inline">
+				<label style="line-height:38px;">${dept.name }</label>
+			</div>
+		</div>
+		
+		<div class="layui-form-item">
+			<label class="layui-form-label">部门描述：</label>
+			<div class="layui-input-block">
+				<label style="line-height:38px;">${dept.desc }</label>
+			</div>
+		</div>
+		
+		<div class="layui-form-item">
+			<label class="layui-form-label">备&#12288;&#12288;注：</label>
+			<div class="layui-input-block">
+				<label style="line-height:38px;">${dept.remarks }</label>
+			</div>
+		</div>
+		
+		<div class="layui-form-item">
+			<label class="layui-form-label">部门电话：</label>
+			<div class="layui-input-inline">
+				<label style="line-height:38px;">${dept.phone }</label>
+			</div>
+		</div>
+		
+		<a href="deptList.do" class="layui-btn layui-btn-radius" style="margin-top:20px;margin-left:150px;">返&nbsp;&nbsp;回</a>
+		
+	</div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+package cn.hrms.test;
+import java.util.List;
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import cn.hrms.dao.UserDao;
+import cn.hrms.entity.User;
+
+public class Test {
+	public static void main(String[] args) {
+		
+		ClassPathXmlApplicationContext cpa = new ClassPathXmlApplicationContext("applicationContext.xml");
+		UserDao userDao = cpa.getBean("userDao",UserDao.class);
+		List<User> userList = userDao.findUser();
+		
+		System.out.println(userList.size());
+		
+		for (User user : userList) {
+			System.out.println(user.getId()+"---"+user.getName());
+		}
+	}
+}

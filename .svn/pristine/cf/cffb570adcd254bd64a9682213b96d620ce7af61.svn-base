@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.recruit.entity.Hire">
+	<resultMap type="cn.hrms.recruit.entity.Hire" id="hireMap">
+		<result column="hire_preson" property="person" />
+		<result column="hire_time" property="time" />
+		<result column="hire_decision" property="decision" />
+
+		<association property="resume" column="hire_res_id" select="cn.hrms.recruit.entity.Resume.findResById"/>
+	</resultMap>
+</mapper>

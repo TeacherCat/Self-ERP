@@ -1,0 +1,82 @@
+
+
+/* 用户角色表 */
+INSERT INTO role(role_name) VALUES('人事专员');
+INSERT INTO role(role_name) VALUES('人事经理');
+INSERT INTO role(role_name) VALUES('薪酬专员');
+INSERT INTO role(role_name) VALUES('薪酬经理');
+INSERT INTO role(role_name) VALUES('人力资源负责人');
+
+
+/* 部门表 */
+INSERT INTO dept(dept_name,dept_desc,dept_phone) VALUES('项目开发部','项目开发部...','0755-26666666');
+INSERT INTO dept(dept_name,dept_desc,dept_phone) VALUES('项目测试部','项目测试部...','0755-22566201');
+INSERT INTO dept(dept_name,dept_desc,dept_phone) VALUES('产品营销部','产品营销部...','0755-27720210');
+INSERT INTO dept(dept_name,dept_desc,dept_phone) VALUES('产品推广部','产品推广部...','0755-28200130');
+INSERT INTO dept(dept_name,dept_desc,dept_phone) VALUES('售后服务部','售后服务部...','0755-23001023');
+INSERT INTO dept(dept_name,dept_desc,dept_phone) VALUES('人力资源部','人力资源部...','0755-23361020');
+INSERT INTO dept(dept_name,dept_desc,dept_phone) VALUES('财务部','财务部...','0755-23361020');
+INSERT INTO dept(dept_name,dept_desc,dept_phone) VALUES('总裁办','总裁办...','0755-28888888');
+
+
+/* 职位表 */
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('java工程师',1,'java工程师......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('C#工程师',1,'C#工程师......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('PHP工程师',1,'PHP工程师......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('前端设计员',1,'前端设计员');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('UI设计员',1,'UI设计员......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('项目经理',1,'项目经理......');
+
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('单元测试员',2,'单元测试员......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('模块测试员',2,'模块测试员......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('项目测试员',2,'项目测试员......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('测试主管',2,'测试主管......');
+
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('产品专员',3,'产品专员......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('营销专员',3,'营销专员......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('产品主管',3,'产品主管......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('营销主管',3,'营销主管......');
+
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('国内推广员',4,'国内推广员......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('国际推广员',4,'国际推广员......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('国内推广经理',4,'国内推广经理......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('国际推广经理',4,'国际推广经理......');
+
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('华中售后员',5,'华中售后员......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('华南售后员',5,'华南售后员......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('华北售后员',5,'华北售后员......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('售后经理',5,'售后经理......');
+
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('人事专员',6,'人事专员......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('人事经理',6,'人事经理......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('薪酬专员',6,'薪酬专员......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('薪酬经理',6,'薪酬经理......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('人力资源负责人',6,'人力资源负责人......');
+
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('财务专员',7,'财务专员......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('财务经理',7,'财务经理......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('财务部负责人',7,'财务部负责人......');
+
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('总经理',8,'总经理......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('副总裁',8,'副总裁......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('总裁',8,'总裁......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('首席执行官',8,'首席执行官......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('首席财务官',8,'首席财务官......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('董事成员',8,'董事成员......');
+INSERT INTO post(post_name,post_dept_id,post_desc) VALUES('董事长',8,'董事长......');
+
+
+/* 用户表 */
+INSERT INTO users VALUES('liuting','刘婷','123456',1,'15812023230');
+INSERT INTO users VALUES('chenzhuo','陈卓','123456',1,'15845201254');
+INSERT INTO users VALUES('liuhuan','刘欢','123456',1,'15920123022');
+INSERT INTO users VALUES('limengting','李梦婷','123456',1,'15810002361');
+INSERT INTO users VALUES('yangyang','杨阳','123456',1,'15862001023');
+INSERT INTO users VALUES('xudan','徐丹','123456',3,'13612012013');
+INSERT INTO users VALUES('wanmengli','万梦力','123456',3,'13420225563');
+INSERT INTO users VALUES('zhouwenyu','周文宇','123456',3,'15620123022');
+INSERT INTO users VALUES('zhaoyazhi','赵雅芝','123456',3,'15920887402');
+INSERT INTO users VALUES('quxiaoxiao','曲潇潇','123456',3,'15822023675');
+INSERT INTO users VALUES('zhaoya','赵雅','123456',2,'13602132025');
+INSERT INTO users VALUES('zhoumeng','周萌','123456',4,'13888992021');
+INSERT INTO users VALUES('admin','张三','123456',5,'13581310901');

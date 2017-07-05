@@ -1,0 +1,89 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>添加试题</title>
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/plugins/layui/css/layui.css" />
+	<script type="text/javascript" src="<%=request.getContextPath()%>/plugins/layui/layui.js"></script>
+</head>
+
+<body>
+	<div style="width:500px;margin:10px auto;">
+		
+		<div class="layui-form-item">
+			<label class="layui-form-label">试题名称：</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input">
+			</div>
+			<span class="msg">&nbsp;*&nbsp;</span>
+		</div>
+		
+		<div class="layui-form-item">
+			<label class="layui-form-label">试题类型：</label>
+			<select class="select">
+				<option>请选择省</option>
+				<option>开发部</option>
+				<option>市场部</option>
+				<option>福建省</option>
+			</select>
+			<span class="msg">&nbsp;*&nbsp;</span>
+		</div>
+		
+		<div class="layui-form-item">
+			<label class="layui-form-label">试题级别：</label>
+			<select class="select">
+				<option>请选择省</option>
+				<option>开发部</option>
+				<option>市场部</option>
+				<option>福建省</option>
+			</select>
+			<span class="msg">&nbsp;*&nbsp;</span>
+		</div>
+		
+		<div class="layui-form-item">
+			<label class="layui-form-label">所属部门：</label>
+			<select class="select">
+				<option>请选择省</option>
+				<option>开发部</option>
+				<option>市场部</option>
+				<option>福建省</option>
+			</select>
+			<span class="msg">&nbsp;*&nbsp;</span>
+		</div>
+		
+		<div class="layui-form-item">
+			<label class="layui-form-label">出题人：</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input">
+			</div>
+		</div>
+		
+		<div class="layui-form-item layui-form-text">
+			<label class="layui-form-label">试题内容：</label>
+			<div class="layui-input-block">
+				<textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+			</div>
+		</div>
+		
+		<div class="layui-form-item layui-form-text">
+			<label class="layui-form-label">备&nbsp;&nbsp;注：</label>
+			<div class="layui-input-block">
+				<textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+			</div>
+		</div>
+		
+		<div class="layui-form-item">
+			<label class="layui-form-label">试题附件：</label>
+			<div class="layui-input-inline">
+				<input type="file" class="layui-input">
+			</div>
+		</div>
+		
+		<input type="submit" value="添&nbsp;&nbsp;加" class="layui-btn layui-btn-radius" style="margin-top:20px;margin-left:100px;" />
+		<a href="<%=request.getContextPath()%>/jsp/sysset/topic/topicList.jsp" class="layui-btn layui-btn-radius" style="margin-top:20px">返&nbsp;&nbsp;回</a>
+		
+	</div>
+</body>
+</html>

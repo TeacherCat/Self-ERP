@@ -1,0 +1,20 @@
+package cn.hrms.dao.impl;
+
+import java.util.List;
+
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+
+import cn.hrms.dao.UserDao;
+import cn.hrms.entity.User;
+
+public class UserDaoImpl extends SqlSessionDaoSupport implements UserDao {
+
+	public List<User> findUser() {
+		return super.getSqlSession().selectList("cn.hrms.entity.User.findUser");
+	}
+
+	public int addUser(User user) {
+		return super.getSqlSession().insert("cn.hrms.entity.User.addUser", user);
+	}
+
+}

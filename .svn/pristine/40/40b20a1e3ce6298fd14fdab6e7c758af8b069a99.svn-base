@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.personnel.entity.ArchivesAudit">
+	
+	<resultMap type="cn.hrms.personnel.entity.ArchivesAudit" id="archivesAuditMap">
+		<id column="aud_id" property="id" />
+		<result column="aud_result" property="result" />
+		<result column="aud_opinion" property="opinion" />
+		<result column="aud_person" property="person" />
+		<result column="aud_time" property="time" />
+	</resultMap>
+	
+	<!-- 根据编号查询档案审核对象 -->
+	<select id="findArchivesAuditByID" resultMap="archivesAuditMap">
+		SELECT * FROM archives_audit WHERE aud_id=#{id}
+	</select>
+	
+	<!-- 添加档案审核 -->
+	<insert id="addArchivesAudit" parameterType="cn.hrms.personnel.entity.ArchivesAudit">
+		INSERT INTO archives_audit VALUES(#{id},#{result},#{opinion},#{person},#{time})
+	</insert>
+	
+	<!-- 修改档案审核 -->
+	<update id="updArchivesAudit" parameterType="cn.hrms.personnel.entity.ArchivesAudit">
+		UPDATE archives_audit SET aud_result=#{result},aud_opinion=#{opinion},aud_person=#{person},aud_time=#{time} WHERE aud_id=#{id}
+	</update>
+	
+	<!-- 删除档案审核 -->
+	<delete id="delArchivesAudit" parameterType="int">
+		DELETE FROM archives_audit WHERE aud_id = #{id}
+	</delete>
+	
+</mapper>

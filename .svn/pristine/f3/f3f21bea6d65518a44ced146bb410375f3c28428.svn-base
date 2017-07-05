@@ -1,0 +1,82 @@
+package cn.hrms.sysset.action;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import cn.hrms.sysset.biz.DeptBiz;
+import cn.hrms.sysset.biz.TopicBiz;
+import cn.hrms.sysset.entity.Dept;
+import cn.hrms.sysset.entity.Topic;
+import cn.hrms.util.Final;
+import cn.hrms.util.Page;
+
+@Controller("topicAction")
+public class TopicAction {
+	private TopicBiz topicBiz;
+	private DeptBiz deptBiz;
+	
+	@RequestMapping("topicList")
+	public String topicList(Topic topic, Integer currPageNo, Model model){
+		if(topic.getLevel() != null && topic.getLevel().equals("0")){
+			topic.setLevel(null);
+		}
+		if(topic.getDept() != null && topic.getDept().getId() == 0){
+			topic.setDept(null);
+		}
+		Page<Topic> page = new Page<Topic>();
+		page.setTotalCount(topicBiz.TopCount(topic));
+		page.setPageTotalCount();
+		if(currPageNo != null){
+			page.setCurrPageNo(currPageNo);
+		}
+		page.setPageList(topicBiz.findTop(topic, page));
+		model.addAttribute("page", page);
+		model.addAttribute("deptList", deptBiz.findDept(new Dept()));
+		model.addAttribute("topic", topic);
+		return "jsp/sysset/topic/topicList";
+	}
+	
+	@RequestMapping("topicAdd")
+	public String topicAdd(Topic topic, Integer res, Model model){
+		if(res == null){
+			topicBiz.addTop(topic);
+			model.addAttribute("msg", Final.addSuccess);
+		}
+		model.addAttribute("deptList", deptBiz.findDept(new Dept()));
+		return "jsp/sysset/topic/topicAdd";
+	}
+	
+	@RequestMapping("topicDel")
+	public String topicDel(Integer id, Integer currPageNo, Model model){
+		topicBiz.delTop(id);
+		model.addAttribute("msg", Final.delSuccess);
+		return topicList(new Topic(), currPageNo, model);
+	}
+	
+	@RequestMapping("topicUpd")
+	public String topicUpd(Topic topic, Integer res, Model model){
+		if(res == null){
+			topicBiz.updTop(topic);
+			model.addAttribute("msg", Final.updSuccess);
+		}
+		model.addAttribute("topic", topicBiz.findTopById(topic.getId()));
+		model.addAttribute("deptList", deptBiz.findDept(new Dept()));
+		return "jsp/sysset/topic/topicUpd";
+	}
+	
+	@RequestMapping("topicDetail")
+	public String topicDetail(Integer id, Model model){
+		model.addAttribute("topic", topicBiz.findTopById(id));
+		return "jsp/sysset/topic/topicDetail";
+	}
+
+	public void setTopicBiz(TopicBiz topicBiz) {
+		this.topicBiz = topicBiz;
+	}
+
+	public void setDeptBiz(DeptBiz deptBiz) {
+		this.deptBiz = deptBiz;
+	}
+
+}

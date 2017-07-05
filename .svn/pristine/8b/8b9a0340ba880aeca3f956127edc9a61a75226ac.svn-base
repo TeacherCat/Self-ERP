@@ -1,0 +1,192 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>新增档案</title>
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/plugins/layui/css/layui.css" />
+	<script type="text/javascript" src="<%=request.getContextPath()%>/plugins/layui/layui.js"></script>
+</head>
+
+<body>
+	<div class="layui-form-item" style="margin-top:20px;margin-right:20px;">
+		
+		<div class="layui-inline">
+			<label class="layui-form-label">所属部门：</label>
+			<select class="select">
+				<option>请选择省</option>
+				<option>开发部</option>
+				<option>市场部</option>
+				<option>福建省</option>
+			</select>
+			<span class="msg">&nbsp;*&nbsp;</span>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">所属职位：</label>
+			<select class="select">
+				<option>请选择省</option>
+				<option>开发部</option>
+				<option>市场部</option>
+				<option>福建省</option>
+			</select>
+			<span class="msg">&nbsp;*&nbsp;</span>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">档案状态：</label>
+			<select class="select">
+				<option>请选择省</option>
+				<option>开发部</option>
+				<option>市场部</option>
+				<option>福建省</option>
+			</select>
+			<span class="msg">&nbsp;*&nbsp;</span>
+		</div><br/><br/>
+		
+		<div class="layui-inline">
+			<label class="layui-form-label">姓&#12288;&#12288;名：</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input">
+			</div>
+			<span class="msg">&nbsp;*&nbsp;</span>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">性&#12288;&#12288;别：</label>
+			<select class="select">
+				<option>请选择省</option>
+				<option>开发部</option>
+				<option>市场部</option>
+				<option>福建省</option>
+			</select>
+			<span class="msg">&nbsp;*&nbsp;</span>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">身份证号：</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input">
+			</div>
+			<span class="msg">&nbsp;*&nbsp;</span>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">联系电话：</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input">
+			</div>
+			<span class="msg">&nbsp;*&nbsp;</span>
+		</div><br/><br/>
+		
+		<div class="layui-inline">
+			<label class="layui-form-label">邮&#12288;&#12288;箱：</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input">
+			</div>
+			<span class="msg">&nbsp;*&nbsp;</span>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">籍&#12288;&#12288;贯：</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input">
+			</div>
+			<span class="msg">&nbsp;&nbsp;&nbsp;</span>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">政治面貌：</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input">
+			</div>
+			<span class="msg">&nbsp;&nbsp;&nbsp;</span>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">学&#12288;&#12288;历：</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input">
+			</div>
+			<span class="msg">&nbsp;*&nbsp;</span>
+		</div><br/><br/>
+		
+		<div class="layui-inline">
+			<label class="layui-form-label">毕业院校：</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input">
+			</div>
+			<span class="msg">&nbsp;&nbsp;&nbsp;</span>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">专&#12288;&#12288;业：</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input">
+			</div>
+			<span class="msg">&nbsp;&nbsp;&nbsp;</span>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">银行卡号：</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input">
+			</div>
+			<span class="msg">&nbsp;&nbsp;&nbsp;</span>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">社保卡号：</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input">
+			</div>
+			<span class="msg">&nbsp;&nbsp;&nbsp;</span>
+		</div><br/><br/>
+		
+		<div class="layui-inline">
+			<label class="layui-form-label">登&nbsp;&nbsp;记&nbsp;&nbsp;人：</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input">
+			</div>
+			<span class="msg">&nbsp;*&nbsp;</span>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">登记时间：</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input">
+			</div>
+			<span class="msg">&nbsp;*&nbsp;</span>
+		</div><br/><br/>
+		
+		<div class="layui-form-item layui-form-text">
+			<label class="layui-form-label">住&#12288;&#12288;址：</label>
+			<div class="layui-input-block">
+				<input type="text" class="layui-input">
+			</div>
+		</div>
+		
+		<div class="layui-form-item layui-form-text">
+			<label class="layui-form-label">个人履历：</label>
+			<div class="layui-input-block">
+				<textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+			</div>
+		</div>
+		
+		<div class="layui-form-item layui-form-text">
+			<label class="layui-form-label">家庭关系：</label>
+			<div class="layui-input-block">
+				<textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+			</div>
+		</div>
+		
+		<div class="layui-form-item layui-form-text">
+			<label class="layui-form-label">备&#12288;&#12288;注：</label>
+			<div class="layui-input-block">
+				<textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+			</div>
+		</div>
+		
+		<div class="layui-form-item layui-form-text">
+			<label class="layui-form-label">档案附件：</label>
+			<div class="layui-input-inline">
+				<input type="file" class="layui-input">
+			</div>
+		</div>
+		
+		<input type="submit" value="保&nbsp;&nbsp;存" class="layui-btn layui-btn-radius" style="margin-top:20px;margin-left:100px;" />
+		<input type="submit" value="提&nbsp;&nbsp;交" class="layui-btn layui-btn-radius" style="margin-top:20px;" />
+		<a href="<%=request.getContextPath()%>/jsp/personnel/archivesList.jsp" class="layui-btn layui-btn-radius" style="margin-top:20px">返&nbsp;&nbsp;回</a>
+		
+	</div>
+</body>
+</html>

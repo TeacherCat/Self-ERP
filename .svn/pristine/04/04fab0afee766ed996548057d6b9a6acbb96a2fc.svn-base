@@ -1,0 +1,80 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>代办列表</title>
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/plugins/layui/css/layui.css" />
+	<script type="text/javascript" src="<%=request.getContextPath()%>/plugins/layui/layui.js"></script>
+</head>
+
+<body>
+
+	<div class="layui-form-item" style="margin-top:20px;">
+		<div class="layui-inline">
+			<label class="layui-form-label">任务名称：</label>
+			<div class="layui-input-inline">
+				<input type="text" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">代办类型：</label>
+			<div class="layui-input-block">
+				<input type="text" class="layui-input">
+			</div>
+		</div>
+		<div class="layui-inline">
+			<label class="layui-form-label">到达日期：</label>
+			<div class="layui-input-block">
+				<input type="text" class="layui-input">
+			</div>
+		</div>
+		<input type="submit" class="layui-btn layui-btn-radius" style="margin-top:-5px;" value="查&nbsp;询" />
+	</div>
+
+	<div class="layui-field-box layui-form">
+		<table class="layui-table admin-table">
+			<thead>
+				<tr>
+					<th>代办类型</th>
+					<th>代办任务名称</th>
+					<th>到达日期</th>
+					<th style="width:100px;">操作</th>
+				</tr>
+			</thead>
+			<tr>
+				<td>aaa</td>
+				<td>aaa</td>
+				<td>aaa</td>
+				<td>
+					<a href="#" class="layui-btn layui-btn-normal layui-btn-mini">处理</a>
+				</td>
+			</tr>
+			<tr>
+				<td>aaa</td>
+				<td>aaa</td>
+				<td>aaa</td>
+				<td>
+					<a href="#" class="layui-btn layui-btn-normal layui-btn-mini">处理</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<div class="btable-paged" data-type="paged" style="margin:20px auto;width:550px;">
+		<div class="layui-box layui-laypage layui-laypage-default">
+			<a>首页</a>
+			<a>上一页</a>
+			<span>1 / 1</span>
+			<a>下一页</a>
+			<a>尾页</a>
+			<span class="layui-laypage-total">到第 
+			<input class="layui-laypage-skip" onkeyup=""> 页
+			<button class="layui-laypage-btn" type="button">确定</button>
+			</span>
+		</div>
+	</div>
+
+</body>
+</html>

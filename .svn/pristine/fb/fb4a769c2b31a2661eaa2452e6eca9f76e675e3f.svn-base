@@ -1,0 +1,47 @@
+package cn.hrms.sysset.biz.impl;
+
+import java.util.List;
+
+import cn.hrms.sysset.biz.ProjectBiz;
+import cn.hrms.sysset.dao.ProjectDao;
+import cn.hrms.sysset.entity.Project;
+import cn.hrms.util.Page;
+
+public class ProjectBizImpl implements ProjectBiz{
+	private ProjectDao projectDao;
+
+	@Override
+	public List<Project> findPro(Page<Project> page) {
+		return projectDao.findPro(page);
+	}
+
+	@Override
+	public Project findProById(Integer id) {
+		return projectDao.findProById(id);
+	}
+
+	@Override
+	public int proCount() {
+		return projectDao.proCount();
+	}
+
+	@Override
+	public int addPro(Project pro) {
+		return projectDao.addPro(pro);
+	}
+
+	@Override
+	public int delPro(Integer id) {
+		return projectDao.delPro(id);
+	}
+
+	@Override
+	public int updPro(Project pro) {
+		return projectDao.updPro(pro);
+	}
+
+	public void setProjectDao(ProjectDao projectDao) {
+		this.projectDao = projectDao;
+	}
+
+}

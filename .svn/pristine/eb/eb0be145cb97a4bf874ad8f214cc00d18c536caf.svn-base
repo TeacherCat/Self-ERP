@@ -1,0 +1,48 @@
+package cn.hrms.train.action;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import cn.hrms.train.biz.TrainBiz;
+import cn.hrms.train.entity.Train;
+import cn.hrms.util.Page;
+import cn.hrms.util.Upload;
+
+@Controller
+public class TrainAction {
+
+	private TrainBiz trainBiz;
+	
+	@RequestMapping("trainList")
+	public String TrainList(Train train,Integer currPageNo,Model model){
+		if(train.getStartTime()==""){
+			train.setStartTime(null);
+		}
+		if(train.getEndTime()==""){
+			train.setEndTime(null);
+		}
+		Page<Train> page = new Page<Train>();
+		page.setTotalCount(trainBiz.findTotalCount(train));
+		page.setPageTotalCount();
+		if(currPageNo != null){
+			page.setCurrPageNo(currPageNo);
+		}
+		page.setPageList(trainBiz.findTrain(train, page));
+		model.addAttribute("page", page);
+		model.addAttribute("train", train);
+		return "jsp/train/trainList";
+	}
+	
+	@RequestMapping("trainUpload")
+	public String FileUpload(HttpSession session){
+		Upload upload = new Upload();
+		//upload.FileUpload(session, "train");
+		return "";
+	}
+
+	public void setTrainBiz(TrainBiz trainBiz) {
+		this.trainBiz = trainBiz;
+	}
+}

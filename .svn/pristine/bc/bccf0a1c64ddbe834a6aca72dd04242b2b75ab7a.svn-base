@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-3.1.xsd" >
+	
+	
+	<!-- 加载数据库连接信息文件 -->
+	<bean name="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:db.properties"></property>
+	</bean>
+	
+	<!-- 配置数据源 -->
+	<bean name="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${DB_DRIVER}" />
+		<property name="jdbcUrl" value="${DB_URL}" />
+		<property name="user" value="${DB_USER}" />
+		<property name="password" value="${DB_PWD}" />
+	</bean>
+	
+	<!-- 会话工厂 -->
+	<bean name="SqlsessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 配置数据源 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- 加载映射文件 -->
+		<property name="mapperLocations" value="classpath:cn/hrms/entity/*.xml" />
+	</bean>
+	
+	<!-- 事务管理 -->
+	<bean name="tm" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<!-- 指定切入的方法 增加事务级别 -->
+	<tx:advice id="txAdvice" transaction-manager="tm">
+		<tx:attributes>
+			<tx:method name="add*" propagation="REQUIRED"/>
+			<tx:method name="delete*" propagation="REQUIRED"/>
+			<tx:method name="update*" propagation="REQUIRED"/>
+			<tx:method name="find*"  read-only="true"/>
+		</tx:attributes>
+	</tx:advice>
+	
+	<!-- 在哪里切入 -->
+	<aop:config>
+		<aop:pointcut expression="execution(* cn.hrms.biz.impl.*.*(..))" id="point"/>
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="point"/>
+	</aop:config>
+	
+</beans>

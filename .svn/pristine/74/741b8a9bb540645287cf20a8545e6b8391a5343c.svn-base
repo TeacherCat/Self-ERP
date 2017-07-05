@@ -1,0 +1,43 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>修改密码</title>
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css" />
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/plugins/layui/css/layui.css" />
+	<script type="text/javascript" src="<%=request.getContextPath()%>/plugins/layui/layui.js"></script>
+</head>
+
+<body>
+	<div style="width:500px;margin:20px auto;">
+		
+		<div class="layui-form-item">
+			<label class="layui-form-label">原密码：</label>
+			<div class="layui-input-inline">
+				<input type="text" name="phone" class="layui-input">
+			</div>
+			<span class="pwd">&nbsp;*&nbsp;登录时使用的密码&nbsp;*&nbsp;</span>
+		</div>
+		
+		<div class="layui-form-item">
+			<label class="layui-form-label">新密码：</label>
+			<div class="layui-input-inline">
+				<input type="text" name="phone" class="layui-input">
+			</div>
+			<span class="pwd">&nbsp;*&nbsp;您要使用的新密码&nbsp;*&nbsp;</span>
+		</div>
+		
+		<div class="layui-form-item">
+			<label class="layui-form-label">新密码：</label>
+			<div class="layui-input-inline">
+				<input type="text" name="phone" class="layui-input">
+			</div>
+			<span class="pwd">&nbsp;*&nbsp;再次输入您的新密码&nbsp;*&nbsp;</span>
+		</div>
+		
+		<input type="submit" value="确认修改" class="layui-btn layui-btn-radius" style="margin:20px 150px;" />
+		
+	</div>
+</body>
+</html>

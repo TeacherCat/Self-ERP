@@ -1,0 +1,169 @@
+package cn.hrms.train.entity;
+
+import java.io.Serializable;
+import java.util.Date;
+
+/*
+ * 培训
+ */
+public class Train implements Serializable {
+
+	private static final long serialVersionUID = -3291095715857449709L;
+	
+	/*
+	 * 培训编号
+	 */
+	private Integer id;
+	
+	/*
+	 * 培训名称
+	 */
+	private String name;
+	
+	/*
+	 * 培训讲师
+	 */
+	private String lecturer;
+	
+	/*
+	 * 培训目的
+	 */
+	private String goal;
+	
+	/*
+	 * 培训简介
+	 */
+	private String desc;
+	
+	/*
+	 * 培训开始时间
+	 */
+	private Date startTime;
+	
+	/*
+	 * 培训结束时间
+	 */
+	private Date endTime;
+	
+	/*
+	 * 参训人员
+	 */
+	private String personnel;
+	
+	/*
+	 * 培训资料
+	 */
+	private String data;
+	
+	/*
+	 * 登记人
+	 */
+	private String registrar;
+	
+	/*
+	 * 登记时间
+	 */
+	private Date time;
+	
+	/*
+	 * 状态
+	 */
+	private String state;
+	
+	public Train(Integer id, String name, String lecturer, String goal,
+			String desc, Date startTime, Date endTime, String personnel,
+			String data, String registrar, Date time, String state) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.lecturer = lecturer;
+		this.goal = goal;
+		this.desc = desc;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.personnel = personnel;
+		this.data = data;
+		this.registrar = registrar;
+		this.time = time;
+		this.state = state;
+	}
+	
+	public Train() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getLecturer() {
+		return lecturer;
+	}
+	public void setLecturer(String lecturer) {
+		this.lecturer = lecturer;
+	}
+	public String getGoal() {
+		return goal;
+	}
+	public void setGoal(String goal) {
+		this.goal = goal;
+	}
+	public String getDesc() {
+		return desc;
+	}
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
+	public Date getStartTime() {
+		return startTime;
+	}
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+	public Date getEndTime() {
+		return endTime;
+	}
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
+	public String getPersonnel() {
+		return personnel;
+	}
+	public void setPersonnel(String personnel) {
+		this.personnel = personnel;
+	}
+	public String getData() {
+		return data;
+	}
+	public void setData(String data) {
+		this.data = data;
+	}
+	public String getRegistrar() {
+		return registrar;
+	}
+	public void setRegistrar(String registrar) {
+		this.registrar = registrar;
+	}
+	public Date getTime() {
+		return time;
+	}
+	public void setTime(Date time) {
+		this.time = time;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
+
+}

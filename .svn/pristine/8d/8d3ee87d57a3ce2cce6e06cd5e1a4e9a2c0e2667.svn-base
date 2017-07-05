@@ -1,0 +1,31 @@
+package cn.hrms.test;
+
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import cn.hrms.sysset.dao.UserDao;
+import cn.hrms.sysset.entity.Dept;
+import cn.hrms.sysset.entity.Post;
+import cn.hrms.sysset.entity.Role;
+import cn.hrms.sysset.entity.User;
+
+public class test {
+	
+	public static void main(String[] args) {
+		ClassPathXmlApplicationContext cpa = new ClassPathXmlApplicationContext("applicationContext.xml");
+		UserDao ud = cpa.getBean("userDao", UserDao.class);
+		Role role = new Role();
+		role.setId(1);
+		Dept dept = new Dept();
+		dept.setId(2);
+		Post post = new Post();
+		post.setId(1);
+		User user = new User();
+		user.setName("a");
+		user.setDept(dept);
+		//ud.addUser(new User("aa", "aaa", "aa", role, dept, post, null));
+		//ud.updUser(new User("aa", "aaa", "bb", role, dept, post, null));
+		//ud.delUser("aa");
+		System.out.println(ud.findUser(user).size());
+	}
+
+}

@@ -1,0 +1,96 @@
+var navs = [
+	{
+		"title": "我的工作台",
+		"spread": true,
+		"children": [{
+			"title": "代办列表",
+			"icon": "&#xe642;",
+			"href": "jsp/bench/workList.jsp"
+		}, {
+			"title": "修改密码",
+			"icon": "&#xe631;",
+			"href": "jsp/bench/password.jsp"
+		}]
+	},
+	{
+		"title": "系统设置",
+		"spread": false,
+		"children": [ {
+			"title": "用户管理",
+			"icon": "&#xe612;",
+			"href": "jsp/sysset/users/usersList.jsp"
+		},{
+			"title": "部门管理",
+			"icon": "&#xe62e;",
+			"href": "jsp/sysset/dept/deptList.jsp"
+		}, {
+			"title": "职位管理",
+			"icon": "&#xe61b;",
+			"href": "jsp/sysset/post/postList.jsp"
+		}, {
+			"title": "题库管理",
+			"icon": "&#xe63c;",
+			"href": "jsp/sysset/topic/topicList.jsp"
+		},{
+			"title": "薪酬项目管理",
+			"icon": "&#xe638;",
+			"href": "jsp/sysset/project/projectList.jsp"
+		},{
+			"title": "公共属性管理",
+			"icon": "&#xe620;",
+			"href": "jsp/sysset/property/propertyList.jsp"
+		}]
+	},
+	{
+		"title": "人事管理",
+		"spread": false,
+		"children": [{
+			"title": "人事档案管理",
+			"icon": "&#xe613;",
+			"href": "jsp/personnel/archivesList.jsp"
+		}]
+	},
+	{
+		"title": "招聘管理",
+		"spread": false,
+		"children": [{
+			"title": "职位发布管理",
+			"icon": "&#xe61b;",
+			"href": ""
+		},{
+			"title": "简历管理",
+			"icon": "&#xe62a;",
+			"href": ""
+		},{
+			"title": "面试管理",
+			"icon": "&#xe61c;",
+			"href": ""
+		},{
+			"title": "录用管理",
+			"icon": "&#xe605;",
+			"href": ""
+		}]
+	},
+	{
+		"title": "培训管理",
+		"spread": false,
+		"children": [{
+			"title": "培训计划管理",
+			"icon": "&#xe604;",
+			"href": "jsp/train/trainList.jsp"
+		}]
+	},
+	{
+		"title": "薪酬管理",
+		"spread": false,
+		"children": [{
+			"title": "薪酬标准管理",
+			"icon": "&#xe62c;",
+			"href": ""
+		},{
+			"title": "薪酬发放管理",
+			"icon": "&#xe609;",
+			"href": ""
+		}]
+	}
+];

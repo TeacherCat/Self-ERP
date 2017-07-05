@@ -1,0 +1,37 @@
+body{
+	border:1px solid #fff;
+}
+.select{
+	border:1px solid #e6e6e6;
+	width:190px;
+	height:38px;
+	padding-left:10px;
+	margin-right:5px;
+}
+.select option{
+	margin-top:20px;
+}
+.msg{
+	font-size:12px;
+	color:red;
+	line-height:40px;
+}
+
+
+/*主页*/
+#main{
+	margin-top:20px;
+	padding:20px 30px;
+	text-align: center;
+	font-size: 20px;
+	line-height: 60px;
+	font-weight: bolder;
+}
+
+/*修改密码*/
+.pwd{
+	font-size:12px;
+	color:blue;
+	line-height:35px;
+}
+

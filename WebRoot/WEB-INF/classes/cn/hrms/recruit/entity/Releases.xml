@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "//UNKNOWN/" "mybatis-3-mapper.dtd">
+<mapper namespace="cn.hrms.recruit.entity.Releases">
+
+	<resultMap type="cn.hrms.recruit.entity.Releases" id="releasesMap">
+		<id column="rele_id" property="id" />
+		<result column="rele_type" property="type" />
+		<result column="rele_count" property="count" />
+		<result column="rele_education" property="education" />
+		<result column="rele_limit" property="limit" />
+		<result column="rele_desc" property="desc" />
+		<result column="rele_requier" property="requier" />
+		<result column="rele_registrar" property="registrar" />
+		<result column="rele_time" property="time" />
+		<result column="rele_end_time" property="endTime" />
+		<association property="dept" column="rele_dept_id" select="cn.hrms.sysset.entity.Dept.findDeptById"/>
+		<association property="post" column="rele_post_id" select="cn.hrms.sysset.entity.Post.findPostById"/>
+	</resultMap>
+	
+	<!-- 根据编号查询唯一职位发布 -->
+	<select id="findReleasesById" resultMap="releasesMap">
+		select * from releases where rele_id = #{id}
+	</select>
+	
+	<!-- 查询所有职位发布 -->
+	<select id="findAllReleases" resultMap="releasesMap">
+		select * from releases
+	</select>
+	
+	<!-- 按条件分页查询职位发布 -->
+	<select id="findReleases" resultMap="releasesMap" parameterType="map">
+		select * from releases
+		<where>
+			<if test="releases.dept != null">
+				and rele_dept_id = #{releases.dept.id}
+			</if>
+			<if test="releases.type != null">
+				and rele_type = #{releases.type}
+			</if>
+			<if test="releases.education != null">
+				and rele_education = #{releases.education}
+			</if>
+		</where>
+		ORDER BY (rele_time) DESC LIMIT #{start},#{size}
+	</select>
+	
+	<!-- 查询总条数 -->
+	<select id="findTotalCount" parameterType="cn.hrms.recruit.entity.Releases" resultType="int" >
+		SELECT COUNT(rele_id) FROM releases
+		<where>
+			<if test="dept != null">
+				and rele_dept_id = #{dept.id}
+			</if>
+			<if test="type != null">
+				and rele_type = #{type}
+			</if>
+			<if test="education != null">
+				and rele_education = #{education}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 新增职位发布 -->
+	<insert id="addReleases" parameterType="cn.hrms.recruit.entity.Releases">
+		INSERT INTO releases(rele_dept_id,rele_post_id,rele_type,rele_count,rele_education,rele_limit,rele_desc,rele_requier,rele_registrar,rele_time,rele_end_time) 
+		VALUES(#{dept.id},#{post.id},#{type},#{count},#{education},#{limit},#{desc},#{requier},#{registrar},#{time},#{endTime})
+	</insert>
+	
+	<!-- 修改职位发布 -->
+	<update id="updReleases" parameterType="cn.hrms.recruit.entity.Releases">
+		UPDATE releases SET rele_dept_id=#{dept.id},rele_post_id=#{post.id},rele_type=#{type},rele_count=#{count},rele_education=#{education},rele_limit=#{limit},rele_desc=#{desc},
+		rele_requier=#{requier},rele_registrar=#{registrar},rele_end_time=#{endTime} WHERE rele_id=#{id}
+	</update>
+	
+	<!-- 删除职位发布 -->
+	<delete id="delReleases" parameterType="int">
+		DELETE FROM releases WHERE rele_id = #{id}
+	</delete>
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd"
+	default-autowire="byName">
+	
+	<!-- 导入dao配置文件 -->
+	<import resource="applicationContext-dao.xml"/>
+	
+	<!-- 系统管理模块 -->
+	<bean id="usersBiz" class="cn.hrms.sysset.biz.impl.UsersBizImpl" p:usersDao-ref="usersDao" />
+	<bean id="postBiz" class="cn.hrms.sysset.biz.impl.PostBizImpl" p:postDao-ref="postDao" />
+	<bean id="deptBiz" class="cn.hrms.sysset.biz.impl.DeptBizImpl" p:deptDao-ref="deptDao" />
+	<bean id="roleBiz" class="cn.hrms.sysset.biz.impl.RoleBizImpl" p:roleDao-ref="roleDao" />
+	<bean id="projectBiz" class="cn.hrms.sysset.biz.impl.ProjectBizImpl" p:projectDao-ref="projectDao" />
+	<bean id="propertyBiz" class="cn.hrms.sysset.biz.impl.PropertyBizImpl" p:propertyDao-ref="propertyDao" />
+	<bean id="topicBiz" class="cn.hrms.sysset.biz.impl.TopicBizImpl" p:topicDao-ref="topicDao" />
+
+	<!-- 培训管理模块 -->	
+	<bean id="trainBiz" class="cn.hrms.train.biz.impl.TrainBizImpl" p:trainDao-ref="trainDao" />
+	<bean id="trainAuditBiz" class="cn.hrms.train.biz.impl.TrainAuditBizImpl" p:trainAuditDao-ref="trainAuditDao" />
+	<bean id="trainBackBiz" class="cn.hrms.train.biz.impl.TrainBackBizImpl" p:trainBackDao-ref="trainBackDao" />
+	
+	<!-- 人事管理模块 -->
+	<bean id="archivesBiz" class="cn.hrms.personnel.biz.impl.ArchivesBizImpl" p:archivesDao-ref="archivesDao" />
+	<bean id="archivesAuditBiz" class="cn.hrms.personnel.biz.impl.ArchivesAuditBizImpl" p:archivesAuditDao-ref="archivesAuditDao" />
+	
+	<!-- 薪酬管理模块 -->
+	<bean id="standardBiz" class="cn.hrms.pay.biz.impl.StandardBizImpl" p:standardDao-ref="standardDao" />
+	<bean id="staDetBiz" class="cn.hrms.pay.biz.impl.StaDetBizImpl" p:staDetDao-ref="staDetDao" />
+	<bean id="staAudBiz" class="cn.hrms.pay.biz.impl.StaAudBizImpl" p:staAudDao-ref="staAudDao" />
+</beans>
